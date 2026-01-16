@@ -1,0 +1,97 @@
+import { Link, useParams } from "react-router-dom";
+import SectionHeader from "../components/SectionHeader.jsx";
+import { projects } from "../data/projects.js";
+
+export default function ProjectDetail() {
+  const { slug } = useParams();
+  const project = projects.find((item) => item.slug === slug);
+
+  if (!project) {
+    return (
+      <section className="space-y-6">
+        <SectionHeader title="Projeto nao encontrado" description="Erro 404" />
+        <p className="text-sm text-muted">
+          Nao foi possivel localizar o projeto solicitado.
+        </p>
+        <Link
+          to="/projetos"
+          className="inline-flex items-center rounded-full border border-ink/20 px-4 py-2 text-sm font-semibold text-ink"
+        >
+          Voltar para projetos
+        </Link>
+      </section>
+    );
+  }
+
+  return (
+    <section className="space-y-10">
+      <div className="space-y-4">
+        <p className="text-xs font-semibold uppercase tracking-[0.3em] text-muted">
+          {project.status}
+        </p>
+        <h1 className="font-display text-3xl font-semibold text-ink md:text-4xl">
+          {project.name}
+        </h1>
+        <p className="max-w-3xl text-sm leading-relaxed text-muted">
+          {project.overview}
+        </p>
+      </div>
+
+      <div className="grid gap-6 md:grid-cols-2">
+        <div className="rounded-2xl border border-black/10 bg-white/80 p-6 shadow-soft">
+          <h2 className="font-display text-lg font-semibold text-ink">
+            Problema
+          </h2>
+          <p className="mt-3 text-sm leading-relaxed text-muted">
+            {project.problem}
+          </p>
+        </div>
+        <div className="rounded-2xl border border-black/10 bg-white/80 p-6 shadow-soft">
+          <h2 className="font-display text-lg font-semibold text-ink">
+            Solucao
+          </h2>
+          <p className="mt-3 text-sm leading-relaxed text-muted">
+            {project.solution}
+          </p>
+        </div>
+      </div>
+
+      <div className="grid gap-6 md:grid-cols-[1.1fr_0.9fr]">
+        <div className="rounded-2xl border border-black/10 bg-white/80 p-6 shadow-soft">
+          <h2 className="font-display text-lg font-semibold text-ink">
+            Responsabilidades tecnicas
+          </h2>
+          <ul className="mt-4 space-y-3 text-sm text-muted">
+            {project.responsibilities.map((item) => (
+              <li key={item}>{item}</li>
+            ))}
+          </ul>
+        </div>
+        <div className="rounded-2xl border border-black/10 bg-white/80 p-6 shadow-soft">
+          <h2 className="font-display text-lg font-semibold text-ink">
+            Stack utilizada
+          </h2>
+          <div className="mt-4 flex flex-wrap gap-2">
+            {project.techStack.map((item) => (
+              <span
+                key={item}
+                className="rounded-full border border-ink/10 bg-sand px-3 py-1 text-xs font-medium text-ink"
+              >
+                {item}
+              </span>
+            ))}
+          </div>
+          <h3 className="mt-6 text-sm font-semibold text-ink">Status</h3>
+          <p className="mt-2 text-sm text-muted">{project.statusDetail}</p>
+        </div>
+      </div>
+
+      <Link
+        to="/projetos"
+        className="inline-flex items-center rounded-full border border-ink/20 px-4 py-2 text-sm font-semibold text-ink transition hover:border-ink"
+      >
+        Voltar para projetos
+      </Link>
+    </section>
+  );
+}
