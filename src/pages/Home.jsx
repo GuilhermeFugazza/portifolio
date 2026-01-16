@@ -9,12 +9,14 @@ export default function Home() {
             Desenvolvedor Full Stack
           </p>
           <h1 className="font-display text-4xl font-semibold leading-tight text-ink md:text-5xl">
-            Sistemas, APIs e aplicacoes mobile que resolvem problemas reais.
+            Desenvolvedor Full Stack focado em sistemas, APIs e aplicacoes mobile
+            escalaveis
           </h1>
           <p className="text-base leading-relaxed text-muted md:text-lg">
-            Atuo com produtos digitais do planejamento ao deploy, com foco em
-            performance, escalabilidade e entregas consistentes para negocios que
-            precisam de tecnologia aplicada.
+            Atuo no desenvolvimento de aplicacoes web e mobile, APIs e
+            automacoes, com foco em sistemas reais, escalaveis e orientados a
+            produto. Experiencia pratica com SaaS, multi-tenant e integracoes
+            complexas.
           </p>
           <div className="flex flex-wrap items-center gap-4">
             <Link
@@ -22,12 +24,6 @@ export default function Home() {
               className="rounded-full bg-accent px-6 py-3 text-sm font-semibold text-white shadow-soft transition hover:bg-accentDark"
             >
               Ver projetos
-            </Link>
-            <Link
-              to="/contato"
-              className="rounded-full border border-ink/20 px-6 py-3 text-sm font-semibold text-ink transition hover:border-ink"
-            >
-              Falar sobre um projeto
             </Link>
           </div>
         </div>
