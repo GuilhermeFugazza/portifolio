@@ -1,4 +1,5 @@
-import { NavLink } from "react-router-dom";
+import { useEffect, useLayoutEffect, useRef, useState } from "react";
+import { NavLink, useLocation } from "react-router-dom";
 import ShinyButton from "./ShinyButton.jsx";
 
 const navItems = [
@@ -65,6 +66,55 @@ const navItems = [
 ];
 
 export default function Navbar() {
+  const location = useLocation();
+  const navRef = useRef(null);
+  const itemRefs = useRef([]);
+  const [indicator, setIndicator] = useState({ left: 0, width: 0, opacity: 0 });
+
+  const normalizePath = (pathname) =>
+    pathname.startsWith("/projetos") ? "/projetos" : pathname;
+
+  const updateIndicator = () => {
+    const container = navRef.current;
+    const activeIndex = navItems.findIndex(
+      (item) => item.to === normalizePath(location.pathname)
+    );
+
+    if (!container || activeIndex === -1) {
+      return;
+    }
+
+    const activeEl = itemRefs.current[activeIndex];
+    if (!activeEl) return;
+
+    const containerRect = container.getBoundingClientRect();
+    const activeRect = activeEl.getBoundingClientRect();
+    const left = activeRect.left - containerRect.left + container.scrollLeft;
+
+    setIndicator({
+      left,
+      width: activeRect.width,
+      opacity: 1
+    });
+  };
+
+  useLayoutEffect(() => {
+    updateIndicator();
+  }, [location.pathname]);
+
+  useEffect(() => {
+    const container = navRef.current;
+    if (!container) return;
+
+    const handle = () => updateIndicator();
+    window.addEventListener("resize", handle);
+    container.addEventListener("scroll", handle, { passive: true });
+    return () => {
+      window.removeEventListener("resize", handle);
+      container.removeEventListener("scroll", handle);
+    };
+  }, [location.pathname]);
+
   return (
     <>
       <header className="fixed inset-x-0 top-0 z-50">
@@ -73,26 +123,41 @@ export default function Navbar() {
             <span className="h-2 w-2 rounded-full bg-accent"></span>
             <span>Open to work</span>
           </div>
-          <ShinyButton className="shiny-cta--compact">Download CV</ShinyButton>
+          <ShinyButton className="shiny-cta--compact">Contact Us</ShinyButton>
         </div>
       </header>
 
-      <nav className="fixed inset-x-0 bottom-7 z-50">
+      <nav className="fixed inset-x-0 bottom-10 z-50">
         <div className="mx-auto w-fit max-w-4xl px-6">
-          <div className="flex items-center justify-between overflow-x-auto rounded-full bg-white/8 text-sm font-medium text-white shadow-soft backdrop-blur-2xl">
-            {navItems.map((item) => (
+          <div
+            ref={navRef}
+            className="relative flex items-center gap-1 overflow-x-auto rounded-full bg-white/10 p-1 text-sm font-medium text-white shadow-soft backdrop-blur-2xl"
+          >
+            <span
+              className="pointer-events-none absolute inset-y-1 left-0 rounded-full bg-white/90 transition-[transform,width] duration-400 ease-out"
+              style={{
+                transform: `translateX(${indicator.left}px)`,
+                width: indicator.width,
+                opacity: indicator.opacity
+              }}
+            />
+            {navItems.map((item, index) => (
               <NavLink
                 key={item.to}
                 to={item.to}
+                ref={(el) => {
+                  itemRefs.current[index] = el;
+                }}
                 className={({ isActive }) =>
-                  `whitespace-nowrap rounded-full px-5 py-3 transition ${
-                    isActive ? "bg-white/90 text-black" : "text-white/70"
+                  `relative z-10 whitespace-nowrap rounded-full px-5 py-3 transition ${
+                    isActive ? "text-black" : "text-white/70 hover:text-white"
                   }`
                 }
               >
                 <span className="inline-flex items-center gap-2">
                   {item.icon}
-                  {item.label}
+                  <span className="hidden sm:inline">{item.label}</span>
+                  <span className="sr-only">{item.label}</span>
                 </span>
               </NavLink>
             ))}

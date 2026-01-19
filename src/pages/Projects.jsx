@@ -10,8 +10,8 @@ export default function Projects() {
         description="Cases reais"
       />
       <div className="grid gap-6 md:grid-cols-3">
-        {projects.map((project) => (
-          <ProjectCard key={project.slug} project={project} />
+        {projects.map((project, index) => (
+          <ProjectCard key={project.slug} project={project} index={index} />
         ))}
       </div>
     </section>

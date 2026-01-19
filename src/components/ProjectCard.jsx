@@ -1,8 +1,14 @@
 import { Link } from "react-router-dom";
 
-export default function ProjectCard({ project }) {
+const staggerOffsets = [0.6, 1.4, 0.9, 1.8];
+
+export default function ProjectCard({ project, index = 0 }) {
+  const stagger = staggerOffsets[index % staggerOffsets.length];
   return (
-    <div className="flex h-full flex-col justify-between rounded-2xl border border-white/10 bg-panel/80 p-6 shadow-soft">
+    <div
+      className="stagger-item flex h-full flex-col justify-between rounded-2xl border border-white/10 bg-panel/80 p-6 shadow-soft"
+      style={{ "--stagger": stagger }}
+    >
       <div className="space-y-4">
         <div>
           <p className="text-xs font-semibold uppercase tracking-[0.2em] text-accent">

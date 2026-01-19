@@ -1,15 +1,14 @@
-import { Outlet } from "react-router-dom";
 import Navbar from "../components/Navbar.jsx";
 import Footer from "../components/Footer.jsx";
 import ShaderBackground from "../components/ShaderBackground.jsx";
 
-export default function MainLayout() {
+export default function MainLayout({ children }) {
   return (
-    <div className="flex min-h-screen flex-col text-ink">
+    <div className="flex h-screen flex-col text-ink">
       <ShaderBackground />
       <Navbar />
-      <main className="mx-auto flex w-full max-w-6xl flex-1 px-6 pb-16 pt-20">
-        <Outlet />
+      <main className="relative mx-auto w-full max-w-6xl flex-1 min-h-0 overflow-hidden px-6 pb-20 pt-24">
+        {children}
       </main>
       <Footer />
     </div>

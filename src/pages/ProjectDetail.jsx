@@ -25,7 +25,7 @@ export default function ProjectDetail() {
 
   return (
     <section className="space-y-10">
-      <div className="space-y-4">
+      <div className="stagger-item space-y-4" style={{ "--stagger": 0.6 }}>
         <p className="text-xs font-semibold uppercase tracking-[0.3em] text-accent">
           {project.status}
         </p>
@@ -38,7 +38,10 @@ export default function ProjectDetail() {
       </div>
 
       <div className="grid gap-6 md:grid-cols-2">
-        <div className="rounded-2xl border border-white/10 bg-panel/80 p-6 shadow-soft">
+        <div
+          className="stagger-item rounded-2xl border border-white/10 bg-panel/80 p-6 shadow-soft"
+          style={{ "--stagger": 1.1 }}
+        >
           <h2 className="font-display text-lg font-semibold text-ink">
             Problema
           </h2>
@@ -46,7 +49,10 @@ export default function ProjectDetail() {
             {project.problem}
           </p>
         </div>
-        <div className="rounded-2xl border border-white/10 bg-panel/80 p-6 shadow-soft">
+        <div
+          className="stagger-item rounded-2xl border border-white/10 bg-panel/80 p-6 shadow-soft"
+          style={{ "--stagger": 1.6 }}
+        >
           <h2 className="font-display text-lg font-semibold text-ink">
             Solucao
           </h2>
@@ -57,7 +63,10 @@ export default function ProjectDetail() {
       </div>
 
       <div className="grid gap-6 md:grid-cols-[1.1fr_0.9fr]">
-        <div className="rounded-2xl border border-white/10 bg-panel/80 p-6 shadow-soft">
+        <div
+          className="stagger-item rounded-2xl border border-white/10 bg-panel/80 p-6 shadow-soft"
+          style={{ "--stagger": 0.9 }}
+        >
           <h2 className="font-display text-lg font-semibold text-ink">
             Responsabilidades tecnicas
           </h2>
@@ -67,7 +76,10 @@ export default function ProjectDetail() {
             ))}
           </ul>
         </div>
-        <div className="rounded-2xl border border-white/10 bg-panel/80 p-6 shadow-soft">
+        <div
+          className="stagger-item rounded-2xl border border-white/10 bg-panel/80 p-6 shadow-soft"
+          style={{ "--stagger": 1.4 }}
+        >
           <h2 className="font-display text-lg font-semibold text-ink">
             Stack utilizada
           </h2>
@@ -87,8 +99,9 @@ export default function ProjectDetail() {
       </div>
 
       <Link
+        className="stagger-item inline-flex items-center rounded-full border border-white/20 px-4 py-2 text-sm font-semibold text-ink transition hover:border-white/40"
+        style={{ "--stagger": 2.1 }}
         to="/projetos"
-        className="inline-flex items-center rounded-full border border-white/20 px-4 py-2 text-sm font-semibold text-ink transition hover:border-white/40"
       >
         Voltar para projetos
       </Link>
