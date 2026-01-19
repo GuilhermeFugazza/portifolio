@@ -249,6 +249,80 @@
   .shiny-cta:is(:hover, :focus-visible) span::before {
     opacity: 1;
   }
+
+  .hero-fade {
+    opacity: 0;
+    transform: translateY(16px);
+    animation: hero-fade-up 0.8s ease-out forwards;
+  }
+
+  .page-stack {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    min-height: 100%;
+  }
+
+  .page-layer {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    min-height: 100%;
+    overflow-y: auto;
+    scrollbar-width: none;
+  }
+
+  .page-layer::-webkit-scrollbar {
+    width: 0;
+    height: 0;
+  }
+
+  .page-static {
+    animation: none;
+  }
+
+  .page-enter.forward {
+    --enter-x: 48px;
+  }
+
+  .page-exit.forward {
+    --exit-x: -48px;
+  }
+
+  .page-enter.backward {
+    --enter-x: -48px;
+  }
+
+  .page-exit.backward {
+    --exit-x: 48px;
+  }
+
+  .page-enter {
+    animation: page-layer-in 0.55s ease forwards;
+  }
+
+  .page-exit {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    animation: page-layer-out 0.45s ease forwards;
+  }
+
+  .page-enter .stagger-item {
+    opacity: 0;
+    transform: translateX(var(--enter-x, 0)) translateY(6px);
+    animation: page-item-in 0.6s ease forwards;
+    animation-delay: calc(60ms * var(--stagger, 0));
+  }
+
+  .page-exit .stagger-item {
+    animation: page-item-out 0.45s ease forwards;
+    animation-delay: calc(40ms * var(--stagger, 0));
+  }
+
+  .stagger-item {
+    will-change: transform, opacity;
+  }
 }
 
 @keyframes gradient-angle {
@@ -270,6 +344,66 @@
   }
   50% {
     scale: 1.2;
+  }
+}
+
+@keyframes hero-fade-up {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes page-layer-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes page-layer-out {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+}
+
+@keyframes page-item-in {
+  from {
+    opacity: 0;
+    transform: translateX(var(--enter-x, 0)) translateY(6px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0) translateY(0);
+  }
+}
+
+@keyframes page-item-out {
+  to {
+    opacity: 0;
+    transform: translateX(var(--exit-x, 0)) translateY(-6px);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-fade {
+    opacity: 1;
+    transform: none;
+    animation: none;
+  }
+
+  .page-enter,
+  .page-exit,
+  .page-enter .stagger-item,
+  .page-exit .stagger-item {
+    animation: none;
+    transform: none;
+    opacity: 1;
   }
 }
 

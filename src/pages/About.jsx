@@ -3,12 +3,12 @@ import SectionHeader from "../components/SectionHeader.jsx";
 export default function About() {
   return (
     <section>
-      <SectionHeader
-        title="Sobre"
-        description="Perfil profissional"
-      />
-      <div className="space-y-8">
-        <div className="space-y-3">
+      <SectionHeader title="Sobre" description="Perfil profissional" />
+      <div className="grid gap-6 md:grid-cols-2">
+        <article
+          className="stagger-item space-y-3 rounded-2xl border border-white/10 bg-white/5 p-5 backdrop-blur-sm"
+          style={{ "--stagger": 0.7 }}
+        >
           <h3 className="font-display text-lg font-semibold text-ink">
             Introducao
           </h3>
@@ -17,8 +17,11 @@ export default function About() {
             pelo Instituto Federal Catarinense e experiencia pratica no
             desenvolvimento de sistemas reais em ambiente de producao.
           </p>
-        </div>
-        <div className="space-y-3">
+        </article>
+        <article
+          className="stagger-item space-y-3 rounded-2xl border border-white/10 bg-white/5 p-5 backdrop-blur-sm"
+          style={{ "--stagger": 1.4 }}
+        >
           <h3 className="font-display text-lg font-semibold text-ink">
             Experiencia pratica
           </h3>
@@ -29,8 +32,11 @@ export default function About() {
             SaaS, sistemas multi-tenant, integracoes com APIs externas e
             implementacao de regras de negocio complexas.
           </p>
-        </div>
-        <div className="space-y-3">
+        </article>
+        <article
+          className="stagger-item space-y-3 rounded-2xl border border-white/10 bg-white/5 p-5 backdrop-blur-sm"
+          style={{ "--stagger": 0.9 }}
+        >
           <h3 className="font-display text-lg font-semibold text-ink">
             Responsabilidades tecnicas
           </h3>
@@ -40,8 +46,11 @@ export default function About() {
             mobile. Tambem auxilio um desenvolvedor junior, organizando tarefas,
             revisando entregas e apoiando decisoes tecnicas.
           </p>
-        </div>
-        <div className="space-y-3">
+        </article>
+        <article
+          className="stagger-item space-y-3 rounded-2xl border border-white/10 bg-white/5 p-5 backdrop-blur-sm"
+          style={{ "--stagger": 1.8 }}
+        >
           <h3 className="font-display text-lg font-semibold text-ink">
             Foco tecnico
           </h3>
@@ -52,7 +61,7 @@ export default function About() {
             manutencao de ambientes, embora nao seja minha especialidade
             principal.
           </p>
-        </div>
+        </article>
       </div>
     </section>
   );

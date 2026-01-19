@@ -22,6 +22,7 @@ export default {
   			panel: '#0f1a2e',
   			panelSoft: '#142345',
   			ink: '#f8fafc',
+  			burnt: '#ff8a1f',
   			muted: {
   				DEFAULT: 'hsl(var(--muted))',
   				foreground: 'hsl(var(--muted-foreground))'

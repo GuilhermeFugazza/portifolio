@@ -41,10 +41,11 @@ export default function StackExperience() {
         description="Tecnologias" 
       />
       <div className="grid gap-6 md:grid-cols-2">
-        {stackItems.map((item) => (
+        {stackItems.map((item, index) => (
           <div
             key={item.name}
-            className="rounded-2xl border border-white/10 bg-panel/80 p-6 shadow-soft"
+            className="stagger-item rounded-2xl border border-white/10 bg-panel/80 p-6 shadow-soft"
+            style={{ "--stagger": index % 2 === 0 ? 0.8 + index * 0.2 : 1.3 + index * 0.2 }}
           >
             <h3 className="font-display text-lg font-semibold text-ink">
               {item.name}
