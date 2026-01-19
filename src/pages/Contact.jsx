@@ -22,7 +22,7 @@ export default function Contact() {
             simples, estavel e sustentavel.
           </p>
         </div>
-        <div className="rounded-2xl border border-black/10 bg-white/80 p-6 shadow-soft">
+        <div className="rounded-2xl border border-white/10 bg-panel/80 p-6 shadow-soft">
           <h3 className="font-display text-lg font-semibold text-ink">
             Canais diretos
           </h3>

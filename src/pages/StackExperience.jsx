@@ -44,7 +44,7 @@ export default function StackExperience() {
         {stackItems.map((item) => (
           <div
             key={item.name}
-            className="rounded-2xl border border-black/10 bg-white/80 p-6 shadow-soft"
+            className="rounded-2xl border border-white/10 bg-panel/80 p-6 shadow-soft"
           >
             <h3 className="font-display text-lg font-semibold text-ink">
               {item.name}
