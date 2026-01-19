@@ -7,34 +7,51 @@ export default function About() {
         title="Sobre"
         description="Perfil profissional"
       />
-      <div className="grid gap-8 md:grid-cols-[1.1fr_0.9fr]">
-        <div className="space-y-5 text-sm leading-relaxed text-muted">
-          <p>
-            Formacao tecnica no Instituto Federal, com base solida em
-            desenvolvimento de software e infraestrutura. Atuo no ciclo completo
-            de produtos digitais, priorizando arquitetura limpa e manutencao a
-            longo prazo.
-          </p>
-          <p>
-            Tenho experiencia pratica com sistemas reais em operacao, incluindo
-            APIs REST, plataformas web, mobile e automacoes internas para reduzir
-            tarefas repetitivas.
-          </p>
-          <p>
-            Tambem presto apoio a desenvolvedores juniores, revisando codigo,
-            alinhando boas praticas e ajudando no planejamento de entregas.
+      <div className="space-y-8">
+        <div className="space-y-3">
+          <h3 className="font-display text-lg font-semibold text-ink">
+            Introducao
+          </h3>
+          <p className="text-sm leading-relaxed text-muted">
+            Sou desenvolvedor Full Stack com formacao tecnica em Informatica
+            pelo Instituto Federal Catarinense e experiencia pratica no
+            desenvolvimento de sistemas reais em ambiente de producao.
           </p>
         </div>
-        <div className="rounded-2xl border border-black/10 bg-white/80 p-6 shadow-soft">
+        <div className="space-y-3">
           <h3 className="font-display text-lg font-semibold text-ink">
-            Areas de atuacao
+            Experiencia pratica
           </h3>
-          <ul className="mt-4 space-y-3 text-sm text-muted">
-            <li>Arquitetura e desenvolvimento full stack.</li>
-            <li>Aplicacoes mobile com foco em experiencia do usuario.</li>
-            <li>Automacoes e integracoes de processos.</li>
-            <li>Documentacao tecnica e suporte a times.</li>
-          </ul>
+          <p className="text-sm leading-relaxed text-muted">
+            Atuo no desenvolvimento de aplicacoes web e mobile, APIs e
+            automacoes, participando desde a definicao da arquitetura ate a
+            entrega e manutencao dos sistemas. Tenho experiencia com produtos
+            SaaS, sistemas multi-tenant, integracoes com APIs externas e
+            implementacao de regras de negocio complexas.
+          </p>
+        </div>
+        <div className="space-y-3">
+          <h3 className="font-display text-lg font-semibold text-ink">
+            Responsabilidades tecnicas
+          </h3>
+          <p className="text-sm leading-relaxed text-muted">
+            No meu trabalho atual, sou responsavel pela criacao e evolucao de
+            sistemas internos, integracoes financeiras, automacoes e aplicacoes
+            mobile. Tambem auxilio um desenvolvedor junior, organizando tarefas,
+            revisando entregas e apoiando decisoes tecnicas.
+          </p>
+        </div>
+        <div className="space-y-3">
+          <h3 className="font-display text-lg font-semibold text-ink">
+            Foco tecnico
+          </h3>
+          <p className="text-sm leading-relaxed text-muted">
+            Tenho maior afinidade com desenvolvimento de APIs, estruturacao de
+            banco de dados, automacoes e aplicacoes mobile. Possuo experiencia
+            com infraestrutura Linux e cloud, atuando na configuracao e
+            manutencao de ambientes, embora nao seja minha especialidade
+            principal.
+          </p>
         </div>
       </div>
     </section>

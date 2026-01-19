@@ -26,7 +26,7 @@ export default function ProjectDetail() {
   return (
     <section className="space-y-10">
       <div className="space-y-4">
-        <p className="text-xs font-semibold uppercase tracking-[0.3em] text-muted">
+        <p className="text-xs font-semibold uppercase tracking-[0.3em] text-accent">
           {project.status}
         </p>
         <h1 className="font-display text-3xl font-semibold text-ink md:text-4xl">
@@ -38,7 +38,7 @@ export default function ProjectDetail() {
       </div>
 
       <div className="grid gap-6 md:grid-cols-2">
-        <div className="rounded-2xl border border-black/10 bg-white/80 p-6 shadow-soft">
+        <div className="rounded-2xl border border-white/10 bg-panel/80 p-6 shadow-soft">
           <h2 className="font-display text-lg font-semibold text-ink">
             Problema
           </h2>
@@ -46,7 +46,7 @@ export default function ProjectDetail() {
             {project.problem}
           </p>
         </div>
-        <div className="rounded-2xl border border-black/10 bg-white/80 p-6 shadow-soft">
+        <div className="rounded-2xl border border-white/10 bg-panel/80 p-6 shadow-soft">
           <h2 className="font-display text-lg font-semibold text-ink">
             Solucao
           </h2>
@@ -57,7 +57,7 @@ export default function ProjectDetail() {
       </div>
 
       <div className="grid gap-6 md:grid-cols-[1.1fr_0.9fr]">
-        <div className="rounded-2xl border border-black/10 bg-white/80 p-6 shadow-soft">
+        <div className="rounded-2xl border border-white/10 bg-panel/80 p-6 shadow-soft">
           <h2 className="font-display text-lg font-semibold text-ink">
             Responsabilidades tecnicas
           </h2>
@@ -67,7 +67,7 @@ export default function ProjectDetail() {
             ))}
           </ul>
         </div>
-        <div className="rounded-2xl border border-black/10 bg-white/80 p-6 shadow-soft">
+        <div className="rounded-2xl border border-white/10 bg-panel/80 p-6 shadow-soft">
           <h2 className="font-display text-lg font-semibold text-ink">
             Stack utilizada
           </h2>
@@ -75,7 +75,7 @@ export default function ProjectDetail() {
             {project.techStack.map((item) => (
               <span
                 key={item}
-                className="rounded-full border border-ink/10 bg-sand px-3 py-1 text-xs font-medium text-ink"
+                className="rounded-full border border-white/10 bg-panelSoft px-3 py-1 text-xs font-medium text-ink"
               >
                 {item}
               </span>
@@ -88,7 +88,7 @@ export default function ProjectDetail() {
 
       <Link
         to="/projetos"
-        className="inline-flex items-center rounded-full border border-ink/20 px-4 py-2 text-sm font-semibold text-ink transition hover:border-ink"
+        className="inline-flex items-center rounded-full border border-white/20 px-4 py-2 text-sm font-semibold text-ink transition hover:border-white/40"
       >
         Voltar para projetos
       </Link>
