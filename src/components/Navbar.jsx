@@ -1,10 +1,10 @@
 import { useEffect, useLayoutEffect, useRef, useState } from "react";
 import { NavLink, useLocation } from "react-router-dom";
-import ShinyButton from "./ShinyButton.jsx";
+import curriculumFile from "../assets/CV/Curriculo_Guilherme_Fugazza_Mobile_React_Native_v5.pdf.pdf";
 
 const navItems = [
   {
-    label: "Home",
+    label: "Início",
     to: "/",
     icon: (
       <svg viewBox="0 0 20 20" className="h-4 w-4" aria-hidden="true">
@@ -40,7 +40,7 @@ const navItems = [
     )
   },
   {
-    label: "Stack & Experiencia",
+    label: "Stack & Experiência",
     to: "/stack-experiencia",
     icon: (
       <svg viewBox="0 0 20 20" className="h-4 w-4" aria-hidden="true">
@@ -70,6 +70,7 @@ export default function Navbar() {
   const navRef = useRef(null);
   const itemRefs = useRef([]);
   const [indicator, setIndicator] = useState({ left: 0, width: 0, opacity: 0 });
+  const [isHeaderCompact, setIsHeaderCompact] = useState(false);
 
   const normalizePath = (pathname) =>
     pathname.startsWith("/projetos") ? "/projetos" : pathname;
@@ -115,15 +116,62 @@ export default function Navbar() {
     };
   }, [location.pathname]);
 
+  useEffect(() => {
+    let rafId = 0;
+
+    const syncCompactState = () => {
+      const nextCompact = window.scrollY > 24;
+      setIsHeaderCompact((prev) => (prev === nextCompact ? prev : nextCompact));
+    };
+
+    const onScroll = () => {
+      if (rafId) return;
+      rafId = window.requestAnimationFrame(() => {
+        rafId = 0;
+        syncCompactState();
+      });
+    };
+
+    syncCompactState();
+    window.addEventListener("scroll", onScroll, { passive: true });
+
+    return () => {
+      if (rafId) {
+        window.cancelAnimationFrame(rafId);
+      }
+      window.removeEventListener("scroll", onScroll);
+    };
+  }, []);
+
   return (
     <>
-      <header className="fixed inset-x-0 top-0 z-50">
-        <div className="mx-auto flex w-full max-w-6xl items-center justify-between px-8 pt-8 text-sm text-muted">
-          <div className="flex items-center gap-3 rounded-full bg-white/5 px-4 py-2 text-sm text-white">
-            <span className="h-2 w-2 rounded-full bg-accent"></span>
-            <span>Open to work</span>
+      <header className="fixed z-20 w-full bg-transparent">
+        <div className="mx-auto flex w-full max-w-8xl flex-col items-center gap-4 px-6 pt-6 text-sm text-muted sm:flex-row sm:justify-between sm:gap-3 sm:px-8 sm:pt-8">
+          <div
+            className={`navbar-work-pill ${isHeaderCompact ? "is-collapsed" : ""}`}
+            aria-label="Disponível para projetos"
+            title="Disponível para projetos"
+          >
+            <span className="navbar-work-pill-dot" aria-hidden="true" />
+            <span className="navbar-work-pill-text">Disponível para projetos</span>
           </div>
-          <ShinyButton className="shiny-cta--compact">Contact Us</ShinyButton>
+          <div className="flex justify-center sm:justify-end">
+            <a
+              className={`shiny-cta shiny-cta--compact navbar-cv-cta ${isHeaderCompact ? "is-collapsed" : ""}`}
+              href={curriculumFile}
+              download="Curriculo_Guilherme_Fugazza.pdf"
+              aria-label="Baixar CV"
+            >
+              <span className="navbar-cv-cta-label-wrap">
+                <strong className="navbar-cv-cta-label navbar-cv-cta-label-full">
+                  Baixar CV
+                </strong>
+                <strong className="navbar-cv-cta-label navbar-cv-cta-label-short">
+                  CV
+                </strong>
+              </span>
+            </a>
+          </div>
         </div>
       </header>
 
@@ -131,7 +179,7 @@ export default function Navbar() {
         <div className="mx-auto w-fit max-w-4xl px-6">
           <div
             ref={navRef}
-            className="relative flex items-center gap-1 overflow-x-auto rounded-full bg-white/10 p-1 text-sm font-medium text-white shadow-soft backdrop-blur-2xl"
+            className="relative flex items-center gap-1 overflow-x-auto rounded-full border border-white/20 bg-slate-900/45 p-1 text-sm font-medium text-white shadow-[0_18px_40px_rgba(5,10,25,0.28)] backdrop-blur-xl"
           >
             <span
               className="pointer-events-none absolute inset-y-1 left-0 rounded-full bg-white/90 transition-[transform,width] duration-400 ease-out"
