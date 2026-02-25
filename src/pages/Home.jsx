@@ -1,20 +1,49 @@
-import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import ShinyButton from "../components/ShinyButton.jsx";
+
+const homeStack = [
+  {
+    label: "React",
+    icon: "https://cdn.simpleicons.org/react/61DAFB",
+    alt: "Logo do React"
+  },
+  {
+    label: "React Native",
+    icon: "https://cdn.simpleicons.org/react/61DAFB",
+    alt: "Logo do React Native"
+  },
+  {
+    label: "Node.js",
+    icon: "https://cdn.simpleicons.org/nodedotjs/5FA04E",
+    alt: "Logo do Node.js"
+  },
+  {
+    label: "APIs REST",
+    icon: "https://cdn.simpleicons.org/openapiinitiative/6BA539",
+    alt: "Ícone de APIs REST"
+  },
+  {
+    label: "PostgreSQL",
+    icon: "https://cdn.simpleicons.org/postgresql/4169E1",
+    alt: "Logo do PostgreSQL"
+  },
+  {
+    label: "n8n",
+    icon: "https://cdn.simpleicons.org/n8n/EA4B71",
+    alt: "Logo do n8n"
+  },
+  {
+    label: "Cloudflare",
+    icon: "https://cdn.simpleicons.org/cloudflare/F38020",
+    alt: "Logo do Cloudflare"
+  }
+];
 
 export default function Home() {
   const navigate = useNavigate();
 
-  useEffect(() => {
-    const previousOverflow = document.body.style.overflow;
-    document.body.style.overflow = "hidden";
-    return () => {
-      document.body.style.overflow = previousOverflow;
-    };
-  }, []);
-
   return (
-    <section className="flex h-full w-full items-center justify-center overflow-hidden">
+    <section className="flex min-h-[100svh] w-full items-center justify-center overflow-hidden px-2 pb-36 pt-24 sm:pb-40 sm:pt-28">
       <div className="w-full max-w-3xl space-y-6 text-center">
         <p
           className="stagger-item text-[11px] font-semibold uppercase tracking-[0.35em] text-burnt"
@@ -33,27 +62,26 @@ export default function Home() {
           className="stagger-item mx-auto max-w-2xl text-sm leading-relaxed text-white/80 md:text-base"
           style={{ "--stagger": 1.4 }}
         >
-          Sistemas, APIs e aplicacoes mobile escalaveis com foco em produto e
+          Sistemas, APIs e aplicações mobile escaláveis, com foco em produto e
           entrega consistente.
         </p>
         <div
           className="stagger-item flex flex-wrap justify-center gap-2 pt-1"
           style={{ "--stagger": 0.9 }}
         >
-          {[
-            "React",
-            "React Native",
-            "Node.js",
-            "APIs REST",
-            "PostgreSQL",
-            "n8n",
-            "Cloudflare"
-          ].map((skill) => (
+          {homeStack.map((skill) => (
             <span
-              key={skill}
-              className="rounded-full border border-white/10 bg-white/5 px-3 py-1 text-[11px] font-semibold text-white/80 backdrop-blur-sm"
+              key={skill.label}
+              className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-3 py-1 text-[11px] font-semibold text-white/80 backdrop-blur-sm"
             >
-              {skill}
+              <img
+                src={skill.icon}
+                alt={skill.alt}
+                className="h-3.5 w-3.5 object-contain"
+                loading="lazy"
+                decoding="async"
+              />
+              <span>{skill.label}</span>
             </span>
           ))}
         </div>
