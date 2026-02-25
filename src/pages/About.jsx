@@ -1,4 +1,4 @@
-import profileImage from "../assets/guilherme.png";
+import profileImage from "../assets/guilherme.jpg";
 import SectionHeader from "../components/SectionHeader.jsx";
 
 const serviceAreas = [
