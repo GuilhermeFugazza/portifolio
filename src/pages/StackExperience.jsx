@@ -1,9 +1,9 @@
 import SectionHeader from "../components/SectionHeader.jsx";
 
 const capabilityHighlights = [
-  "Atuação ponta a ponta",
-  "Clareza de arquitetura",
-  "Entrega previsível"
+  "Áreas de atuação predominante",
+  "Arquitetura por camadas",
+  "Integrações empresariais escaláveis"
 ];
 
 const stackDomains = [
@@ -11,11 +11,11 @@ const stackDomains = [
     id: "01",
     title: "Front-end e Mobile",
     summary:
-      "Interfaces web e apps mobile com experiência consistente, fluida e orientada ao uso real.",
+      "Interfaces web e mobile conectadas ao domínio do negócio, com foco em previsibilidade de fluxo e evolução contínua.",
     focus: [
-      "Componentes reutilizáveis e padrão visual escalável.",
-      "Organização de estado e fluxo de tela.",
-      "Ajustes de performance para renderização estável."
+      "Estrutura de componentes reutilizáveis para manutenção incremental.",
+      "Organização de estado por contexto funcional e fluxo de uso.",
+      "Controle de renderização e performance para cenários de operação diária."
     ],
     tools: [
       { name: "React", icon: "https://cdn.simpleicons.org/react/61DAFB" },
@@ -28,11 +28,11 @@ const stackDomains = [
     id: "02",
     title: "Back-end e APIs",
     summary:
-      "APIs robustas para regra de negócio, integrações externas e crescimento sustentável do produto.",
+      "Serviços e APIs para regras de negócio críticas, integração entre sistemas e sustentação de crescimento.",
     focus: [
       "Arquitetura por camadas com separação de responsabilidades.",
-      "Autenticação, validação e controle de acesso.",
-      "Contratos estáveis entre serviços e integrações."
+      "Autenticação baseada em token, validação e controle de acesso.",
+      "Controle de concorrência e contratos REST estáveis entre serviços."
     ],
     tools: [
       { name: "Node.js", icon: "https://cdn.simpleicons.org/nodedotjs/5FA04E" },
@@ -45,11 +45,11 @@ const stackDomains = [
     id: "03",
     title: "Python e Automações",
     summary:
-      "Automações para reduzir tarefas manuais e manter operações mais rápidas e confiáveis.",
+      "Automações orientadas a operação para reduzir intervenção manual e aumentar confiabilidade de processos.",
     focus: [
-      "Scripts para rotinas operacionais recorrentes.",
-      "Tratamento e validação de dados entre sistemas.",
-      "Integrações via webhooks e fluxos de negócio."
+      "Scripts para rotinas empresariais recorrentes e monitoráveis.",
+      "Tratamento de dados com validação entre múltiplas origens.",
+      "Integração via webhooks e orquestração de fluxos no n8n."
     ],
     tools: [
       { name: "Python", icon: "https://cdn.simpleicons.org/python/3776AB" },
@@ -62,11 +62,11 @@ const stackDomains = [
     id: "04",
     title: "Banco de Dados",
     summary:
-      "Modelagem orientada ao negócio com foco em consistência, consulta eficiente e evolução segura.",
+      "Modelagem relacional orientada a domínio com foco em consistência, consulta eficiente e evolução segura.",
     focus: [
-      "Estruturas relacionais claras e sustentáveis.",
-      "Otimização de consultas críticas em produção.",
-      "Migrações e versionamento sem interrupção desnecessária."
+      "Estruturas relacionais claras para isolamento e rastreabilidade.",
+      "Otimização de consultas críticas com análise de plano de execução.",
+      "Migrações versionadas com baixo risco de interrupção operacional."
     ],
     tools: [
       { name: "PostgreSQL", icon: "https://cdn.simpleicons.org/postgresql/4169E1" },
@@ -79,11 +79,11 @@ const stackDomains = [
     id: "05",
     title: "Infraestrutura e Entrega",
     summary:
-      "Deploy e operação com foco em estabilidade, segurança e previsibilidade de release.",
+      "Deploy e sustentação com foco em estabilidade, segurança e previsibilidade de release.",
     focus: [
       "Configuração de ambientes Linux para web e APIs.",
-      "Camada de edge, cache e proteção básica.",
-      "Pipeline de entrega para publicação consistente."
+      "Camada de edge, cache e proteção de tráfego com Cloudflare.",
+      "Pipeline de entrega para publicação consistente de serviços."
     ],
     tools: [
       { name: "Linux", icon: "https://cdn.simpleicons.org/linux/FCC624" },
@@ -92,6 +92,15 @@ const stackDomains = [
       { name: "Cloudflare", icon: "https://cdn.simpleicons.org/cloudflare/F38020" }
     ]
   }
+];
+
+const solvedChallenges = [
+  "Implementação de arquitetura multi-tenant com isolamento de dados",
+  "Integração com APIs financeiras sob autenticação segura",
+  "Estruturação de banco de dados para crescimento escalável",
+  "Criação de fluxos automatizados com n8n e Python",
+  "Deploy e configuração de ambientes Linux para APIs",
+  "Otimização de consultas críticas em PostgreSQL"
 ];
 
 export default function StackExperience() {
@@ -161,6 +170,25 @@ export default function StackExperience() {
             </li>
           ))}
         </ol>
+
+        <section className="stagger-item mt-8" style={{ "--stagger": 1.35 }}>
+          <header>
+            <p className="text-[0.64rem] font-semibold uppercase tracking-[0.15em] text-burnt/90">
+              Escopo técnico
+            </p>
+            <h2 className="mt-1 font-display text-[1.28rem] leading-tight text-ink md:text-[1.42rem]">
+              Desafios técnicos já resolvidos
+            </h2>
+          </header>
+
+          <ul className="mt-3 divide-y divide-white/10 border-y border-white/10">
+            {solvedChallenges.map((item) => (
+              <li key={item} className="py-3 text-[0.84rem] leading-relaxed text-ink/78 md:text-[0.88rem]">
+                - {item}
+              </li>
+            ))}
+          </ul>
+        </section>
       </article>
     </section>
   );

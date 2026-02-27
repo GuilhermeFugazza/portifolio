@@ -35,6 +35,22 @@ const techBrandAssets = {
     icon: "https://cdn.simpleicons.org/n8n/EA4B71",
     alt: "Logo do n8n"
   },
+  "REST APIs": {
+    icon: "https://cdn.simpleicons.org/openapiinitiative/6BA539",
+    alt: "Ícone de REST APIs"
+  },
+  "Multi-tenant": {
+    icon: "https://cdn.simpleicons.org/databricks/FF3621",
+    alt: "Ícone de arquitetura multi-tenant"
+  },
+  "Integrações financeiras": {
+    icon: "https://cdn.simpleicons.org/stripe/635BFF",
+    alt: "Ícone de integrações financeiras"
+  },
+  Cloudflare: {
+    icon: "https://cdn.simpleicons.org/cloudflare/F38020",
+    alt: "Logo do Cloudflare"
+  },
   Linux: {
     icon: "https://cdn.simpleicons.org/linux/FCC624",
     alt: "Logo do Linux"
@@ -51,6 +67,9 @@ const statusClassByText = (status = "") => {
   }
   if (normalized.includes("desenvolv")) {
     return "border-amber-300/30 bg-amber-500/[0.12] text-amber-100/92";
+  }
+  if (normalized.includes("nda") || normalized.includes("confidencial")) {
+    return "border-sky-300/30 bg-sky-500/[0.12] text-sky-100/92";
   }
   return "border-white/15 bg-white/[0.04] text-ink/86";
 };
@@ -117,7 +136,7 @@ export default function ProjectCard({ project, index = 0 }) {
               to={`/projetos/${project.slug}`}
               className="inline-flex min-h-10 w-full items-center justify-center gap-1.5 rounded-full border border-white/20 bg-white/[0.04] px-4 text-sm font-semibold text-white transition hover:border-white/36 hover:bg-white/[0.1] sm:w-fit md:justify-self-end"
             >
-              Clique para ver detalhes
+              {project.ctaLabel || "Clique para ver detalhes"}
               <span aria-hidden="true">↗</span>
             </Link>
           </div>

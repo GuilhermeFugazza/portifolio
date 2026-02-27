@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { NavLink } from "react-router-dom";
+import { NavLink, useLocation } from "react-router-dom";
 import curriculumFile from "../assets/CV/Curriculo_Guilherme_Fugazza_Mobile_React_Native_v5.pdf.pdf";
 
 const navItems = [
@@ -66,7 +66,17 @@ const navItems = [
 ];
 
 export default function Navbar() {
+  const location = useLocation();
   const [isHeaderCompact, setIsHeaderCompact] = useState(false);
+  const whatsappLink = "https://wa.me/5547997564677";
+  const isAboutPage = location.pathname === "/sobre";
+  const ctaHref = isAboutPage ? curriculumFile : whatsappLink;
+  const ctaLabelFull = isAboutPage ? "Baixar CV" : "Fale comigo";
+  const ctaLabelShort = isAboutPage ? "CV" : "Falar";
+  const showWhatsappCompactIcon = !isAboutPage;
+  const ctaLinkProps = isAboutPage
+    ? { download: "Curriculo_Guilherme_Fugazza.pdf" }
+    : { target: "_blank", rel: "noreferrer" };
 
   useEffect(() => {
     let rafId = 0;
@@ -110,16 +120,27 @@ export default function Navbar() {
           <div className="flex justify-center sm:justify-end">
             <a
               className={`shiny-cta shiny-cta--compact navbar-cv-cta ${isHeaderCompact ? "is-collapsed" : ""}`}
-              href={curriculumFile}
-              download="Curriculo_Guilherme_Fugazza.pdf"
-              aria-label="Baixar CV"
+              href={ctaHref}
+              aria-label={ctaLabelFull}
+              {...ctaLinkProps}
             >
               <span className="navbar-cv-cta-label-wrap">
                 <strong className="navbar-cv-cta-label navbar-cv-cta-label-full">
-                  Baixar CV
+                  {ctaLabelFull}
                 </strong>
                 <strong className="navbar-cv-cta-label navbar-cv-cta-label-short">
-                  CV
+                  {showWhatsappCompactIcon ? (
+                    <img
+                      src="https://cdn.simpleicons.org/whatsapp/FFFFFF"
+                      alt=""
+                      aria-hidden="true"
+                      className="h-4 w-4 object-contain"
+                      loading="lazy"
+                      decoding="async"
+                    />
+                  ) : (
+                    ctaLabelShort
+                  )}
                 </strong>
               </span>
             </a>

@@ -49,7 +49,7 @@ export default function Home() {
           className="stagger-item text-[11px] font-semibold uppercase tracking-[0.35em] text-burnt"
           style={{ "--stagger": 0.8 }}
         >
-          Desenvolvedor Full Stack
+          Engenharia de software B2B
         </p>
         <h1
           className="stagger-item font-display text-4xl font-semibold leading-tight text-white md:text-6xl"
@@ -62,8 +62,19 @@ export default function Home() {
           className="stagger-item mx-auto max-w-2xl text-sm leading-relaxed text-white/80 md:text-base"
           style={{ "--stagger": 1.4 }}
         >
-          Sistemas, APIs e aplicações mobile escaláveis, com foco em produto e
-          entrega consistente.
+          Arquitetura e desenvolvimento de sistemas empresariais, APIs robustas e plataformas escaláveis.
+        </p>
+        {/* <p
+          className="stagger-item mx-auto max-w-2xl text-sm leading-relaxed text-white/80 md:text-base"
+          style={{ "--stagger": 1.5 }}
+        >
+          Atuação ponta a ponta em back-end, integrações críticas, multi-tenant e aplicações mobile estruturadas para evolução contínua.
+        </p> */}
+        <p
+          className="stagger-item mx-auto max-w-2xl text-[0.76rem] font-medium leading-relaxed text-white/60 md:text-[0.8rem]"
+          style={{ "--stagger": 1.6 }}
+        >
+          Foco em soluções B2B sob contrato e ambientes de produção reais.
         </p>
         <div
           className="stagger-item flex flex-wrap justify-center gap-2 pt-1"
