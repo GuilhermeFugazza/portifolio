@@ -43,7 +43,7 @@ export default function Home() {
   const navigate = useNavigate();
 
   return (
-    <section className="flex min-h-[100svh] w-full items-center justify-center overflow-hidden px-2 pb-36 pt-24 sm:pb-40 sm:pt-28">
+    <section className="flex min-h-[100svh] w-full items-center justify-center overflow-hidden px-2 pb-36 pt-32 sm:px-4 sm:pb-40 sm:pt-28">
       <div className="w-full max-w-3xl space-y-6 text-center">
         <p
           className="stagger-item text-[11px] font-semibold uppercase tracking-[0.35em] text-burnt"

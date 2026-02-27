@@ -16,7 +16,7 @@ const ROUTE_ORDER = [
   "/contato"
 ];
 
-const TRANSITION_MS = 550;
+const TRANSITION_MS = 620;
 const LOW_END_MEMORY_GB = 4;
 const LOW_END_THREADS = 4;
 
@@ -44,7 +44,7 @@ export default function AnimatedRoutes() {
   const location = useLocation();
   const [currentLocation, setCurrentLocation] = useState(location);
   const [previousLocation, setPreviousLocation] = useState(null);
-  const [direction, setDirection] = useState("forward");
+  const [direction, setDirection] = useState("neutral");
   const [hasMounted, setHasMounted] = useState(false);
   const transitionTimeoutRef = useRef(0);
   const disableTransitions = useMemo(() => isLowEndDevice(), []);

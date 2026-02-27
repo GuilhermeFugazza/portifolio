@@ -53,7 +53,7 @@ export default function ProjectDetail() {
 
   if (!project) {
     return (
-      <section className="space-y-6">
+      <section className="space-y-6 pb-16 pt-8 md:pt-0">
         <SectionHeader title="Projeto não encontrado" description="Erro 404" />
         <p className="text-sm text-muted">
           Não foi possível localizar o projeto solicitado.
@@ -79,20 +79,20 @@ export default function ProjectDetail() {
   const primaryPitch = project.shortDescription || project.overview;
 
   return (
-    <section className="space-y-14 pb-10 pt-28 md:space-y-16 md:pt-32">
+    <section className="space-y-12 pb-12 pt-8 md:space-y-16 md:pt-28">
       <header
         className="stagger-item border-b border-white/10 pb-12 md:pb-14"
         style={{ "--stagger": 0.6 }}
       >
-        <div className="grid gap-10 md:grid-cols-[1.25fr_0.75fr] md:items-start">
+        <div className="grid gap-8 md:grid-cols-[1.25fr_0.75fr] md:items-start md:gap-10">
           <div className="space-y-6">
             <p className="text-xs font-semibold uppercase tracking-[0.3em] text-accent">
               {project.status}
             </p>
-            <h1 className="max-w-4xl font-display text-4xl font-semibold leading-[1.05] text-ink md:text-6xl">
+            <h1 className="max-w-4xl font-display text-3xl font-semibold leading-[1.05] text-ink md:text-6xl">
               {project.name}
             </h1>
-            <p className="max-w-3xl text-lg leading-relaxed text-ink/92 md:text-xl">
+            <p className="max-w-3xl text-base leading-relaxed text-ink/92 md:text-xl">
               {primaryPitch}
             </p>
             <p className="max-w-3xl text-base leading-relaxed text-muted">

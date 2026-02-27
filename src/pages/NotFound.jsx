@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 
 export default function NotFound() {
   return (
-    <section className="space-y-4">
+    <section className="space-y-4 pb-16 pt-8 md:pt-0">
       <p
         className="stagger-item text-xs font-semibold uppercase tracking-[0.3em] text-muted"
         style={{ "--stagger": 0.6 }}
