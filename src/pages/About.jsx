@@ -149,7 +149,7 @@ const processSteps = [
 
 export default function About() {
   return (
-    <section className="w-full pb-10 pt-14 md:pb-12 md:pt-0">
+    <section className="w-full pb-10 pt-0 md:pb-12 md:pt-0">
       <SectionHeader
         title="Sobre"
         description="Perfil profissional"
