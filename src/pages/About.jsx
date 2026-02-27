@@ -149,11 +149,11 @@ const processSteps = [
 
 export default function About() {
   return (
-    <section className="w-full pb-5 pt-10 md:pb-8 md:pt-14">
+    <section className="w-full pb-10 pt-14 md:pb-12 md:pt-0">
       <SectionHeader
         title="Sobre"
         description="Perfil profissional"
-        className="mb-5 md:mb-6"
+        className="mb-8 md:mb-10"
         descriptionClassName="text-[0.68rem] md:text-[0.72rem]"
         titleClassName="text-[2.45rem] md:text-[3rem] leading-[1.03]"
       />

@@ -115,7 +115,7 @@ export default function ProjectCard({ project, index = 0 }) {
 
             <Link
               to={`/projetos/${project.slug}`}
-              className="inline-flex min-h-10 w-fit items-center justify-center gap-1.5 rounded-full border border-white/20 bg-white/[0.04] px-4 text-sm font-semibold text-white transition hover:border-white/36 hover:bg-white/[0.1] md:justify-self-end"
+              className="inline-flex min-h-10 w-full items-center justify-center gap-1.5 rounded-full border border-white/20 bg-white/[0.04] px-4 text-sm font-semibold text-white transition hover:border-white/36 hover:bg-white/[0.1] sm:w-fit md:justify-self-end"
             >
               Clique para ver detalhes
               <span aria-hidden="true">↗</span>

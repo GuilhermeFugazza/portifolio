@@ -46,7 +46,7 @@ const quickActions = [
 
 export default function Contact() {
   return (
-    <section className="w-full py-5 md:py-8">
+    <section className="w-full pb-10 pt-14 md:pb-12 md:pt-0">
       <SectionHeader
         title="Contato"
         description="Vamos conversar"
@@ -66,7 +66,7 @@ export default function Contact() {
               href={action.href}
               target={action.href.startsWith("http") ? "_blank" : undefined}
               rel={action.href.startsWith("http") ? "noreferrer" : undefined}
-              className="inline-flex min-h-10 items-center justify-center rounded-full border border-[rgba(138,162,214,0.3)] bg-[rgba(124,149,206,0.05)] px-4 text-sm font-semibold text-ink/90 transition hover:border-[rgba(156,182,240,0.45)] hover:bg-[rgba(124,149,206,0.1)]"
+              className="inline-flex min-h-10 w-full items-center justify-center rounded-full border border-[rgba(138,162,214,0.3)] bg-[rgba(124,149,206,0.05)] px-4 text-sm font-semibold text-ink/90 transition hover:border-[rgba(156,182,240,0.45)] hover:bg-[rgba(124,149,206,0.1)] sm:w-auto"
             >
               {action.label}
             </a>

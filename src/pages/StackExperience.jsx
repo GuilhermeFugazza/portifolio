@@ -96,7 +96,7 @@ const stackDomains = [
 
 export default function StackExperience() {
   return (
-    <section className="w-full py-5 md:py-8">
+    <section className="w-full pb-10 pt-14 md:pb-12 md:pt-0">
       <SectionHeader
         title="Stack & Experiência"
         description="Tecnologias"

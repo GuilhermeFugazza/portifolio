@@ -1,5 +1,5 @@
-import { useEffect, useLayoutEffect, useRef, useState } from "react";
-import { NavLink, useLocation } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { NavLink } from "react-router-dom";
 import curriculumFile from "../assets/CV/Curriculo_Guilherme_Fugazza_Mobile_React_Native_v5.pdf.pdf";
 
 const navItems = [
@@ -66,55 +66,7 @@ const navItems = [
 ];
 
 export default function Navbar() {
-  const location = useLocation();
-  const navRef = useRef(null);
-  const itemRefs = useRef([]);
-  const [indicator, setIndicator] = useState({ left: 0, width: 0, opacity: 0 });
   const [isHeaderCompact, setIsHeaderCompact] = useState(false);
-
-  const normalizePath = (pathname) =>
-    pathname.startsWith("/projetos") ? "/projetos" : pathname;
-
-  const updateIndicator = () => {
-    const container = navRef.current;
-    const activeIndex = navItems.findIndex(
-      (item) => item.to === normalizePath(location.pathname)
-    );
-
-    if (!container || activeIndex === -1) {
-      return;
-    }
-
-    const activeEl = itemRefs.current[activeIndex];
-    if (!activeEl) return;
-
-    const containerRect = container.getBoundingClientRect();
-    const activeRect = activeEl.getBoundingClientRect();
-    const left = activeRect.left - containerRect.left + container.scrollLeft;
-
-    setIndicator({
-      left,
-      width: activeRect.width,
-      opacity: 1
-    });
-  };
-
-  useLayoutEffect(() => {
-    updateIndicator();
-  }, [location.pathname]);
-
-  useEffect(() => {
-    const container = navRef.current;
-    if (!container) return;
-
-    const handle = () => updateIndicator();
-    window.addEventListener("resize", handle);
-    container.addEventListener("scroll", handle, { passive: true });
-    return () => {
-      window.removeEventListener("resize", handle);
-      container.removeEventListener("scroll", handle);
-    };
-  }, [location.pathname]);
 
   useEffect(() => {
     let rafId = 0;
@@ -146,7 +98,7 @@ export default function Navbar() {
   return (
     <>
       <header className="fixed z-20 w-full bg-transparent">
-        <div className="mx-auto flex w-full max-w-8xl flex-col items-center gap-4 px-6 pt-6 text-sm text-muted sm:flex-row sm:justify-between sm:gap-3 sm:px-8 sm:pt-8">
+        <div className="mx-auto flex w-full max-w-8xl flex-col items-center gap-3 px-4 pt-4 text-sm text-muted sm:flex-row sm:justify-between sm:gap-3 sm:px-8 sm:pt-8">
           <div
             className={`navbar-work-pill ${isHeaderCompact ? "is-collapsed" : ""}`}
             aria-label="Disponível para projetos"
@@ -175,38 +127,26 @@ export default function Navbar() {
         </div>
       </header>
 
-      <nav className="fixed inset-x-0 bottom-10 z-50">
-        <div className="mx-auto w-fit max-w-4xl px-6">
+      <nav className="fixed inset-x-0 bottom-6 z-50 px-2.5 sm:bottom-10 sm:px-4">
+        <div className="no-scrollbar mx-auto flex w-full justify-center overflow-x-auto">
           <div
-            ref={navRef}
-            className="relative flex items-center gap-1 overflow-x-auto rounded-full border border-white/20 bg-slate-900/45 p-1 text-sm font-medium text-white shadow-[0_18px_40px_rgba(5,10,25,0.28)] backdrop-blur-xl"
+            className="relative inline-flex w-max items-center gap-1 overflow-y-hidden rounded-full border border-white/20 bg-[rgba(11,19,36,0.45)] p-1 text-sm font-medium text-white shadow-[0_18px_40px_rgba(5,10,25,0.28)] backdrop-blur-xl"
           >
-            <span
-              className="pointer-events-none absolute inset-y-1 left-0 rounded-full bg-white/90 transition-[transform,width] duration-400 ease-out"
-              style={{
-                transform: `translateX(${indicator.left}px)`,
-                width: indicator.width,
-                opacity: indicator.opacity
-              }}
-            />
-            {navItems.map((item, index) => (
+            {navItems.map((item) => (
               <NavLink
                 key={item.to}
                 to={item.to}
-                ref={(el) => {
-                  itemRefs.current[index] = el;
-                }}
                 className={({ isActive }) =>
-                  `relative z-10 whitespace-nowrap rounded-full px-5 py-3 transition ${
-                    isActive ? "text-black" : "text-white/70 hover:text-white"
+                  `relative inline-flex shrink-0 items-center gap-2 whitespace-nowrap rounded-full px-4 py-2.5 transition sm:px-5 sm:py-3 ${
+                    isActive
+                      ? "bg-white/90 text-black"
+                      : "text-white/70 hover:text-white"
                   }`
                 }
               >
-                <span className="inline-flex items-center gap-2">
-                  {item.icon}
-                  <span className="hidden sm:inline">{item.label}</span>
-                  <span className="sr-only">{item.label}</span>
-                </span>
+                {item.icon}
+                <span className="hidden sm:inline">{item.label}</span>
+                <span className="sr-only">{item.label}</span>
               </NavLink>
             ))}
           </div>
