@@ -77,6 +77,15 @@ export default function ProjectDetail() {
   const spotlightStack = project.techStack.slice(0, 4);
   const executionList = project.responsibilities.slice(0, 5);
   const primaryPitch = project.shortDescription || project.overview;
+  const hasVisualProof = resolvedMobileMockups.length > 0;
+  const keyMessage =
+    project.keyMessage || "Arquitetura e execução orientadas por estabilidade.";
+  const keyHighlights = project.keyHighlights || [
+    "Escopo técnico definido com base no domínio de negócio.",
+    "Implementação orientada a previsibilidade e manutenção.",
+    "Evolução contínua sem ruptura de operação."
+  ];
+  const architecturalDecisions = project.architecturalDecisions || [];
 
   return (
     <section className="space-y-12 pb-12 pt-8 md:space-y-16 md:pt-28">
@@ -102,24 +111,18 @@ export default function ProjectDetail() {
 
           <aside className="space-y-4 md:border-l md:border-white/12 md:pl-8">
             <p className="text-xs font-semibold uppercase tracking-[0.24em] text-burnt">
-              Mensagem-chave
+              Enfoque técnico
             </p>
             <h2 className="max-w-md font-display text-2xl font-semibold leading-tight text-ink">
-              Produto pensado para virar resultado real.
+              {keyMessage}
             </h2>
             <ul className="space-y-3 text-base leading-relaxed text-muted">
-              <li className="flex items-start gap-2">
-                <span className="mt-2 h-1.5 w-1.5 rounded-full bg-burnt/80" />
-                <span>Clareza no fluxo principal desde o primeiro acesso.</span>
-              </li>
-              <li className="flex items-start gap-2">
-                <span className="mt-2 h-1.5 w-1.5 rounded-full bg-burnt/80" />
-                <span>Experiência orientada por progresso e continuidade.</span>
-              </li>
-              <li className="flex items-start gap-2">
-                <span className="mt-2 h-1.5 w-1.5 rounded-full bg-burnt/80" />
-                <span>Arquitetura pronta para evolução de funcionalidades.</span>
-              </li>
+              {keyHighlights.map((item) => (
+                <li key={item} className="flex items-start gap-2">
+                  <span className="mt-2 h-1.5 w-1.5 rounded-full bg-burnt/80" />
+                  <span>{item}</span>
+                </li>
+              ))}
             </ul>
           </aside>
         </div>
@@ -136,25 +139,37 @@ export default function ProjectDetail() {
         </div>
       </header>
 
-      <div className="space-y-5">
-        <div className="stagger-item space-y-3" style={{ "--stagger": 0.75 }}>
+      {hasVisualProof ? (
+        <div className="space-y-5">
+          <div className="stagger-item space-y-3" style={{ "--stagger": 0.75 }}>
+            <p className="text-xs font-semibold uppercase tracking-[0.3em] text-accent">
+              Prova visual
+            </p>
+            <h2 className="font-display text-3xl font-semibold text-ink md:text-4xl">
+              {project.visualProofTitle || "Galeria do caso"}
+            </h2>
+            <p className="max-w-4xl text-base leading-relaxed text-muted">
+              {project.visualProofDescription ||
+                "A galeria abaixo apresenta o fluxo principal do projeto, com foco em usabilidade, organização da informação e continuidade de operação."}
+            </p>
+          </div>
+          <IphoneMockupCarousel
+            images={resolvedMobileMockups}
+            projectSlug={project.mobileGalleryFolder || project.slug}
+            stagger={0.85}
+          />
+        </div>
+      ) : (
+        <div className="stagger-item border-t border-white/10 pt-8" style={{ "--stagger": 0.75 }}>
           <p className="text-xs font-semibold uppercase tracking-[0.3em] text-accent">
-            Prova visual
+            {project.visualProofTitle || "Contexto visual"}
           </p>
-          <h2 className="font-display text-3xl font-semibold text-ink md:text-4xl">
-            Veja o produto em uso real
-          </h2>
-          <p className="max-w-4xl text-base leading-relaxed text-muted">
-            A navegação abaixo mostra telas reais do aplicativo em execução, com
-            foco em usabilidade, hierarquia visual e fluxo contínuo.
+          <p className="mt-3 max-w-4xl text-base leading-relaxed text-muted">
+            {project.visualProofDescription ||
+              "Sem ativos visuais públicos para este escopo técnico."}
           </p>
         </div>
-        <IphoneMockupCarousel
-          images={resolvedMobileMockups}
-          projectSlug={project.mobileGalleryFolder || project.slug}
-          stagger={0.85}
-        />
-      </div>
+      )}
 
       <div className="grid gap-10 border-t border-white/10 pt-8 md:grid-cols-2">
         <section className="stagger-item space-y-3" style={{ "--stagger": 1.1 }}>
@@ -200,7 +215,7 @@ export default function ProjectDetail() {
             Base técnica
           </p>
           <h3 className="font-display text-2xl font-semibold text-ink">
-            Stack e sustentação do produto
+            Stack e sustentação da solução
           </h3>
           <div className="flex flex-wrap gap-2">
             {project.techStack.map((item) => (
@@ -220,6 +235,21 @@ export default function ProjectDetail() {
               {project.statusDetail}
             </p>
           </div>
+          {architecturalDecisions.length > 0 && (
+            <div className="border-l border-white/12 pl-4">
+              <h4 className="text-xs font-semibold uppercase tracking-[0.2em] text-white/65">
+                Decisões arquiteturais
+              </h4>
+              <ul className="mt-2 space-y-2 text-base leading-relaxed text-muted">
+                {architecturalDecisions.map((item) => (
+                  <li key={item} className="flex items-start gap-2">
+                    <span className="mt-2 h-1.5 w-1.5 rounded-full bg-burnt/80" />
+                    <span>{item}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          )}
         </section>
       </div>
 

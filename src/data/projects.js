@@ -1,28 +1,29 @@
 export const projects = [
   {
     slug: "aplicativo-concurseiros",
-    name: "Aplicativo para Concurseiros (SaaS Mobile)",
+    group: "autoral",
+    name: "App de Concurseiros",
     shortDescription:
-      "Plataforma mobile para planejamento de estudos, simulados e acompanhamento de desempenho em tempo real.",
-    status: "Em produção",
-    stack: ["React Native", "Expo", "Node", "PostgreSQL"],
+      "Caso de estudo autoral focado em arquitetura mobile escalável, sincronização offline e organização de fluxo de estudo.",
+    status: "Projeto autoral - laboratório de arquitetura e produto",
+    stack: ["React Native", "Expo", "Node.js", "PostgreSQL"],
     overview:
-      "SaaS mobile criado para concurseiros que precisam organizar a rotina de estudos, registrar resultados e manter consistência diária. O projeto prioriza performance, experiência offline e integração com APIs de conteúdo.",
+      "Projeto autoral usado como laboratório técnico para validar decisões de arquitetura mobile, fluxo de estudo orientado por dados e evolução de APIs de suporte.",
     problem:
-      "A maioria dos estudantes utiliza planilhas desconectadas e aplicativos genéricos, o que dificulta manter um plano de estudos consistente e acompanhar a evolução com dados confiáveis.",
+      "O desafio foi estruturar um app de estudo com experiência contínua mesmo em conectividade instável, sem perder consistência de dados e previsibilidade de evolução.",
     solution:
-      "A solução combina cronograma inteligente, simulados com estatísticas de acertos e um painel de progresso por disciplina. O app integra lembretes, metas semanais e dashboard com indicadores claros.",
+      "A solução foi desenhada com separação clara de camadas, sincronização incremental e API preparada para expansão de módulos sem acoplamento excessivo.",
     responsibilities: [
-      "Definição da arquitetura do app e organização dos módulos principais",
-      "Construção das APIs REST e integrações com notificações",
-      "Modelagem do banco e processos de sincronização",
-      "Implementação de telas críticas com foco em usabilidade",
-      "Automações internas para suporte e onboarding"
+      "Definição da arquitetura mobile e organização modular por contexto de domínio",
+      "Implementação de API REST para sessões de estudo, progresso e sincronização",
+      "Modelagem relacional para histórico de desempenho e metas por disciplina",
+      "Estruturação de fluxo offline-first com reconciliação de dados",
+      "Ajustes de experiência para manter previsibilidade no uso diário"
     ],
     techStack: [
       "React Native",
       "Expo",
-      "Node",
+      "Node.js",
       "Express",
       "PostgreSQL",
       "Redis",
@@ -30,52 +31,74 @@ export const projects = [
     ],
     mobileGalleryFolder: "Study",
     statusDetail:
-      "Produto ativo com base paga e roadmap focado em novos simulados e recomendações personalizadas."
+      "Projeto autoral mantido como laboratório técnico para validar arquitetura, fluxo de produto e evolução de integrações.",
+    keyMessage:
+      "Caso autoral orientado a arquitetura mobile escalável e consistência de dados.",
+    keyHighlights: [
+      "Fluxo de estudo desenhado com foco em continuidade operacional.",
+      "Estrutura técnica preparada para expansão incremental de recursos.",
+      "Decisões guiadas por separação de domínio e previsibilidade de manutenção."
+    ],
+    architecturalDecisions: [
+      "Estrutura modular para escalabilidade futura.",
+      "Sincronização offline-first para continuidade de uso.",
+      "Separação clara entre camada de domínio e apresentação.",
+      "API estruturada para expansão de recursos."
+    ]
   },
   {
-    slug: "erp-cafeterias",
-    name: "ERP Vertical para Cafeterias",
+    slug: "sistemas-empresariais-nda",
+    group: "nda",
+    name: "Sistemas empresariais sob NDA",
     shortDescription:
-      "Sistema interno para controle de estoque, pedidos e rotinas administrativas em cafeterias.",
-    status: "Em desenvolvimento",
-    stack: ["React", "Node", "SQLite", "n8n"],
-    overview:
-      "ERP enxuto para operar rotinas diárias de uma rede de cafeterias, com foco em padronizar processos e reduzir perdas de estoque.",
-    problem:
-      "Gestão de insumos e pedidos feita manualmente gerava inconsistências e falta de previsibilidade.",
-    solution:
-      "Dashboard centralizado com alertas de reposição, controle de compras e fluxo de atendimento simplificado.",
-    responsibilities: [
-      "Mapeamento de processos do negócio",
-      "Construção do painel administrativo",
-      "Automações no n8n para alertas de compras"
+      "Atuação em desenvolvimento e arquitetura de sistemas de gestão, integrações financeiras, APIs multi-tenant e automações empresariais sob contrato de confidencialidade.",
+    status: "Experiência profissional sob NDA",
+    stack: [
+      "Node.js",
+      "PostgreSQL",
+      "REST APIs",
+      "Multi-tenant",
+      "Linux",
+      "Integrações financeiras",
+      "n8n",
+      "Cloudflare"
     ],
-    techStack: ["React", "Node", "SQLite", "n8n"],
+    overview:
+      "Projetos empresariais executados sob confidencialidade, com foco em arquitetura de sistemas de gestão, integração entre serviços críticos e sustentação operacional.",
+    problem:
+      "Ambientes corporativos com múltiplas regras de negócio e integrações sensíveis exigiam arquitetura estável, isolamento de dados e rastreabilidade de operações.",
+    solution:
+      "A entrega foi conduzida com arquitetura por camadas, APIs versionadas, modelagem relacional orientada ao domínio e rotinas automatizadas para reduzir falhas operacionais.",
+    responsibilities: [
+      "Definição e implementação de arquitetura multi-tenant com isolamento por cliente",
+      "Construção de integrações financeiras com autenticação segura e validação transacional",
+      "Estruturação de bancos PostgreSQL para crescimento com performance previsível",
+      "Automação de rotinas operacionais com n8n e scripts Python",
+      "Deploy e sustentação de APIs em ambientes Linux com Cloudflare"
+    ],
+    techStack: [
+      "Node.js",
+      "PostgreSQL",
+      "REST APIs",
+      "Multi-tenant",
+      "Linux",
+      "Integrações financeiras",
+      "n8n",
+      "Cloudflare"
+    ],
     mobileGalleryFolder: "",
     statusDetail:
-      "Projeto piloto com duas unidades, validando processos de estoque e vendas."
-  },
-  {
-    slug: "gestao-ecommerce",
-    name: "Sistema de Gestão de E-commerce (multi-tenant)",
-    shortDescription:
-      "Plataforma para lojas virtuais com controle de catálogo, pedidos e financeiro.",
-    status: "Em produção",
-    stack: ["React", "Node", "PostgreSQL", "Linux"],
-    overview:
-      "Plataforma multi-tenant para gerenciamento de operações de e-commerce, com foco em escalabilidade e separação de dados por loja.",
-    problem:
-      "Lojas pequenas precisam de um sistema único para catálogo, pedidos e financeiro, sem os custos de plataformas grandes.",
-    solution:
-      "Sistema modular com painel por loja, gestão de usuários e integração com gateways de pagamento.",
-    responsibilities: [
-      "Arquitetura multi-tenant",
-      "APIs de catálogo e pedidos",
-      "Monitoramento e deploy em Linux"
+      "Escopo técnico executado em ambientes reais sob contratos de confidencialidade (NDA), sem exposição pública de dados de cliente.",
+    ctaLabel: "Ver escopo técnico",
+    keyMessage:
+      "Arquitetura e desenvolvimento de sistemas críticos sob confidencialidade.",
+    keyHighlights: [
+      "Isolamento multi-tenant e controle de acesso orientado por contexto.",
+      "Integrações financeiras com autenticação segura e validação de consistência.",
+      "Operação sustentada com automação e observabilidade em ambiente Linux."
     ],
-    techStack: ["React", "Node", "PostgreSQL", "Linux"],
-    mobileGalleryFolder: "",
-    statusDetail:
-      "Em uso por lojas locais, com suporte a novos módulos financeiros."
+    visualProofTitle: "Contexto de confidencialidade",
+    visualProofDescription:
+      "Este case representa atuação profissional sob NDA. Por confidencialidade contratual, não há publicação de telas, fluxos internos ou dados operacionais."
   }
 ];

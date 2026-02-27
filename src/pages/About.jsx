@@ -5,37 +5,37 @@ const serviceAreas = [
   {
     title: "Desenvolvimento de APIs e Back-end",
     description:
-      "APIs robustas, seguras e prontas para integrações críticas e alto volume de uso.",
+      "APIs versionadas com autenticação baseada em token, validação consistente e contratos estáveis para integrações críticas.",
     tag: "Back-end"
   },
   {
-    title: "Aplicativos Mobile (iOS e Android)",
+    title: "Aplicativos Mobile Estruturados",
     description:
-      "Aplicativos com estrutura sólida, boa performance e experiência consistente no dia a dia.",
+      "Aplicações mobile com arquitetura modular, sincronização confiável e fluxo orientado à evolução contínua de funcionalidades.",
     tag: "Mobile"
   },
   {
-    title: "Sistemas Web e Dashboards",
+    title: "Sistemas Web Operacionais",
     description:
-      "Interfaces claras para operação e gestão, com foco em produtividade e tomada de decisão.",
+      "Painéis de operação e gestão conectados ao domínio do negócio, priorizando rastreabilidade e eficiência operacional.",
     tag: "Front-end"
   },
   {
     title: "Automações e Integrações",
     description:
-      "Fluxos automatizados para reduzir tarefas manuais e conectar sistemas de forma confiável.",
+      "Integrações entre serviços com webhooks, filas e fluxos automatizados para reduzir tarefas manuais e falhas de processo.",
     tag: "Integrações"
   },
   {
     title: "Sistemas Multi-tenant",
     description:
-      "Arquiteturas escaláveis para múltiplos clientes, mantendo isolamento e segurança de dados.",
+      "Arquiteturas com isolamento de dados por tenant, controle de acesso por contexto e crescimento seguro por cliente.",
     tag: "Arquitetura"
   },
   {
-    title: "Estruturação de Banco de Dados",
+    title: "Modelagem de Dados e Performance",
     description:
-      "Modelagem orientada à consistência, performance e crescimento sustentável do produto.",
+      "Modelagem relacional orientada a domínio com foco em consistência transacional, consultas críticas e manutenção previsível.",
     tag: "Dados"
   }
 ];
@@ -93,36 +93,36 @@ const technologyLogos = [
 ];
 
 const profileLevels = [
-  { label: "Back-end & APIs", level: "Alto", value: 92 },
-  { label: "Mobile", level: "Alto", value: 88 },
-  { label: "Arquitetura de Sistemas", level: "Alto", value: 90 },
-  { label: "Front-end Web", level: "Médio/Alto", value: 78 },
-  { label: "Infraestrutura & Redes", level: "Médio", value: 65 }
+  { label: "Mobile e experiência de fluxo", value: 96 },
+  { label: "Back-end, APIs e integrações", value: 92 },
+  { label: "Arquitetura e multi-tenant", value: 90 },
+  { label: "Modelagem e performance em PostgreSQL", value: 86 },
+  { label: "Infraestrutura Linux e deploy", value: 74 }
 ];
 
 const workPrinciples = [
-  "Entendimento real do problema",
+  "Levantamento técnico orientado ao domínio",
   "Arquitetura antes do código",
-  "Código organizado e escalável",
-  "Comunicação clara com o cliente",
-  "Soluções sustentáveis no longo prazo"
+  "Modelagem consistente de dados e contratos",
+  "Entrega com observabilidade e previsibilidade",
+  "Evolução contínua sem ruptura operacional"
 ];
 
 const professionalSummary = [
-  "Sou desenvolvedor de software com formação técnica em Informática pelo Instituto Federal Catarinense e atuação prática em projetos web, mobile e integrações de negócios.",
-  "Participo de todo o ciclo de produto: diagnóstico, desenho de arquitetura, implementação, validação e evolução contínua em produção.",
-  "Atualmente desenvolvo sistemas de gestão, plataformas SaaS e aplicativos com potencial real de operação e monetização."
+  "Atuo como engenheiro de software em projetos B2B, estruturando APIs, modelagem de dados e aplicações web/mobile com foco em arquitetura escalável.",
+  "Grande parte dos sistemas desenvolvidos são sob contrato de confidencialidade (NDA), atuando em ambientes reais de produção.",
+  "Minha atuação inclui integrações financeiras, desenho de soluções multi-tenant, controle de concorrência em operações críticas e deploy em ambientes Linux."
 ];
 
 const trustHighlights = [
-  "Visão completa de produto, da regra de negócio ao deploy.",
-  "Decisões técnicas orientadas por clareza, performance e escalabilidade.",
-  "Compromisso com previsibilidade de entrega e qualidade de código."
+  "Arquitetura por camadas com separação clara entre domínio, aplicação e infraestrutura.",
+  "Autenticação baseada em token, contratos REST estáveis e integração via webhooks.",
+  "Banco relacional orientado ao domínio com foco em performance e crescimento sustentável."
 ];
 
 const profileFacts = [
   { label: "Formação", value: "Técnico em Informática - IFC" },
-  { label: "Atuação", value: "Web, APIs, Mobile e Integrações" },
+  { label: "Atuação", value: "Sistemas B2B, APIs e integrações" },
   { label: "Modelo", value: "Arquitetura + execução ponta a ponta" }
 ];
 
@@ -131,19 +131,19 @@ const processSteps = [
     step: "01",
     title: "Diagnóstico e escopo",
     description:
-      "Mapeio objetivos, regras e riscos para transformar necessidade de negócio em plano técnico claro."
+      "Mapeio domínio, restrições e integrações para transformar necessidade operacional em escopo técnico executável."
   },
   {
     step: "02",
     title: "Arquitetura e implementação",
     description:
-      "Estruturo back-end, dados e interface de forma consistente para acelerar a evolução sem retrabalho."
+      "Defino camadas, contratos e persistência com foco em estabilidade transacional e evolução sem retrabalho."
   },
   {
     step: "03",
     title: "Entrega, monitoramento e evolução",
     description:
-      "Publicação segura, acompanhamento da operação e melhorias com foco em resultado contínuo."
+      "Configuro deploy, monitoração e ciclo de melhorias para manter confiabilidade em produção."
   }
 ];
 
@@ -178,7 +178,7 @@ export default function About() {
                   <p className="mt-1 font-display text-[1.18rem] leading-tight text-ink">
                     Guilherme Fugazza
                   </p>
-                  <p className="mt-1 text-[0.75rem] text-ink/74">Desenvolvedor Full Stack</p>
+                  <p className="mt-1 text-[0.75rem] text-ink/74">Engenheiro de Software B2B</p>
                 </figcaption>
               </div>
             </figure>
@@ -303,10 +303,10 @@ export default function About() {
             <section className="stagger-item" style={{ "--stagger": 0.8 }}>
               <header>
                 <p className="text-[0.64rem] font-semibold uppercase tracking-[0.15em] text-burnt/90">
-                  Maturidade técnica
+                  Áreas de atuação predominante
                 </p>
                 <h2 className="mt-1 font-display text-[1.28rem] leading-tight text-ink md:text-[1.42rem]">
-                  Nível por área
+                  Distribuição de foco técnico
                 </h2>
               </header>
 
@@ -315,9 +315,6 @@ export default function About() {
                   <div key={item.label} className="py-3">
                     <div className="flex items-end justify-between gap-3">
                       <span className="text-[0.84rem] font-medium text-ink/80">{item.label}</span>
-                      <span className="text-[0.64rem] font-semibold uppercase tracking-[0.1em] text-ink/50">
-                        {item.level}
-                      </span>
                     </div>
                     <div className="mt-2 h-1.5 overflow-hidden rounded-full bg-[rgba(138,162,214,0.15)]">
                       <div
@@ -333,7 +330,7 @@ export default function About() {
         </div>
 
         <p className="stagger-item mt-7 text-center text-[0.92rem] leading-relaxed text-ink/68" style={{ "--stagger": 0.9 }}>
-          Se você precisa de alguém para planejar, construir e evoluir um produto digital com responsabilidade técnica e visão de negócio, vamos conversar.
+          Se você precisa estruturar ou evoluir sistemas empresariais com responsabilidade técnica, integração confiável e arquitetura escalável, vamos conversar.
         </p>
       </div>
     </section>
