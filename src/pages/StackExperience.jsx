@@ -1,195 +1,77 @@
+import { Link } from "react-router-dom";
 import SectionHeader from "../components/SectionHeader.jsx";
-
-const capabilityHighlights = [
-  "Áreas de atuação predominante",
-  "Arquitetura por camadas",
-  "Integrações empresariais escaláveis"
-];
-
-const stackDomains = [
-  {
-    id: "01",
-    title: "Front-end e Mobile",
-    summary:
-      "Interfaces web e mobile conectadas ao domínio do negócio, com foco em previsibilidade de fluxo e evolução contínua.",
-    focus: [
-      "Estrutura de componentes reutilizáveis para manutenção incremental.",
-      "Organização de estado por contexto funcional e fluxo de uso.",
-      "Controle de renderização e performance para cenários de operação diária."
-    ],
-    tools: [
-      { name: "React", icon: "https://cdn.simpleicons.org/react/61DAFB" },
-      { name: "React Native", icon: "https://cdn.simpleicons.org/react/61DAFB" },
-      { name: "Expo", icon: "https://cdn.simpleicons.org/expo/FFFFFF" },
-      { name: "Tailwind", icon: "https://cdn.simpleicons.org/tailwindcss/06B6D4" }
-    ]
-  },
-  {
-    id: "02",
-    title: "Back-end e APIs",
-    summary:
-      "Serviços e APIs para regras de negócio críticas, integração entre sistemas e sustentação de crescimento.",
-    focus: [
-      "Arquitetura por camadas com separação de responsabilidades.",
-      "Autenticação baseada em token, validação e controle de acesso.",
-      "Controle de concorrência e contratos REST estáveis entre serviços."
-    ],
-    tools: [
-      { name: "Node.js", icon: "https://cdn.simpleicons.org/nodedotjs/5FA04E" },
-      { name: "Express", icon: "https://cdn.simpleicons.org/express/FFFFFF" },
-      { name: "REST APIs", icon: "https://cdn.simpleicons.org/openapiinitiative/6BA539" },
-      { name: "Cloudflare", icon: "https://cdn.simpleicons.org/cloudflare/F38020" }
-    ]
-  },
-  {
-    id: "03",
-    title: "Python e Automações",
-    summary:
-      "Automações orientadas a operação para reduzir intervenção manual e aumentar confiabilidade de processos.",
-    focus: [
-      "Scripts para rotinas empresariais recorrentes e monitoráveis.",
-      "Tratamento de dados com validação entre múltiplas origens.",
-      "Integração via webhooks e orquestração de fluxos no n8n."
-    ],
-    tools: [
-      { name: "Python", icon: "https://cdn.simpleicons.org/python/3776AB" },
-      { name: "Pandas", icon: "https://cdn.simpleicons.org/pandas/150458" },
-      { name: "n8n", icon: "https://cdn.simpleicons.org/n8n/EA4B71" },
-      { name: "Webhooks", icon: "https://cdn.simpleicons.org/zapier/FF4F00" }
-    ]
-  },
-  {
-    id: "04",
-    title: "Banco de Dados",
-    summary:
-      "Modelagem relacional orientada a domínio com foco em consistência, consulta eficiente e evolução segura.",
-    focus: [
-      "Estruturas relacionais claras para isolamento e rastreabilidade.",
-      "Otimização de consultas críticas com análise de plano de execução.",
-      "Migrações versionadas com baixo risco de interrupção operacional."
-    ],
-    tools: [
-      { name: "PostgreSQL", icon: "https://cdn.simpleicons.org/postgresql/4169E1" },
-      { name: "SQLite", icon: "https://cdn.simpleicons.org/sqlite/0F80CC" },
-      { name: "Redis", icon: "https://cdn.simpleicons.org/redis/DC382D" },
-      { name: "Prisma", icon: "https://cdn.simpleicons.org/prisma/2D3748" }
-    ]
-  },
-  {
-    id: "05",
-    title: "Infraestrutura e Entrega",
-    summary:
-      "Deploy e sustentação com foco em estabilidade, segurança e previsibilidade de release.",
-    focus: [
-      "Configuração de ambientes Linux para web e APIs.",
-      "Camada de edge, cache e proteção de tráfego com Cloudflare.",
-      "Pipeline de entrega para publicação consistente de serviços."
-    ],
-    tools: [
-      { name: "Linux", icon: "https://cdn.simpleicons.org/linux/FCC624" },
-      { name: "Docker", icon: "https://cdn.simpleicons.org/docker/2496ED" },
-      { name: "GitHub Actions", icon: "https://cdn.simpleicons.org/githubactions/2088FF" },
-      { name: "Cloudflare", icon: "https://cdn.simpleicons.org/cloudflare/F38020" }
-    ]
-  }
-];
-
-const solvedChallenges = [
-  "Implementação de arquitetura multi-tenant com isolamento de dados",
-  "Integração com APIs financeiras sob autenticação segura",
-  "Estruturação de banco de dados para crescimento escalável",
-  "Criação de fluxos automatizados com n8n e Python",
-  "Deploy e configuração de ambientes Linux para APIs",
-  "Otimização de consultas críticas em PostgreSQL"
-];
+import { techIcon } from "../data/techIcons.js";
+import { useLang } from "../i18n/LanguageContext.jsx";
+import { strings } from "../i18n/strings.js";
 
 export default function StackExperience() {
+  const { t } = useLang();
+  const s = strings.stack;
+
   return (
-    <section className="w-full pb-10 pt-14 md:pb-12 md:pt-0">
-      <SectionHeader
-        title="Stack & Experiência"
-        description="Tecnologias"
-        className="mb-5 md:mb-6"
-      />
+    <section className="w-full pb-6 md:pb-10">
+      <SectionHeader title={t(s.title)} description={t(s.eyebrow)} lede={t(s.lede)} />
 
-      <article className="stagger-item mx-auto w-full max-w-[980px]" style={{ "--stagger": 0.45 }}>
-        <p className="stack-principles-line">
-          {capabilityHighlights.join(" · ")}
-        </p>
+      <ol className="grid gap-5 md:grid-cols-2 md:gap-6 xl:grid-cols-3">
+        {s.layers.map((layer, index) => (
+          <li
+            key={layer.id}
+            className="stagger-item surface surface--interactive flex flex-col gap-4"
+            style={{ "--stagger": 0.4 + index * 0.1 }}
+          >
+            <div className="flex items-baseline justify-between gap-3">
+              <h2 className="font-display text-[1.25rem] font-semibold leading-tight txt-1">{t(layer.title)}</h2>
+              <span className="font-display text-[0.78rem] font-semibold txt-4">{layer.id}</span>
+            </div>
 
-        <ol className="mt-5 divide-y divide-white/10 border-y border-white/10">
-          {stackDomains.map((domain, index) => (
+            <p className="body-text">{t(layer.summary)}</p>
+
+            <ul className="chip-row">
+              {layer.tools.map((name) => {
+                const icon = techIcon(name);
+                return (
+                  <li key={name} className="chip">
+                    {icon && <img src={icon} alt="" loading="lazy" decoding="async" />}
+                    {name}
+                  </li>
+                );
+              })}
+            </ul>
+
+            {layer.proof && (
+              <Link
+                to={`/projetos/${layer.proof.slug}`}
+                className="mt-auto flex items-start gap-2 border-t border-[var(--line)] pt-4 meta-text transition hover:txt-1"
+              >
+                <span className="eyebrow eyebrow--quiet shrink-0 pt-[0.2em]">{t(s.proof)}</span>
+                <span>{t(layer.proof.label)} →</span>
+              </Link>
+            )}
+          </li>
+        ))}
+      </ol>
+
+      <section className="stagger-item surface mt-5 md:mt-6" style={{ "--stagger": 1.1 }}>
+        <header className="block-head">
+          <p className="eyebrow">{t(s.solvedEyebrow)}</p>
+          <h2 className="block-head-title">{t(s.solvedTitle)}</h2>
+        </header>
+
+        <ol className="grid gap-0 divide-y divide-[var(--line)] md:grid-cols-2 md:gap-x-10 md:divide-y-0">
+          {s.solved.map((item, index) => (
             <li
-              key={domain.title}
-              className="stagger-item py-4 md:py-5"
-              style={{ "--stagger": 0.6 + index * 0.12 }}
+              key={t(item.title)}
+              className="grid grid-cols-[2rem_minmax(0,1fr)] gap-3 py-4 first:pt-0 last:pb-0 md:border-b md:border-[var(--line)] md:py-4 md:first:pt-4 md:last:pb-4 md:[&:nth-child(-n+2)]:pt-0 md:[&:nth-last-child(-n+2)]:border-b-0 md:[&:nth-last-child(-n+2)]:pb-0"
             >
-              <div className="grid gap-3 md:grid-cols-[13.5rem_minmax(0,1fr)] md:gap-6">
-                <header>
-                  <p className="text-[0.63rem] font-semibold uppercase tracking-[0.14em] text-burnt/90">
-                    Domínio {domain.id}
-                  </p>
-                  <h3 className="mt-1 font-display text-[1.28rem] font-semibold leading-tight text-ink md:text-[1.48rem]">
-                    {domain.title}
-                  </h3>
-                </header>
-
-                <div>
-                  <p className="text-[0.9rem] leading-relaxed text-ink/82 md:text-[0.95rem]">
-                    {domain.summary}
-                  </p>
-
-                  <ul className="mt-2 grid gap-1.5">
-                    {domain.focus.map((item) => (
-                      <li key={item} className="text-[0.82rem] leading-relaxed text-ink/78 md:text-[0.85rem]">
-                        - {item}
-                      </li>
-                    ))}
-                  </ul>
-
-                  <ul className="stack-tool-list">
-                    {domain.tools.map((tool) => (
-                      <li key={tool.name}>
-                        <span className="stack-tool-chip" title={tool.name}>
-                          <span className="stack-tool-icon-wrap">
-                            <img
-                              src={tool.icon}
-                              alt={`Logo ${tool.name}`}
-                              className="stack-tool-icon"
-                              loading="lazy"
-                              decoding="async"
-                            />
-                          </span>
-                          <span className="stack-tool-name">{tool.name}</span>
-                        </span>
-                      </li>
-                    ))}
-                  </ul>
-                </div>
+              <span className="font-display text-[0.8rem] font-semibold txt-4">{String(index + 1).padStart(2, "0")}</span>
+              <div>
+                <h3 className="text-[0.95rem] font-semibold leading-snug txt-1">{t(item.title)}</h3>
+                <p className="meta-text mt-1">{t(item.detail)}</p>
               </div>
             </li>
           ))}
         </ol>
-
-        <section className="stagger-item mt-8" style={{ "--stagger": 1.35 }}>
-          <header>
-            <p className="text-[0.64rem] font-semibold uppercase tracking-[0.15em] text-burnt/90">
-              Escopo técnico
-            </p>
-            <h2 className="mt-1 font-display text-[1.28rem] leading-tight text-ink md:text-[1.42rem]">
-              Desafios técnicos já resolvidos
-            </h2>
-          </header>
-
-          <ul className="mt-3 divide-y divide-white/10 border-y border-white/10">
-            {solvedChallenges.map((item) => (
-              <li key={item} className="py-3 text-[0.84rem] leading-relaxed text-ink/78 md:text-[0.88rem]">
-                - {item}
-              </li>
-            ))}
-          </ul>
-        </section>
-      </article>
+      </section>
     </section>
   );
 }

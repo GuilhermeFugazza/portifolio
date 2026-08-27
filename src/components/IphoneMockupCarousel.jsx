@@ -1,4 +1,6 @@
 import { useEffect, useMemo, useRef, useState } from "react";
+import { useLang } from "../i18n/LanguageContext.jsx";
+import { strings } from "../i18n/strings.js";
 
 const MAX_VISIBLE_SIDE = 3;
 const DRAG_THRESHOLD = 48;
@@ -64,6 +66,7 @@ export default function IphoneMockupCarousel({
   projectSlug = "",
   stagger = 0.9
 }) {
+  const { t } = useLang();
   const slides = useMemo(() => normalizeSlides(images), [images]);
   const [activeIndex, setActiveIndex] = useState(0);
   const [dragOffset, setDragOffset] = useState(0);
@@ -216,19 +219,12 @@ export default function IphoneMockupCarousel({
     <section
       className="stagger-item py-2"
       style={{ "--stagger": stagger }}
-      aria-label="Carrossel 3D de mockups mobile"
+      aria-label={t({ pt: "Galeria de telas do app", en: "App screens gallery" })}
     >
-      <div className="flex items-end justify-between gap-4">
-        <div>
-          <h2 className="font-display text-lg font-semibold text-ink md:text-xl">
-            Galeria mobile
-          </h2>
-          <p className="mt-1 text-xs font-semibold uppercase tracking-[0.2em] text-white/60">
-            Capturas de tela
-          </p>
-        </div>
-        <span className="text-xs font-semibold uppercase tracking-[0.2em] text-white/50">
-          {hasSlides ? `${activeIndex + 1}/${total}` : "0/0"}
+      <div className="flex items-center justify-between gap-4">
+        <span className="meta-text">{slides[activeIndex]?.label}</span>
+        <span className="eyebrow eyebrow--quiet">
+          {hasSlides ? `${activeIndex + 1} / ${total}` : "0 / 0"}
         </span>
       </div>
 
@@ -238,7 +234,7 @@ export default function IphoneMockupCarousel({
           className="mobile-carousel-nav mobile-carousel-nav-prev"
           onClick={goPrev}
           disabled={!hasSlides || isSingleSlide}
-          aria-label="Imagem anterior"
+          aria-label={t(strings.common.prev)}
         >
           &lsaquo;
         </button>
@@ -288,7 +284,7 @@ export default function IphoneMockupCarousel({
           className="mobile-carousel-nav mobile-carousel-nav-next"
           onClick={goNext}
           disabled={!hasSlides || isSingleSlide}
-          aria-label="Próxima imagem"
+          aria-label={t(strings.common.next)}
         >
           &rsaquo;
         </button>
@@ -305,7 +301,7 @@ export default function IphoneMockupCarousel({
               onClick={() => goTo(index)}
               role="tab"
               aria-selected={index === activeIndex}
-              aria-label={`Ir para ${slide.label}`}
+              aria-label={`${t(strings.common.goTo)} ${slide.label}`}
             />
           ))}
         </div>

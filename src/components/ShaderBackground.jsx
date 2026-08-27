@@ -1,22 +1,28 @@
-import { memo, useEffect, useRef, useState } from "react";
-import { Canvas, extend, useFrame, useThree } from "@react-three/fiber";
-import { shaderMaterial } from "@react-three/drei";
-import * as THREE from "three";
+import { memo, useEffect, useRef } from "react";
 
+// Fundo animado em WebGL puro. Era três dependências (three, @react-three/fiber,
+// @react-three/drei) para desenhar um quad em tela cheia, e o shader é o mesmo.
 const vertexShader = `
+  attribute vec2 aPosition;
   varying vec2 vUv;
   void main() {
-    vUv = uv;
-    gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0);
+    vUv = aPosition * 0.5 + 0.5;
+    gl_Position = vec4(aPosition, 0.0, 1.0);
   }
 `;
 
+// O enquadramento original vinha de um plano 5.2 x 3.0 visto por uma câmera
+// com fov 68 a 1.5 de distância. Os fatores abaixo reproduzem esse recorte.
 const fragmentShader = `
   precision mediump float;
 
   uniform float iTime;
   uniform vec2 iResolution;
   varying vec2 vUv;
+
+  const float PLANE_W = 5.2;
+  const float PLANE_H = 3.0;
+  const float VISIBLE_H = 2.0235;
 
   vec3 palette(float t) {
     vec3 a = vec3(0.010, 0.028, 0.082);
@@ -27,10 +33,14 @@ const fragmentShader = `
   }
 
   void main() {
-    vec2 uv = vUv * 2.0 - 1.0;
-    uv.x *= iResolution.x / max(iResolution.y, 1.0);
+    float aspect = iResolution.x / max(iResolution.y, 1.0);
+    vec2 crop = vec2(VISIBLE_H * aspect / PLANE_W, VISIBLE_H / PLANE_H);
+    vec2 framed = vec2(0.5) + (vUv - vec2(0.5)) * crop;
 
-    float t = iTime * 0.135;
+    vec2 uv = framed * 2.0 - 1.0;
+    uv.x *= aspect;
+
+    float t = iTime * 0.085;
     vec2 q = uv;
 
     q += 0.14 * vec2(
@@ -56,14 +66,6 @@ const fragmentShader = `
   }
 `;
 
-const FlowShaderMaterial = shaderMaterial(
-  { iTime: 0, iResolution: new THREE.Vector2(1, 1) },
-  vertexShader,
-  fragmentShader,
-);
-
-extend({ FlowShaderMaterial });
-
 const WRAPPER_STYLE = {
   position: "fixed",
   inset: 0,
@@ -74,91 +76,186 @@ const WRAPPER_STYLE = {
   overflow: "hidden",
   pointerEvents: "none",
   zIndex: -10,
-  transform: "translateX(-50%)"
+  transform: "translateX(-50%)",
+  // Se o WebGL não subir, o gradiente sozinho já sustenta a página.
+  background:
+    "radial-gradient(120% 90% at 50% 12%, #0b1c3f 0%, #061128 46%, #03081a 100%)"
 };
-const CANVAS_STYLE = { width: "100vw", height: "100%" };
-const CAMERA_CONFIG = {
-  position: [0, 0, 1],
-  fov: 68,
-  near: 0.1,
-  far: 10
-};
-const PLANE_SIZE = [5.2, 3.0];
-const DEFAULT_DPR = [1, 1.25];
-const RESIZE_CONFIG = { scroll: false, debounce: { scroll: 0, resize: 120 } };
 
-function getAdaptiveDpr() {
-  if (typeof window === "undefined" || typeof navigator === "undefined") {
-    return DEFAULT_DPR;
-  }
+const CANVAS_STYLE = { display: "block", width: "100%", height: "100%" };
 
-  const isMobile =
-    window.matchMedia("(pointer: coarse)").matches ||
-    /android|iphone|ipad|ipod/i.test(navigator.userAgent);
+function maxDevicePixelRatio() {
+  if (typeof window === "undefined" || typeof navigator === "undefined") return 1;
+
   const deviceMemory =
     typeof navigator.deviceMemory === "number" ? navigator.deviceMemory : 8;
-  const hardwareConcurrency =
+  const threads =
     typeof navigator.hardwareConcurrency === "number"
       ? navigator.hardwareConcurrency
       : 8;
-  const lowEnd = deviceMemory <= 4 || hardwareConcurrency <= 4;
 
-  if (lowEnd) return [0.85, 1.0];
-  if (isMobile) return [1.0, 1.25];
-  return [1.0, 1.5];
+  if (deviceMemory <= 4 || threads <= 4) return 1;
+  if (window.matchMedia("(pointer: coarse)").matches) return 1.25;
+  return 1.5;
 }
 
-const ShaderPlane = memo(function ShaderPlane() {
-  const materialRef = useRef(null);
-  const size = useThree((state) => state.size);
+function compile(gl, type, source) {
+  const shader = gl.createShader(type);
+  gl.shaderSource(shader, source);
+  gl.compileShader(shader);
 
-  useEffect(() => {
-    const material = materialRef.current;
-    if (!material) return;
-    material.iResolution.set(size.width, size.height);
-  }, [size.width, size.height]);
+  if (!gl.getShaderParameter(shader, gl.COMPILE_STATUS)) {
+    gl.deleteShader(shader);
+    return null;
+  }
 
-  useFrame(({ clock }) => {
-    const material = materialRef.current;
-    if (!material) return;
-    material.iTime = clock.elapsedTime;
-  });
-
-  return (
-    <mesh frustumCulled={false} position={[0, 0, -0.5]}>
-      <planeGeometry args={PLANE_SIZE} />
-      <flowShaderMaterial ref={materialRef} toneMapped={false} />
-    </mesh>
-  );
-});
+  return shader;
+}
 
 const ShaderBackground = memo(function ShaderBackground() {
-  const [dpr, setDpr] = useState(DEFAULT_DPR);
+  const canvasRef = useRef(null);
 
   useEffect(() => {
-    setDpr(getAdaptiveDpr());
+    const canvas = canvasRef.current;
+    if (!canvas) return undefined;
+
+    const gl =
+      canvas.getContext("webgl", {
+        antialias: false,
+        alpha: false,
+        depth: false,
+        stencil: false,
+        preserveDrawingBuffer: false,
+        powerPreference: "high-performance"
+      }) || canvas.getContext("experimental-webgl");
+
+    if (!gl) return undefined;
+
+    const vertex = compile(gl, gl.VERTEX_SHADER, vertexShader);
+    const fragment = compile(gl, gl.FRAGMENT_SHADER, fragmentShader);
+    if (!vertex || !fragment) return undefined;
+
+    const program = gl.createProgram();
+    gl.attachShader(program, vertex);
+    gl.attachShader(program, fragment);
+    gl.linkProgram(program);
+
+    if (!gl.getProgramParameter(program, gl.LINK_STATUS)) {
+      gl.deleteProgram(program);
+      return undefined;
+    }
+
+    gl.useProgram(program);
+
+    const buffer = gl.createBuffer();
+    gl.bindBuffer(gl.ARRAY_BUFFER, buffer);
+    gl.bufferData(
+      gl.ARRAY_BUFFER,
+      new Float32Array([-1, -1, 3, -1, -1, 3]),
+      gl.STATIC_DRAW
+    );
+
+    const aPosition = gl.getAttribLocation(program, "aPosition");
+    gl.enableVertexAttribArray(aPosition);
+    gl.vertexAttribPointer(aPosition, 2, gl.FLOAT, false, 0, 0);
+
+    const uTime = gl.getUniformLocation(program, "iTime");
+    const uResolution = gl.getUniformLocation(program, "iResolution");
+
+    const dprCap = maxDevicePixelRatio();
+    let frame = 0;
+    let start = 0;
+
+    const draw = (elapsed) => {
+      gl.uniform1f(uTime, elapsed);
+      gl.drawArrays(gl.TRIANGLES, 0, 3);
+    };
+
+    const resize = () => {
+      const ratio = Math.min(window.devicePixelRatio || 1, dprCap);
+      const width = Math.max(1, Math.round(canvas.clientWidth * ratio));
+      const height = Math.max(1, Math.round(canvas.clientHeight * ratio));
+
+      if (canvas.width === width && canvas.height === height) return;
+
+      canvas.width = width;
+      canvas.height = height;
+      gl.viewport(0, 0, width, height);
+      gl.uniform2f(uResolution, width, height);
+    };
+
+    const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
+
+    const renderLoop = (timestamp) => {
+      if (!start) start = timestamp;
+      resize();
+      draw((timestamp - start) / 1000);
+      frame = window.requestAnimationFrame(renderLoop);
+    };
+
+    const stop = () => {
+      if (!frame) return;
+      window.cancelAnimationFrame(frame);
+      frame = 0;
+    };
+
+    const play = () => {
+      if (frame || reducedMotion.matches || document.hidden) return;
+      start = 0;
+      frame = window.requestAnimationFrame(renderLoop);
+    };
+
+    const renderStaticFrame = () => {
+      resize();
+      draw(12);
+    };
+
+    const syncMotion = () => {
+      if (reducedMotion.matches) {
+        stop();
+        renderStaticFrame();
+        return;
+      }
+      play();
+    };
+
+    const handleVisibility = () => {
+      if (document.hidden) {
+        stop();
+        return;
+      }
+      syncMotion();
+    };
+
+    const handleResize = () => {
+      if (frame) return;
+      renderStaticFrame();
+    };
+
+    syncMotion();
+
+    document.addEventListener("visibilitychange", handleVisibility);
+    window.addEventListener("resize", handleResize);
+    reducedMotion.addEventListener("change", syncMotion);
+
+    return () => {
+      stop();
+      document.removeEventListener("visibilitychange", handleVisibility);
+      window.removeEventListener("resize", handleResize);
+      reducedMotion.removeEventListener("change", syncMotion);
+
+      gl.deleteBuffer(buffer);
+      gl.deleteProgram(program);
+      gl.deleteShader(vertex);
+      gl.deleteShader(fragment);
+      // Sem loseContext(): o StrictMode do React roda o efeito duas vezes em
+      // dev, e getContext() devolveria o mesmo contexto já perdido na segunda.
+    };
   }, []);
 
   return (
     <div style={WRAPPER_STYLE}>
-      <Canvas
-        frameloop="always"
-        camera={CAMERA_CONFIG}
-        dpr={dpr}
-        resize={RESIZE_CONFIG}
-        performance={{ min: 0.75, max: 1, debounce: 200 }}
-        style={CANVAS_STYLE}
-        gl={{
-          antialias: false,
-          alpha: false,
-          depth: false,
-          stencil: false,
-          preserveDrawingBuffer: false,
-          powerPreference: "high-performance"
-        }}
-      >
-        <ShaderPlane />
-      </Canvas>
+      <canvas ref={canvasRef} style={CANVAS_STYLE} aria-hidden="true" />
       <div className="absolute inset-0 bg-gradient-to-t from-[#030b1f]/30 via-[#07183d]/10 to-[#040d24]/24" />
     </div>
   );

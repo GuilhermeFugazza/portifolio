@@ -41,14 +41,14 @@
     --primary-foreground: 0 0% 98%;
     --secondary: 0 0% 96.1%;
     --secondary-foreground: 0 0% 9%;
-    --muted: 0 0% 96.1%;
-    --muted-foreground: 0 0% 45.1%;
-    --accent: 0 0% 96.1%;
-    --accent-foreground: 0 0% 9%;
+    --muted: 215 20% 70%;
+    --muted-foreground: 215 16% 54%;
+    --accent: 29 100% 56%;
+    --accent-foreground: 222 47% 6%;
     --destructive: 0 84.2% 60.2%;
     --destructive-foreground: 0 0% 98%;
-    --border: 0 0% 89.8%;
-    --input: 0 0% 89.8%;
+    --border: 217 30% 26%;
+    --input: 217 30% 26%;
     --ring: 0 0% 3.9%;
     --chart-1: 12 76% 61%;
     --chart-2: 173 58% 39%;
@@ -2079,4 +2079,457 @@
   * {
     @apply border-border;
   }
+}
+
+/* =========================================================================
+   Sistema de composição — adicionado em 26/08/2026
+
+   O portfólio tinha seis jeitos diferentes de desenhar a mesma coisa: chips
+   com três implementações, listas com hífen literal no texto, e cada bloco
+   solto sobre o gradiente sem nenhum contêiner. As classes abaixo existem
+   para que toda página use a mesma régua de escala, cor e espaçamento.
+   ========================================================================= */
+
+:root {
+  --fg-1: #f1f5fd;
+  --fg-2: #cdd6e8;
+  --fg-3: #9dabc4;
+  --fg-4: #71809b;
+
+  --line: rgba(139, 163, 214, 0.14);
+  --line-strong: rgba(139, 163, 214, 0.26);
+
+  --surface: rgba(10, 19, 38, 0.5);
+  --surface-raised: rgba(14, 25, 48, 0.66);
+
+  --shell-x: 1.25rem;
+}
+
+@media (min-width: 768px) {
+  :root {
+    --shell-x: 0rem;
+  }
+}
+
+/* --- escala de texto ---------------------------------------------------- */
+
+.txt-1 { color: var(--fg-1); }
+.txt-2 { color: var(--fg-2); }
+.txt-3 { color: var(--fg-3); }
+.txt-4 { color: var(--fg-4); }
+
+.eyebrow {
+  font-size: 0.66rem;
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: theme("colors.burnt");
+}
+
+.eyebrow--quiet {
+  color: var(--fg-4);
+}
+
+.lede {
+  font-size: 1rem;
+  line-height: 1.62;
+  color: var(--fg-2);
+  max-width: 46rem;
+}
+
+.body-text {
+  font-size: 0.95rem;
+  line-height: 1.68;
+  color: var(--fg-2);
+}
+
+.meta-text {
+  font-size: 0.82rem;
+  line-height: 1.6;
+  color: var(--fg-3);
+}
+
+/* --- cabeçalho de página ------------------------------------------------ */
+
+.page-head {
+  display: grid;
+  gap: 0.75rem;
+  padding-top: 5.5rem;
+  padding-bottom: 2rem;
+  border-bottom: 1px solid var(--line);
+  margin-bottom: 2.25rem;
+}
+
+@media (min-width: 768px) {
+  .page-head {
+    padding-top: 7.5rem;
+    padding-bottom: 2.5rem;
+    margin-bottom: 3rem;
+  }
+}
+
+.page-head-title {
+  font-family: theme("fontFamily.display");
+  font-size: clamp(2.1rem, 5.5vw, 3.1rem);
+  font-weight: 600;
+  line-height: 1.04;
+  letter-spacing: -0.02em;
+  color: var(--fg-1);
+}
+
+/* --- superfícies -------------------------------------------------------- */
+
+.surface {
+  border: 1px solid var(--line);
+  border-radius: 1rem;
+  background: var(--surface);
+  padding: 1.25rem;
+}
+
+@media (min-width: 768px) {
+  .surface {
+    padding: 1.6rem;
+  }
+}
+
+.surface--interactive {
+  transition: border-color 180ms ease, background-color 180ms ease,
+    transform 180ms ease;
+}
+
+.surface--interactive:hover {
+  border-color: var(--line-strong);
+  background: var(--surface-raised);
+}
+
+@media (min-width: 768px) {
+  .surface--interactive:hover {
+    transform: translateY(-2px);
+  }
+}
+
+/* --- listas com marcador de verdade ------------------------------------- */
+
+.marked-list {
+  display: grid;
+  gap: 0.55rem;
+}
+
+.marked-list > li {
+  position: relative;
+  padding-left: 1.05rem;
+  font-size: 0.88rem;
+  line-height: 1.62;
+  color: var(--fg-2);
+}
+
+.marked-list > li::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0.62em;
+  width: 0.32rem;
+  height: 0.32rem;
+  border-radius: 999px;
+  background: theme("colors.burnt");
+  opacity: 0.72;
+}
+
+.marked-list--quiet > li::before {
+  background: var(--fg-4);
+  opacity: 1;
+}
+
+/* --- chips de tecnologia (implementação única) -------------------------- */
+
+.chip-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+}
+
+.chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  min-height: 1.85rem;
+  padding: 0 0.6rem;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.02);
+  font-size: 0.73rem;
+  font-weight: 500;
+  color: var(--fg-3);
+  white-space: nowrap;
+}
+
+.chip img {
+  width: 0.82rem;
+  height: 0.82rem;
+  object-fit: contain;
+  flex: none;
+}
+
+.chip--plain {
+  padding: 0 0.62rem;
+  font-size: 0.68rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--fg-3);
+}
+
+/* --- selo de status ----------------------------------------------------- */
+
+.status-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.22rem 0.62rem;
+  border: 1px solid;
+  border-radius: 999px;
+  font-size: 0.6rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.status-pill::before {
+  content: "";
+  width: 0.36rem;
+  height: 0.36rem;
+  border-radius: 999px;
+  background: currentColor;
+}
+
+.status-pill--live {
+  border-color: rgba(52, 211, 153, 0.32);
+  background: rgba(16, 185, 129, 0.1);
+  color: #6ee7b7;
+}
+
+.status-pill--wip {
+  border-color: rgba(251, 191, 36, 0.32);
+  background: rgba(245, 158, 11, 0.1);
+  color: #fcd34d;
+}
+
+.status-pill--shipped {
+  border-color: rgba(125, 211, 252, 0.32);
+  background: rgba(56, 189, 248, 0.1);
+  color: #93c5fd;
+}
+
+/* --- botões ------------------------------------------------------------- */
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.4rem;
+  min-height: 2.5rem;
+  padding: 0 1.05rem;
+  border-radius: 999px;
+  border: 1px solid transparent;
+  font-size: 0.85rem;
+  font-weight: 600;
+  transition: border-color 160ms ease, background-color 160ms ease,
+    color 160ms ease;
+}
+
+.btn--primary {
+  border-color: rgba(255, 255, 255, 0.2);
+  background: rgba(255, 255, 255, 0.06);
+  color: #ffffff;
+}
+
+.btn--primary:hover {
+  border-color: rgba(255, 255, 255, 0.4);
+  background: rgba(255, 255, 255, 0.12);
+}
+
+.btn--ghost {
+  border-color: var(--line);
+  color: var(--fg-3);
+}
+
+.btn--ghost:hover {
+  border-color: var(--line-strong);
+  color: var(--fg-1);
+}
+
+/* --- rótulo de seção interna -------------------------------------------- */
+
+.block-head {
+  display: grid;
+  gap: 0.3rem;
+  margin-bottom: 1rem;
+}
+
+.block-head-title {
+  font-family: theme("fontFamily.display");
+  font-size: 1.3rem;
+  font-weight: 600;
+  line-height: 1.2;
+  letter-spacing: -0.012em;
+  color: var(--fg-1);
+}
+
+/* --- grade de definições ------------------------------------------------ */
+
+.def-grid {
+  display: grid;
+  gap: 0;
+}
+
+.def-grid > div {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 0.15rem;
+  padding: 0.7rem 0;
+  border-bottom: 1px solid var(--line);
+}
+
+.def-grid > div:first-child {
+  padding-top: 0;
+}
+
+.def-grid > div:last-child {
+  border-bottom: 0;
+  padding-bottom: 0;
+}
+
+.def-grid dt {
+  font-size: 0.63rem;
+  font-weight: 600;
+  letter-spacing: 0.11em;
+  text-transform: uppercase;
+  color: var(--fg-4);
+}
+
+.def-grid dd {
+  font-size: 0.85rem;
+  line-height: 1.5;
+  color: var(--fg-2);
+}
+
+/* --- capa do card de projeto -------------------------------------------- */
+
+.project-cover {
+  display: block;
+  position: relative;
+  aspect-ratio: 16 / 9;
+  overflow: hidden;
+  border-bottom: 1px solid var(--line);
+  border-radius: 1rem 1rem 0 0;
+  background:
+    radial-gradient(120% 90% at 50% 0%, rgba(31, 52, 102, 0.55), transparent 65%),
+    #0a1226;
+}
+
+.project-cover-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: top left;
+  transition: transform 500ms ease;
+}
+
+.surface--interactive:hover .project-cover-img {
+  transform: scale(1.025);
+}
+
+/* App mobile: mostra a tela inteira centralizada em vez de cortar. */
+.project-cover-img--mobile {
+  width: auto;
+  height: 118%;
+  margin: 0 auto;
+  object-fit: contain;
+  object-position: top center;
+  border-radius: 0.9rem 0.9rem 0 0;
+  box-shadow: 0 18px 40px rgba(0, 0, 0, 0.45);
+  transform: translateY(6%);
+}
+
+.surface--interactive:hover .project-cover-img--mobile {
+  transform: translateY(6%) scale(1.02);
+}
+
+.project-cover-empty {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  background-image:
+    linear-gradient(rgba(139, 163, 214, 0.06) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(139, 163, 214, 0.06) 1px, transparent 1px);
+  background-size: 22px 22px;
+}
+
+/* Mobile: o pill "Disponível" vira só o ponto verde, para caber na mesma
+   linha do CTA sem cobrir o título da página. */
+@media (max-width: 639px) {
+  .navbar-work-pill {
+    width: 2.55rem;
+    gap: 0;
+    padding-inline: 0;
+    justify-content: center;
+  }
+
+  .navbar-work-pill .navbar-work-pill-text {
+    max-width: 0;
+    opacity: 0;
+  }
+
+  .page-head {
+    padding-top: 5.75rem;
+  }
+}
+
+.status-pill--test {
+  border-color: rgba(125, 211, 252, 0.32);
+  background: rgba(56, 189, 248, 0.1);
+  color: #93c5fd;
+}
+
+/* Botão sólido: o CTA principal precisa ser o elemento de maior contraste
+   da tela, não o mais brilhante. */
+.btn--solid {
+  border-color: #f1f5fd;
+  background: #f1f5fd;
+  color: #070b17;
+}
+
+.btn--solid:hover {
+  border-color: #ffffff;
+  background: #ffffff;
+}
+
+/* Seletor de idioma no cabeçalho */
+.lang-switch {
+  display: inline-flex;
+  padding: 0.2rem;
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  border-radius: 999px;
+  background: rgba(10, 18, 39, 0.64);
+}
+
+.lang-switch button {
+  min-width: 2.2rem;
+  padding: 0.3rem 0.55rem;
+  border-radius: 999px;
+  font-size: 0.68rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  color: var(--fg-3);
+  transition: background-color 160ms ease, color 160ms ease;
+}
+
+.lang-switch button:hover {
+  color: var(--fg-1);
+}
+
+.lang-switch button.is-active {
+  background: #f1f5fd;
+  color: #070b17;
 }

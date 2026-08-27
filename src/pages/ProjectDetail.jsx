@@ -1,271 +1,181 @@
 import { Link, useParams } from "react-router-dom";
 import SectionHeader from "../components/SectionHeader.jsx";
 import IphoneMockupCarousel from "../components/IphoneMockupCarousel.jsx";
-import { projects } from "../data/projects.js";
+import BrowserMockupGallery from "../components/BrowserMockupGallery.jsx";
+import { useProjects } from "../data/useProjects.js";
+import { galleryFor } from "../data/screenshots.js";
+import { techIcon } from "../data/techIcons.js";
+import { statusModifier } from "../lib/status.js";
+import { useLang } from "../i18n/LanguageContext.jsx";
+import { strings } from "../i18n/strings.js";
 
-const mobileScreenshotModules = import.meta.glob(
-  "../assets/projects/*/*.{png,jpg,jpeg,webp}",
-  { eager: true, import: "default" }
-);
-
-const folderFromPath = (path) => {
-  const match = path.match(/\/projects\/([^/]+)\//);
-  return match?.[1] ?? "";
-};
-
-const fileNameFromPath = (path) => path.split("/").pop() ?? "";
-
-const collator = new Intl.Collator(undefined, {
-  numeric: true,
-  sensitivity: "base"
-});
-
-const mobileScreenshotsByFolder = Object.entries(mobileScreenshotModules).reduce(
-  (acc, [path, src]) => {
-    const folder = folderFromPath(path);
-    if (!folder) return acc;
-
-    if (!acc[folder]) {
-      acc[folder] = [];
-    }
-
-    acc[folder].push({
-      src,
-      path
-    });
-    return acc;
-  },
-  {}
-);
-
-Object.keys(mobileScreenshotsByFolder).forEach((folder) => {
-  mobileScreenshotsByFolder[folder] = mobileScreenshotsByFolder[folder]
-    .sort((a, b) => collator.compare(fileNameFromPath(a.path), fileNameFromPath(b.path)))
-    .map((item, index) => ({
-      src: item.src,
-      label: `Mockup ${index + 1}`
-    }));
-});
+function Block({ eyebrow, title, children, stagger, className = "" }) {
+  return (
+    <section className={`stagger-item surface ${className}`.trim()} style={{ "--stagger": stagger }}>
+      <header className="block-head">
+        <p className="eyebrow">{eyebrow}</p>
+        <h2 className="block-head-title">{title}</h2>
+      </header>
+      {children}
+    </section>
+  );
+}
 
 export default function ProjectDetail() {
   const { slug } = useParams();
+  const { t, lang } = useLang();
+  const projects = useProjects();
+  const s = strings.detail;
   const project = projects.find((item) => item.slug === slug);
 
   if (!project) {
     return (
-      <section className="space-y-6 pb-16 pt-8 md:pt-0">
-        <SectionHeader title="Projeto não encontrado" description="Erro 404" />
-        <p className="text-sm text-muted">
-          Não foi possível localizar o projeto solicitado.
-        </p>
-        <Link
-          to="/projetos"
-          className="inline-flex items-center rounded-full border border-ink/20 px-4 py-2 text-sm font-semibold text-ink"
-        >
-          Voltar para projetos
+      <section className="pb-16">
+        <SectionHeader title={t(s.notFound)} description="404" />
+        <p className="body-text">{t(s.notFoundText)}</p>
+        <Link to="/projetos" className="btn btn--primary mt-6">
+          {t(s.backAll)}
         </Link>
       </section>
     );
   }
 
-  const folderMockups = project.mobileGalleryFolder
-    ? mobileScreenshotsByFolder[project.mobileGalleryFolder] || []
-    : [];
-  const fallbackMockups = project.mobileMockups || [];
-  const resolvedMobileMockups =
-    folderMockups.length > 0 ? folderMockups : fallbackMockups;
-  const spotlightStack = project.techStack.slice(0, 4);
-  const executionList = project.responsibilities.slice(0, 5);
-  const primaryPitch = project.shortDescription || project.overview;
-  const hasVisualProof = resolvedMobileMockups.length > 0;
-  const keyMessage =
-    project.keyMessage || "Arquitetura e execução orientadas por estabilidade.";
-  const keyHighlights = project.keyHighlights || [
-    "Escopo técnico definido com base no domínio de negócio.",
-    "Implementação orientada a previsibilidade e manutenção.",
-    "Evolução contínua sem ruptura de operação."
-  ];
-  const architecturalDecisions = project.architecturalDecisions || [];
+  const gallery = galleryFor(project, lang);
+  const isDesktopGallery = Boolean(project.desktopGalleryFolder);
+  const projectLinks = project.links || [];
+  const liveLink = projectLinks.find((link) => link.kind === "live");
+  const currentIndex = projects.findIndex((item) => item.slug === slug);
+  const nextProject = projects[(currentIndex + 1) % projects.length];
+  const groupLabel =
+    project.group === "produto" ? t(strings.common.ownProduct)
+    : project.group === "cliente" ? t(strings.common.clientProject)
+    : "";
 
   return (
-    <section className="space-y-12 pb-12 pt-8 md:space-y-16 md:pt-28">
-      <header
-        className="stagger-item border-b border-white/10 pb-12 md:pb-14"
-        style={{ "--stagger": 0.6 }}
-      >
-        <div className="grid gap-8 md:grid-cols-[1.25fr_0.75fr] md:items-start md:gap-10">
-          <div className="space-y-6">
-            <p className="text-xs font-semibold uppercase tracking-[0.3em] text-accent">
-              {project.status}
-            </p>
-            <h1 className="max-w-4xl font-display text-3xl font-semibold leading-[1.05] text-ink md:text-6xl">
-              {project.name}
-            </h1>
-            <p className="max-w-3xl text-base leading-relaxed text-ink/92 md:text-xl">
-              {primaryPitch}
-            </p>
-            <p className="max-w-3xl text-base leading-relaxed text-muted">
-              {project.overview}
-            </p>
-          </div>
-
-          <aside className="space-y-4 md:border-l md:border-white/12 md:pl-8">
-            <p className="text-xs font-semibold uppercase tracking-[0.24em] text-burnt">
-              Enfoque técnico
-            </p>
-            <h2 className="max-w-md font-display text-2xl font-semibold leading-tight text-ink">
-              {keyMessage}
-            </h2>
-            <ul className="space-y-3 text-base leading-relaxed text-muted">
-              {keyHighlights.map((item) => (
-                <li key={item} className="flex items-start gap-2">
-                  <span className="mt-2 h-1.5 w-1.5 rounded-full bg-burnt/80" />
-                  <span>{item}</span>
-                </li>
-              ))}
-            </ul>
-          </aside>
+    <section className="w-full pb-6 md:pb-10">
+      <header className="page-head">
+        <div className="stagger-item flex flex-wrap items-center gap-3" style={{ "--stagger": 0.4 }}>
+          <Link to="/projetos" className="meta-text transition hover:txt-1">
+            {t(s.backCrumb)}
+          </Link>
+          <span className="txt-4" aria-hidden="true">/</span>
+          <span className={`status-pill ${statusModifier(project.status)}`}>{project.status}</span>
+          {groupLabel && <span className="meta-text">{groupLabel}</span>}
         </div>
 
-        <div className="mt-7 flex flex-wrap gap-2.5">
-          {spotlightStack.map((item) => (
-            <span
-              key={item}
-              className="rounded-full border border-white/15 px-3 py-1 text-xs font-semibold uppercase tracking-[0.08em] text-ink/90"
-            >
-              {item}
-            </span>
-          ))}
+        <h1 className="stagger-item page-head-title" style={{ "--stagger": 0.2 }}>
+          {project.name}
+        </h1>
+
+        <p className="stagger-item lede !max-w-[52rem]" style={{ "--stagger": 0.6 }}>
+          {project.shortDescription}
+        </p>
+
+        <div className="stagger-item flex flex-wrap items-center gap-2 pt-1" style={{ "--stagger": 0.8 }}>
+          {liveLink && (
+            <a href={liveLink.href} target="_blank" rel="noreferrer noopener" className="btn btn--primary">
+              {liveLink.label}
+              <span aria-hidden="true">↗</span>
+            </a>
+          )}
+          {project.repoNote && <span className="meta-text">{project.repoNote}</span>}
         </div>
       </header>
 
-      {hasVisualProof ? (
-        <div className="space-y-5">
-          <div className="stagger-item space-y-3" style={{ "--stagger": 0.75 }}>
-            <p className="text-xs font-semibold uppercase tracking-[0.3em] text-accent">
-              Prova visual
-            </p>
-            <h2 className="font-display text-3xl font-semibold text-ink md:text-4xl">
-              {project.visualProofTitle || "Galeria do caso"}
-            </h2>
-            <p className="max-w-4xl text-base leading-relaxed text-muted">
-              {project.visualProofDescription ||
-                "A galeria abaixo apresenta o fluxo principal do projeto, com foco em usabilidade, organização da informação e continuidade de operação."}
-            </p>
-          </div>
-          <IphoneMockupCarousel
-            images={resolvedMobileMockups}
-            projectSlug={project.mobileGalleryFolder || project.slug}
-            stagger={0.85}
-          />
+      <div className="grid gap-5 md:gap-6">
+        <div className="grid gap-5 md:grid-cols-[minmax(0,1.5fr)_minmax(0,1fr)] md:gap-6">
+          <Block eyebrow={t(s.context)} title={t(s.contextTitle)} stagger={0.5}>
+            <p className="body-text">{project.overview}</p>
+          </Block>
+
+          <Block eyebrow={t(s.focus)} title={project.keyMessage} stagger={0.65}>
+            <ul className="marked-list">
+              {project.keyHighlights.map((item) => (
+                <li key={item}>{item}</li>
+              ))}
+            </ul>
+          </Block>
         </div>
-      ) : (
-        <div className="stagger-item border-t border-white/10 pt-8" style={{ "--stagger": 0.75 }}>
-          <p className="text-xs font-semibold uppercase tracking-[0.3em] text-accent">
-            {project.visualProofTitle || "Contexto visual"}
-          </p>
-          <p className="mt-3 max-w-4xl text-base leading-relaxed text-muted">
-            {project.visualProofDescription ||
-              "Sem ativos visuais públicos para este escopo técnico."}
-          </p>
-        </div>
-      )}
 
-      <div className="grid gap-10 border-t border-white/10 pt-8 md:grid-cols-2">
-        <section className="stagger-item space-y-3" style={{ "--stagger": 1.1 }}>
-          <p className="text-xs font-semibold uppercase tracking-[0.22em] text-white/65">
-            Cenário inicial
-          </p>
-          <h3 className="font-display text-2xl font-semibold text-ink">
-            O desafio de negócio
-          </h3>
-          <p className="text-base leading-relaxed text-muted">{project.problem}</p>
-        </section>
-
-        <section className="stagger-item space-y-3" style={{ "--stagger": 1.6 }}>
-          <p className="text-xs font-semibold uppercase tracking-[0.22em] text-white/65">
-            Resposta aplicada
-          </p>
-          <h3 className="font-display text-2xl font-semibold text-ink">
-            A solução estratégica
-          </h3>
-          <p className="text-base leading-relaxed text-muted">{project.solution}</p>
-        </section>
-      </div>
-
-      <div className="grid gap-10 border-t border-white/10 pt-8 md:grid-cols-[1.1fr_0.9fr]">
-        <section className="stagger-item space-y-3" style={{ "--stagger": 0.9 }}>
-          <p className="text-xs font-semibold uppercase tracking-[0.22em] text-white/65">
-            Execução
-          </p>
-          <h3 className="font-display text-2xl font-semibold text-ink">
-            O que foi entregue na prática
-          </h3>
-          <ul className="space-y-3 text-base text-muted">
-            {executionList.map((item) => (
-              <li key={item} className="flex items-start gap-2">
-                <span className="mt-2 h-1.5 w-1.5 rounded-full bg-burnt/80" />
-                <span>{item}</span>
-              </li>
-            ))}
-          </ul>
-        </section>
-        <section className="stagger-item space-y-3" style={{ "--stagger": 1.4 }}>
-          <p className="text-xs font-semibold uppercase tracking-[0.22em] text-white/65">
-            Base técnica
-          </p>
-          <h3 className="font-display text-2xl font-semibold text-ink">
-            Stack e sustentação da solução
-          </h3>
-          <div className="flex flex-wrap gap-2">
-            {project.techStack.map((item) => (
-              <span
-                key={item}
-                className="rounded-full border border-white/15 px-3 py-1 text-xs font-semibold uppercase tracking-[0.08em] text-ink/90"
-              >
-                {item}
-              </span>
-            ))}
-          </div>
-          <div className="border-l border-white/12 pl-4">
-            <h4 className="text-xs font-semibold uppercase tracking-[0.2em] text-white/65">
-              Status atual
-            </h4>
-            <p className="mt-2 text-base leading-relaxed text-muted">
-              {project.statusDetail}
-            </p>
-          </div>
-          {architecturalDecisions.length > 0 && (
-            <div className="border-l border-white/12 pl-4">
-              <h4 className="text-xs font-semibold uppercase tracking-[0.2em] text-white/65">
-                Decisões arquiteturais
-              </h4>
-              <ul className="mt-2 space-y-2 text-base leading-relaxed text-muted">
-                {architecturalDecisions.map((item) => (
-                  <li key={item} className="flex items-start gap-2">
-                    <span className="mt-2 h-1.5 w-1.5 rounded-full bg-burnt/80" />
-                    <span>{item}</span>
-                  </li>
-                ))}
-              </ul>
+        <Block eyebrow={t(s.visual)} title={project.visualProofTitle || t(s.gallery)} stagger={0.8}>
+          {gallery.length > 0 ? (
+            <div>
+              <p className="body-text mb-5">{project.visualProofDescription}</p>
+              {isDesktopGallery ? (
+                <BrowserMockupGallery
+                  images={gallery}
+                  projectSlug={project.desktopGalleryFolder}
+                  addressLabel={liveLink ? liveLink.href.replace(/^https?:\/\//, "") : ""}
+                  stagger={0.9}
+                />
+              ) : (
+                <IphoneMockupCarousel images={gallery} projectSlug={project.mobileGalleryFolder} stagger={0.9} />
+              )}
             </div>
+          ) : (
+            <p className="body-text">{project.visualProofDescription}</p>
           )}
-        </section>
-      </div>
+        </Block>
 
-      <div
-        className="stagger-item flex flex-wrap items-center justify-between gap-4 border-t border-white/10 pt-8"
-        style={{ "--stagger": 2.1 }}
-      >
-        <p className="text-base font-semibold text-ink">
-          Quer ver outro case com foco em impacto de negócio?
-        </p>
-        <Link
-          className="inline-flex items-center rounded-full border border-white/20 px-4 py-2 text-sm font-semibold text-ink transition hover:border-white/40"
-          to="/projetos"
+        <div className="grid gap-5 md:grid-cols-2 md:gap-6">
+          <Block eyebrow={t(s.problemEyebrow)} title={t(s.problemTitle)} stagger={1.0}>
+            <p className="body-text">{project.problem}</p>
+          </Block>
+          <Block eyebrow={t(s.solutionEyebrow)} title={t(s.solutionTitle)} stagger={1.1}>
+            <p className="body-text">{project.solution}</p>
+          </Block>
+        </div>
+
+        <div className="grid gap-5 md:grid-cols-[minmax(0,1.15fr)_minmax(0,0.85fr)] md:gap-6">
+          <Block eyebrow={t(s.execEyebrow)} title={t(s.execTitle)} stagger={1.2}>
+            <ul className="marked-list">
+              {project.responsibilities.map((item) => (
+                <li key={item}>{item}</li>
+              ))}
+            </ul>
+          </Block>
+
+          <div className="grid gap-5 md:gap-6">
+            <Block eyebrow={t(s.stackEyebrow)} title={t(s.stackTitle)} stagger={1.3}>
+              <ul className="chip-row">
+                {project.techStack.map((item) => {
+                  const icon = techIcon(item);
+                  return (
+                    <li key={item} className="chip">
+                      {icon && <img src={icon} alt="" loading="lazy" decoding="async" />}
+                      {item}
+                    </li>
+                  );
+                })}
+              </ul>
+              <p className="meta-text mt-4 border-t border-[var(--line)] pt-4">{project.statusDetail}</p>
+            </Block>
+
+            {project.architecturalDecisions?.length > 0 && (
+              <Block eyebrow={t(s.decisionsEyebrow)} title={t(s.decisionsTitle)} stagger={1.4}>
+                <ul className="marked-list marked-list--quiet">
+                  {project.architecturalDecisions.map((item) => (
+                    <li key={item}>{item}</li>
+                  ))}
+                </ul>
+              </Block>
+            )}
+          </div>
+        </div>
+
+        <nav
+          className="stagger-item flex flex-wrap items-center justify-between gap-4 border-t border-[var(--line)] pt-6"
+          style={{ "--stagger": 1.5 }}
+          aria-label={t(s.navLabel)}
         >
-          Voltar para projetos
-        </Link>
+          <Link to="/projetos" className="btn btn--ghost">
+            {t(s.backAll)}
+          </Link>
+          <Link to={`/projetos/${nextProject.slug}`} className="btn btn--primary">
+            {t(s.next)}: {nextProject.name}
+            <span aria-hidden="true">→</span>
+          </Link>
+        </nav>
       </div>
     </section>
   );

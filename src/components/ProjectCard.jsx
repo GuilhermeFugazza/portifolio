@@ -1,144 +1,82 @@
 import { Link } from "react-router-dom";
+import { coverFor } from "../data/screenshots.js";
+import { techIcon } from "../data/techIcons.js";
+import { statusModifier } from "../lib/status.js";
+import { useLang } from "../i18n/LanguageContext.jsx";
+import { strings } from "../i18n/strings.js";
 
-const staggerOffsets = [0.6, 1.4, 0.9, 1.8];
-
-const techBrandAssets = {
-  React: {
-    icon: "https://cdn.simpleicons.org/react/61DAFB",
-    alt: "Logo do React"
-  },
-  "React Native": {
-    icon: "https://cdn.simpleicons.org/react/61DAFB",
-    alt: "Logo do React Native"
-  },
-  Expo: {
-    icon: "https://cdn.simpleicons.org/expo/FFFFFF",
-    alt: "Logo do Expo"
-  },
-  Node: {
-    icon: "https://cdn.simpleicons.org/nodedotjs/5FA04E",
-    alt: "Logo do Node.js"
-  },
-  "Node.js": {
-    icon: "https://cdn.simpleicons.org/nodedotjs/5FA04E",
-    alt: "Logo do Node.js"
-  },
-  PostgreSQL: {
-    icon: "https://cdn.simpleicons.org/postgresql/4169E1",
-    alt: "Logo do PostgreSQL"
-  },
-  SQLite: {
-    icon: "https://cdn.simpleicons.org/sqlite/0F80CC",
-    alt: "Logo do SQLite"
-  },
-  n8n: {
-    icon: "https://cdn.simpleicons.org/n8n/EA4B71",
-    alt: "Logo do n8n"
-  },
-  "REST APIs": {
-    icon: "https://cdn.simpleicons.org/openapiinitiative/6BA539",
-    alt: "Ícone de REST APIs"
-  },
-  "Multi-tenant": {
-    icon: "https://cdn.simpleicons.org/databricks/FF3621",
-    alt: "Ícone de arquitetura multi-tenant"
-  },
-  "Integrações financeiras": {
-    icon: "https://cdn.simpleicons.org/stripe/635BFF",
-    alt: "Ícone de integrações financeiras"
-  },
-  Cloudflare: {
-    icon: "https://cdn.simpleicons.org/cloudflare/F38020",
-    alt: "Logo do Cloudflare"
-  },
-  Linux: {
-    icon: "https://cdn.simpleicons.org/linux/FCC624",
-    alt: "Logo do Linux"
-  }
-};
-
-const statusClassByText = (status = "") => {
-  const normalized = status
-    .normalize("NFD")
-    .replace(/[\u0300-\u036f]/g, "")
-    .toLowerCase();
-  if (normalized.includes("produc")) {
-    return "border-emerald-300/30 bg-emerald-500/[0.12] text-emerald-100/92";
-  }
-  if (normalized.includes("desenvolv")) {
-    return "border-amber-300/30 bg-amber-500/[0.12] text-amber-100/92";
-  }
-  if (normalized.includes("nda") || normalized.includes("confidencial")) {
-    return "border-sky-300/30 bg-sky-500/[0.12] text-sky-100/92";
-  }
-  return "border-white/15 bg-white/[0.04] text-ink/86";
-};
-
-const getTechAsset = (techName) => techBrandAssets[techName] || null;
+const staggerOffsets = [0.5, 0.75, 1.0, 1.25];
 
 export default function ProjectCard({ project, index = 0 }) {
+  const { t } = useLang();
   const stagger = staggerOffsets[index % staggerOffsets.length];
+  const cover = coverFor(project);
+  const isMobileCover = Boolean(project.mobileGalleryFolder && !project.desktopGalleryFolder);
+  const liveLink = (project.links || []).find((link) => link.kind === "live");
+  const groupLabel =
+    project.group === "produto" ? t(strings.common.ownProduct)
+    : project.group === "cliente" ? t(strings.common.clientProject)
+    : "";
 
   return (
-    <li className="stagger-item py-5 md:py-6" style={{ "--stagger": stagger }}>
-      <article className="grid gap-4 md:grid-cols-[15.2rem_minmax(0,1fr)] md:gap-8">
-        <header>
-          <p
-            className={`inline-flex rounded-full border px-2.5 py-1 text-[0.6rem] font-semibold uppercase tracking-[0.15em] ${statusClassByText(
-              project.status
-            )}`}
-          >
-            {project.status}
-          </p>
+    <li className="stagger-item" style={{ "--stagger": stagger }}>
+      <article className="surface surface--interactive flex h-full flex-col !p-0">
+        <Link
+          to={`/projetos/${project.slug}`}
+          className="project-cover"
+          aria-label={`${t(strings.common.openCase)} ${project.name}`}
+        >
+          {cover ? (
+            <img
+              src={cover}
+              alt=""
+              className={isMobileCover ? "project-cover-img project-cover-img--mobile" : "project-cover-img"}
+              loading="lazy"
+              decoding="async"
+            />
+          ) : (
+            <span className="project-cover-empty">
+              <span className="eyebrow eyebrow--quiet">{t(strings.common.screensPending)}</span>
+            </span>
+          )}
+        </Link>
 
-          <h3 className="mt-2 font-display text-[1.35rem] leading-[1.1] tracking-[-0.015em] text-ink/92 md:text-[1.52rem]">
-            {project.name}
-          </h3>
-        </header>
+        <div className="flex flex-1 flex-col gap-4 p-5 md:p-6">
+          <div className="flex flex-wrap items-center justify-between gap-2">
+            <span className={`status-pill ${statusModifier(project.status)}`}>{project.status}</span>
+            {groupLabel && <span className="meta-text">{groupLabel}</span>}
+          </div>
 
-        <div className="min-w-0">
-          <p className="text-[0.93rem] leading-[1.58] text-ink/84 md:text-[0.97rem]">
-            {project.shortDescription}
-          </p>
+          <div className="grid gap-2">
+            <h3 className="font-display text-[1.45rem] font-semibold leading-[1.1] tracking-[-0.015em] txt-1">
+              <Link to={`/projetos/${project.slug}`}>{project.name}</Link>
+            </h3>
+            <p className="body-text">{project.shortDescription}</p>
+          </div>
 
-          <div className="mt-4 grid gap-3 md:grid-cols-[minmax(0,1fr)_auto] md:items-end">
-            <ul className="flex flex-wrap gap-2" aria-label={`Tecnologias de ${project.name}`}>
-              {project.stack.map((item) => {
-                const asset = getTechAsset(item);
+          <ul className="chip-row" aria-label={`${t(strings.common.techOf)} ${project.name}`}>
+            {project.stack.map((item) => {
+              const icon = techIcon(item);
+              return (
+                <li key={item} className="chip" title={item}>
+                  {icon && <img src={icon} alt="" loading="lazy" decoding="async" />}
+                  {item}
+                </li>
+              );
+            })}
+          </ul>
 
-                return (
-                  <li
-                    key={item}
-                    className="inline-flex min-h-8 items-center gap-2 rounded-full border border-white/10 bg-white/[0.02] px-2.5 py-1"
-                    title={item}
-                    aria-label={item}
-                  >
-                    <span className="grid h-4 w-4 place-items-center rounded-full bg-white/[0.03]">
-                      {asset ? (
-                        <img
-                          src={asset.icon}
-                          alt={asset.alt}
-                          className="h-3.5 w-3.5 object-contain"
-                          loading="lazy"
-                          decoding="async"
-                        />
-                      ) : (
-                        <span className="text-[0.54rem] font-bold text-ink/78">{item[0]}</span>
-                      )}
-                    </span>
-                    <span className="text-[0.75rem] font-medium text-ink/78">{item}</span>
-                  </li>
-                );
-              })}
-            </ul>
-
-            <Link
-              to={`/projetos/${project.slug}`}
-              className="inline-flex min-h-10 w-full items-center justify-center gap-1.5 rounded-full border border-white/20 bg-white/[0.04] px-4 text-sm font-semibold text-white transition hover:border-white/36 hover:bg-white/[0.1] sm:w-fit md:justify-self-end"
-            >
-              {project.ctaLabel || "Clique para ver detalhes"}
-              <span aria-hidden="true">↗</span>
+          <div className="mt-auto flex flex-wrap gap-2 pt-1">
+            <Link to={`/projetos/${project.slug}`} className="btn btn--primary">
+              {t(strings.common.seeCase)}
+              <span aria-hidden="true">→</span>
             </Link>
+            {liveLink && (
+              <a href={liveLink.href} target="_blank" rel="noreferrer noopener" className="btn btn--ghost">
+                {liveLink.label}
+                <span aria-hidden="true">↗</span>
+              </a>
+            )}
           </div>
         </div>
       </article>

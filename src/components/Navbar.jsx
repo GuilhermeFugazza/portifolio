@@ -1,10 +1,12 @@
 import { useEffect, useState } from "react";
 import { NavLink, useLocation } from "react-router-dom";
+import { useLang } from "../i18n/LanguageContext.jsx";
+import { strings } from "../i18n/strings.js";
 import curriculumFile from "../assets/CV/Curriculo_Guilherme_Fugazza_Mobile_React_Native_v5.pdf.pdf";
 
 const navItems = [
   {
-    label: "Início",
+    label: strings.nav.home,
     to: "/",
     icon: (
       <svg viewBox="0 0 20 20" className="h-4 w-4" aria-hidden="true">
@@ -16,7 +18,7 @@ const navItems = [
     )
   },
   {
-    label: "Sobre",
+    label: strings.nav.about,
     to: "/sobre",
     icon: (
       <svg viewBox="0 0 20 20" className="h-4 w-4" aria-hidden="true">
@@ -28,7 +30,7 @@ const navItems = [
     )
   },
   {
-    label: "Projetos",
+    label: strings.nav.projects,
     to: "/projetos",
     icon: (
       <svg viewBox="0 0 20 20" className="h-4 w-4" aria-hidden="true">
@@ -40,7 +42,7 @@ const navItems = [
     )
   },
   {
-    label: "Stack & Experiência",
+    label: strings.nav.stack,
     to: "/stack-experiencia",
     icon: (
       <svg viewBox="0 0 20 20" className="h-4 w-4" aria-hidden="true">
@@ -52,7 +54,7 @@ const navItems = [
     )
   },
   {
-    label: "Contato",
+    label: strings.nav.contact,
     to: "/contato",
     icon: (
       <svg viewBox="0 0 20 20" className="h-4 w-4" aria-hidden="true">
@@ -67,12 +69,13 @@ const navItems = [
 
 export default function Navbar() {
   const location = useLocation();
+  const { t, lang, setLang } = useLang();
   const [isHeaderCompact, setIsHeaderCompact] = useState(false);
   const whatsappLink = "https://wa.me/5547997564677";
   const isAboutPage = location.pathname === "/sobre";
   const ctaHref = isAboutPage ? curriculumFile : whatsappLink;
-  const ctaLabelFull = isAboutPage ? "Baixar CV" : "Fale comigo";
-  const ctaLabelShort = isAboutPage ? "CV" : "Falar";
+  const ctaLabelFull = isAboutPage ? t(strings.nav.cv) : t(strings.nav.talk);
+  const ctaLabelShort = isAboutPage ? t(strings.nav.cvShort) : t(strings.nav.talkShort);
   const showWhatsappCompactIcon = !isAboutPage;
   const ctaLinkProps = isAboutPage
     ? { download: "Curriculo_Guilherme_Fugazza.pdf" }
@@ -108,16 +111,29 @@ export default function Navbar() {
   return (
     <>
       <header className="fixed z-20 w-full bg-transparent">
-        <div className="mx-auto flex w-full max-w-8xl flex-col items-center gap-3 px-4 pt-4 text-sm text-muted sm:flex-row sm:justify-between sm:gap-3 sm:px-8 sm:pt-8">
+        <div className="mx-auto flex w-full max-w-8xl flex-row items-center justify-between gap-3 px-4 pt-4 text-sm sm:px-8 sm:pt-8">
           <div
             className={`navbar-work-pill ${isHeaderCompact ? "is-collapsed" : ""}`}
-            aria-label="Disponível para projetos"
-            title="Disponível para projetos"
+            aria-label={t(strings.nav.available)}
+            title={t(strings.nav.available)}
           >
             <span className="navbar-work-pill-dot" aria-hidden="true" />
-            <span className="navbar-work-pill-text">Disponível para projetos</span>
+            <span className="navbar-work-pill-text">{t(strings.nav.available)}</span>
           </div>
-          <div className="flex justify-center sm:justify-end">
+          <div className="flex items-center justify-end gap-2">
+            <div className="lang-switch" role="group" aria-label={t(strings.nav.langLabel)}>
+              {[["pt", "PT-BR"], ["en", "EN"]].map(([code, label]) => (
+                <button
+                  key={code}
+                  type="button"
+                  onClick={() => setLang(code)}
+                  className={lang === code ? "is-active" : ""}
+                  aria-pressed={lang === code}
+                >
+                  {label}
+                </button>
+              ))}
+            </div>
             <a
               className={`shiny-cta shiny-cta--compact navbar-cv-cta ${isHeaderCompact ? "is-collapsed" : ""}`}
               href={ctaHref}
@@ -166,8 +182,8 @@ export default function Navbar() {
                 }
               >
                 {item.icon}
-                <span className="hidden sm:inline">{item.label}</span>
-                <span className="sr-only">{item.label}</span>
+                <span className="hidden sm:inline">{t(item.label)}</span>
+                <span className="sr-only">{t(item.label)}</span>
               </NavLink>
             ))}
           </div>

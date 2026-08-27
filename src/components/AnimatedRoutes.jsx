@@ -102,24 +102,7 @@ export default function AnimatedRoutes() {
   }, []);
 
   useEffect(() => {
-    const syncBodyOverflow = () => {
-      const isHome = currentLocation.pathname === "/";
-      const isProjectsList = currentLocation.pathname === "/projetos";
-      const isLargeViewport =
-        window.innerWidth >= 1024 && window.innerHeight >= 820;
-      const shouldLockScroll = isHome || (isProjectsList && isLargeViewport);
-
-      document.body.style.overflow = shouldLockScroll ? "hidden" : "";
-    };
-
-    syncBodyOverflow();
     window.scrollTo({ top: 0, left: 0, behavior: "auto" });
-    window.addEventListener("resize", syncBodyOverflow);
-
-    return () => {
-      window.removeEventListener("resize", syncBodyOverflow);
-      document.body.style.overflow = "";
-    };
   }, [currentLocation.pathname]);
 
   return (

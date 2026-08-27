@@ -1,337 +1,148 @@
+import { Link } from "react-router-dom";
 import profileImage from "../assets/guilherme.jpg";
 import SectionHeader from "../components/SectionHeader.jsx";
+import { techIcon } from "../data/techIcons.js";
+import { useLang } from "../i18n/LanguageContext.jsx";
+import { strings } from "../i18n/strings.js";
 
-const serviceAreas = [
-  {
-    title: "Desenvolvimento de APIs e Back-end",
-    description:
-      "APIs versionadas com autenticação baseada em token, validação consistente e contratos estáveis para integrações críticas.",
-    tag: "Back-end"
-  },
-  {
-    title: "Aplicativos Mobile Estruturados",
-    description:
-      "Aplicações mobile com arquitetura modular, sincronização confiável e fluxo orientado à evolução contínua de funcionalidades.",
-    tag: "Mobile"
-  },
-  {
-    title: "Sistemas Web Operacionais",
-    description:
-      "Painéis de operação e gestão conectados ao domínio do negócio, priorizando rastreabilidade e eficiência operacional.",
-    tag: "Front-end"
-  },
-  {
-    title: "Automações e Integrações",
-    description:
-      "Integrações entre serviços com webhooks, filas e fluxos automatizados para reduzir tarefas manuais e falhas de processo.",
-    tag: "Integrações"
-  },
-  {
-    title: "Sistemas Multi-tenant",
-    description:
-      "Arquiteturas com isolamento de dados por tenant, controle de acesso por contexto e crescimento seguro por cliente.",
-    tag: "Arquitetura"
-  },
-  {
-    title: "Modelagem de Dados e Performance",
-    description:
-      "Modelagem relacional orientada a domínio com foco em consistência transacional, consultas críticas e manutenção previsível.",
-    tag: "Dados"
-  }
-];
-
-const technologyLogos = [
-  {
-    name: "React",
-    icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg"
-  },
-  {
-    name: "React Native",
-    icon: "https://cdn.simpleicons.org/react/61DAFB"
-  },
-  {
-    name: "Tailwind CSS",
-    icon:
-      "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/tailwindcss/tailwindcss-original.svg"
-  },
-  {
-    name: "Node.js",
-    icon:
-      "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nodejs/nodejs-original.svg"
-  },
-  {
-    name: "Python",
-    icon:
-      "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg"
-  },
-  {
-    name: "REST APIs",
-    icon: "https://cdn.simpleicons.org/openapiinitiative/6BA539"
-  },
-  {
-    name: "Webhooks",
-    icon: "https://cdn.simpleicons.org/zapier/FF4F00"
-  },
-  {
-    name: "n8n",
-    icon: "https://cdn.simpleicons.org/n8n/EA4B71"
-  },
-  {
-    name: "PostgreSQL",
-    icon:
-      "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/postgresql/postgresql-original.svg"
-  },
-  {
-    name: "Linux Server",
-    icon:
-      "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/linux/linux-original.svg"
-  },
-  {
-    name: "Cloudflare",
-    icon: "https://cdn.simpleicons.org/cloudflare/F38020"
-  }
-];
-
-const profileLevels = [
-  { label: "Mobile e experiência de fluxo", value: 96 },
-  { label: "Back-end, APIs e integrações", value: 92 },
-  { label: "Arquitetura e multi-tenant", value: 90 },
-  { label: "Modelagem e performance em PostgreSQL", value: 86 },
-  { label: "Infraestrutura Linux e deploy", value: 74 }
-];
-
-const workPrinciples = [
-  "Levantamento técnico orientado ao domínio",
-  "Arquitetura antes do código",
-  "Modelagem consistente de dados e contratos",
-  "Entrega com observabilidade e previsibilidade",
-  "Evolução contínua sem ruptura operacional"
-];
-
-const professionalSummary = [
-  "Atuo como engenheiro de software em projetos B2B, estruturando APIs, modelagem de dados e aplicações web/mobile com foco em arquitetura escalável.",
-  "Grande parte dos sistemas desenvolvidos são sob contrato de confidencialidade (NDA), atuando em ambientes reais de produção.",
-  "Minha atuação inclui integrações financeiras, desenho de soluções multi-tenant, controle de concorrência em operações críticas e deploy em ambientes Linux."
-];
-
-const trustHighlights = [
-  "Arquitetura por camadas com separação clara entre domínio, aplicação e infraestrutura.",
-  "Autenticação baseada em token, contratos REST estáveis e integração via webhooks.",
-  "Banco relacional orientado ao domínio com foco em performance e crescimento sustentável."
-];
-
-const profileFacts = [
-  { label: "Formação", value: "Técnico em Informática - IFC" },
-  { label: "Atuação", value: "Sistemas B2B, APIs e integrações" },
-  { label: "Modelo", value: "Arquitetura + execução ponta a ponta" }
-];
-
-const processSteps = [
-  {
-    step: "01",
-    title: "Diagnóstico e escopo",
-    description:
-      "Mapeio domínio, restrições e integrações para transformar necessidade operacional em escopo técnico executável."
-  },
-  {
-    step: "02",
-    title: "Arquitetura e implementação",
-    description:
-      "Defino camadas, contratos e persistência com foco em estabilidade transacional e evolução sem retrabalho."
-  },
-  {
-    step: "03",
-    title: "Entrega, monitoramento e evolução",
-    description:
-      "Configuro deploy, monitoração e ciclo de melhorias para manter confiabilidade em produção."
-  }
+const stack = [
+  "React", "React Native", "Expo", "TypeScript", "Node.js", "NestJS", "Fastify",
+  "PostgreSQL", "Prisma", "Redis", "Docker", "Linux", "Cloudflare", "Python", "n8n"
 ];
 
 export default function About() {
+  const { t } = useLang();
+  const s = strings.about;
+
   return (
-    <section className="w-full pb-10 pt-0 md:pb-12 md:pt-0">
-      <SectionHeader
-        title="Sobre"
-        description="Perfil profissional"
-        className="mb-8 md:mb-10"
-        descriptionClassName="text-[0.68rem] md:text-[0.72rem]"
-        titleClassName="text-[2.45rem] md:text-[3rem] leading-[1.03]"
-      />
+    <section className="w-full pb-6 md:pb-10">
+      <SectionHeader title={t(s.title)} description={t(s.eyebrow)} lede={t(s.lede)} />
 
-      <div className="mx-auto w-full max-w-[1040px]">
-        <div className="grid gap-6 md:grid-cols-[18.5rem_minmax(0,1fr)] md:gap-8">
-          <aside className="stagger-item md:sticky md:top-28 md:self-start" style={{ "--stagger": 0.2 }}>
-            <figure className="relative overflow-hidden rounded-[1.28rem] border border-[rgba(138,162,214,0.28)] bg-[linear-gradient(160deg,rgba(12,24,52,0.82),rgba(8,15,32,0.9))] p-2">
-              <div className="relative aspect-[4/5] overflow-hidden rounded-[1rem]">
-                <img
-                  src={profileImage}
-                  alt="Foto de Guilherme"
-                  className="h-full w-full object-cover object-top"
-                  loading="eager"
-                  decoding="async"
-                />
-                <div className="pointer-events-none absolute inset-0 bg-[linear-gradient(180deg,rgba(7,11,23,0.08)_16%,rgba(7,11,23,0.65)_100%)]" />
-                <figcaption className="absolute inset-x-0 bottom-0 p-3">
-                  <p className="text-[0.6rem] font-semibold uppercase tracking-[0.16em] text-burnt/90">
-                    Perfil profissional
-                  </p>
-                  <p className="mt-1 font-display text-[1.18rem] leading-tight text-ink">
-                    Guilherme Fugazza
-                  </p>
-                  <p className="mt-1 text-[0.75rem] text-ink/74">Engenheiro de Software B2B</p>
-                </figcaption>
+      <div className="grid gap-5 md:grid-cols-[17.5rem_minmax(0,1fr)] md:gap-6">
+        <aside className="grid content-start gap-5 md:sticky md:top-24 md:self-start md:gap-6">
+          <figure className="stagger-item surface !p-2" style={{ "--stagger": 0.3 }}>
+            <div className="relative aspect-[4/5] overflow-hidden rounded-[0.7rem]">
+              <img
+                src={profileImage}
+                alt="Guilherme Fugazza"
+                className="h-full w-full object-cover object-top"
+                loading="eager"
+                decoding="async"
+              />
+            </div>
+            <figcaption className="px-2 pb-1 pt-3">
+              <p className="font-display text-[1.1rem] font-semibold leading-tight txt-1">Guilherme Fugazza</p>
+              <p className="meta-text mt-0.5">{t(s.role)}</p>
+            </figcaption>
+          </figure>
+
+          <dl className="stagger-item surface def-grid" style={{ "--stagger": 0.45 }}>
+            {s.facts.map((fact) => (
+              <div key={t(fact.label)}>
+                <dt>{t(fact.label)}</dt>
+                <dd>{t(fact.value)}</dd>
               </div>
-            </figure>
+            ))}
+          </dl>
 
-            <dl className="mt-4 divide-y divide-[rgba(138,162,214,0.16)] border-y border-[rgba(138,162,214,0.16)]">
-              {profileFacts.map((fact) => (
-                <div key={fact.label} className="flex items-baseline justify-between gap-3 py-2.5">
-                  <dt className="text-[0.66rem] font-semibold uppercase tracking-[0.12em] text-ink/52">
-                    {fact.label}
-                  </dt>
-                  <dd className="text-right text-[0.8rem] font-medium text-ink/80">{fact.value}</dd>
-                </div>
+          <div className="stagger-item flex flex-col gap-2" style={{ "--stagger": 0.55 }}>
+            <Link to="/contato" className="btn btn--primary">
+              {t(s.contactBtn)}
+            </Link>
+            <a href="https://github.com/GuilhermeFugazza" target="_blank" rel="noreferrer noopener" className="btn btn--ghost">
+              GitHub ↗
+            </a>
+          </div>
+        </aside>
+
+        <div className="grid gap-5 md:gap-6">
+          <section className="stagger-item surface" style={{ "--stagger": 0.4 }}>
+            <div className="grid gap-3">
+              {s.summary.map((paragraph) => (
+                <p key={t(paragraph)} className="body-text">
+                  {t(paragraph)}
+                </p>
               ))}
-            </dl>
-          </aside>
+            </div>
+          </section>
 
-          <div className="space-y-6">
-            <section className="stagger-item" style={{ "--stagger": 0.32 }}>
-              <div className="grid gap-2">
-                {professionalSummary.map((paragraph) => (
-                  <p key={paragraph} className="text-[0.94rem] leading-relaxed text-ink/78">
-                    {paragraph}
-                  </p>
-                ))}
-              </div>
+          <section className="stagger-item surface" style={{ "--stagger": 0.55 }}>
+            <header className="block-head">
+              <p className="eyebrow">{t(s.expEyebrow)}</p>
+              <h2 className="block-head-title">{t(s.expTitle)}</h2>
+            </header>
 
-              <ul className="mt-3 grid gap-1.5">
-                {trustHighlights.map((item) => (
-                  <li key={item} className="text-[0.84rem] leading-relaxed text-ink/72">
-                    - {item}
-                  </li>
-                ))}
-              </ul>
-
-              <p className="mt-4 text-[0.66rem] font-semibold uppercase tracking-[0.13em] text-ink/50">
-                {workPrinciples.join(" · ")}
-              </p>
-            </section>
-
-            <section className="stagger-item" style={{ "--stagger": 0.44 }}>
-              <header>
-                <p className="text-[0.64rem] font-semibold uppercase tracking-[0.15em] text-burnt/90">
-                  Processo
-                </p>
-                <h2 className="mt-1 font-display text-[1.28rem] leading-tight text-ink md:text-[1.42rem]">
-                  Como conduzo projetos
-                </h2>
-              </header>
-
-              <ol className="mt-3 divide-y divide-[rgba(138,162,214,0.16)] border-y border-[rgba(138,162,214,0.16)]">
-                {processSteps.map((item) => (
-                  <li key={item.step} className="grid gap-2 py-3 md:grid-cols-[2.4rem_minmax(0,1fr)] md:gap-3">
-                    <span className="inline-flex h-6 w-9 items-center justify-center rounded-full border border-[rgba(138,162,214,0.24)] bg-[rgba(124,149,206,0.06)] text-[0.62rem] font-semibold tracking-[0.1em] text-ink/72">
-                      {item.step}
-                    </span>
+            <ol className="grid gap-0 divide-y divide-[var(--line)]">
+              {s.experience.map((item) => (
+                <li
+                  key={t(item.org)}
+                  className="grid gap-3 py-5 first:pt-0 last:pb-0 md:grid-cols-[8.5rem_minmax(0,1fr)] md:gap-6"
+                >
+                  <p className="meta-text pt-0.5">{t(item.period)}</p>
+                  <div className="grid gap-2">
                     <div>
-                      <h3 className="text-[0.92rem] font-semibold text-ink/86">{item.title}</h3>
-                      <p className="mt-1 text-[0.84rem] leading-relaxed text-ink/72">{item.description}</p>
+                      <h3 className="text-[1rem] font-semibold txt-1">{t(item.role)}</h3>
+                      <p className="meta-text">{t(item.org)}</p>
                     </div>
-                  </li>
-                ))}
-              </ol>
-            </section>
-
-            <section className="stagger-item" style={{ "--stagger": 0.56 }}>
-              <header>
-                <p className="text-[0.64rem] font-semibold uppercase tracking-[0.15em] text-burnt/90">
-                  Atuação
-                </p>
-                <h2 className="mt-1 font-display text-[1.28rem] leading-tight text-ink md:text-[1.42rem]">
-                  Frentes principais
-                </h2>
-              </header>
-
-              <ol className="mt-3 divide-y divide-[rgba(138,162,214,0.16)] border-y border-[rgba(138,162,214,0.16)]">
-                {serviceAreas.map((item, index) => (
-                  <li key={item.title} className="grid gap-2 py-3 md:grid-cols-[2.4rem_minmax(0,1fr)_auto] md:gap-3">
-                    <span className="text-[0.62rem] font-semibold uppercase tracking-[0.12em] text-ink/48">
-                      {String(index + 1).padStart(2, "0")}
-                    </span>
-                    <div>
-                      <h3 className="text-[0.92rem] font-semibold text-ink/86">{item.title}</h3>
-                      <p className="mt-1 text-[0.84rem] leading-relaxed text-ink/72">{item.description}</p>
-                    </div>
-                    <span className="inline-flex h-6 w-fit items-center rounded-full border border-[rgba(138,162,214,0.24)] bg-[rgba(124,149,206,0.06)] px-2 text-[0.62rem] font-semibold uppercase tracking-[0.1em] text-ink/64">
-                      {item.tag}
-                    </span>
-                  </li>
-                ))}
-              </ol>
-            </section>
-
-            <section className="stagger-item" style={{ "--stagger": 0.68 }}>
-              <header>
-                <p className="text-[0.64rem] font-semibold uppercase tracking-[0.15em] text-burnt/90">
-                  Tecnologias
-                </p>
-                <h2 className="mt-1 font-display text-[1.28rem] leading-tight text-ink md:text-[1.42rem]">
-                  Stack principal
-                </h2>
-              </header>
-
-              <ul className="mt-3 flex flex-wrap gap-2" aria-label="Stack principal">
-                {technologyLogos.map((tech) => (
-                  <li
-                    key={tech.name}
-                    className="inline-flex min-h-8 items-center gap-2 rounded-full border border-[rgba(138,162,214,0.22)] bg-[rgba(124,149,206,0.05)] px-2.5 py-1"
-                  >
-                    <img
-                      src={tech.icon}
-                      alt={`Logo ${tech.name}`}
-                      className="h-3.5 w-3.5 object-contain"
-                      loading="lazy"
-                      decoding="async"
-                    />
-                    <span className="text-[0.74rem] font-medium text-ink/68">{tech.name}</span>
-                  </li>
-                ))}
-              </ul>
-            </section>
-
-            <section className="stagger-item" style={{ "--stagger": 0.8 }}>
-              <header>
-                <p className="text-[0.64rem] font-semibold uppercase tracking-[0.15em] text-burnt/90">
-                  Áreas de atuação predominante
-                </p>
-                <h2 className="mt-1 font-display text-[1.28rem] leading-tight text-ink md:text-[1.42rem]">
-                  Distribuição de foco técnico
-                </h2>
-              </header>
-
-              <div className="mt-3 divide-y divide-[rgba(138,162,214,0.16)] border-y border-[rgba(138,162,214,0.16)]">
-                {profileLevels.map((item) => (
-                  <div key={item.label} className="py-3">
-                    <div className="flex items-end justify-between gap-3">
-                      <span className="text-[0.84rem] font-medium text-ink/80">{item.label}</span>
-                    </div>
-                    <div className="mt-2 h-1.5 overflow-hidden rounded-full bg-[rgba(138,162,214,0.15)]">
-                      <div
-                        className="h-full rounded-full bg-[linear-gradient(90deg,rgba(94,131,226,0.9),rgba(140,169,238,0.86))]"
-                        style={{ width: `${item.value}%` }}
-                      />
-                    </div>
+                    <p className="body-text">{t(item.summary)}</p>
+                    {item.points.length > 0 && (
+                      <ul className="marked-list marked-list--quiet mt-1">
+                        {item.points.map((point) => (
+                          <li key={t(point)}>{t(point)}</li>
+                        ))}
+                      </ul>
+                    )}
                   </div>
+                </li>
+              ))}
+            </ol>
+          </section>
+
+          <div className="grid gap-5 md:grid-cols-2 md:gap-6">
+            <section className="stagger-item surface" style={{ "--stagger": 0.7 }}>
+              <header className="block-head">
+                <p className="eyebrow">{t(s.processEyebrow)}</p>
+                <h2 className="block-head-title">{t(s.processTitle)}</h2>
+              </header>
+              <ol className="grid gap-4">
+                {s.process.map((item) => (
+                  <li key={item.step} className="grid grid-cols-[2rem_minmax(0,1fr)] gap-3">
+                    <span className="font-display text-[0.8rem] font-semibold txt-4">{item.step}</span>
+                    <div>
+                      <h3 className="text-[0.92rem] font-semibold txt-1">{t(item.title)}</h3>
+                      <p className="meta-text mt-0.5">{t(item.description)}</p>
+                    </div>
+                  </li>
                 ))}
-              </div>
+              </ol>
+            </section>
+
+            <section className="stagger-item surface" style={{ "--stagger": 0.8 }}>
+              <header className="block-head">
+                <p className="eyebrow">{t(s.stackEyebrow)}</p>
+                <h2 className="block-head-title">{t(s.stackTitle)}</h2>
+              </header>
+              <ul className="chip-row">
+                {stack.map((name) => {
+                  const icon = techIcon(name);
+                  return (
+                    <li key={name} className="chip">
+                      {icon && <img src={icon} alt="" loading="lazy" decoding="async" />}
+                      {name}
+                    </li>
+                  );
+                })}
+              </ul>
+              <p className="meta-text mt-4 border-t border-[var(--line)] pt-4">
+                {t(s.stackNote)}{" "}
+                <Link to="/stack-experiencia" className="txt-2 underline decoration-white/25 underline-offset-4">
+                  {t(s.stackLink)}
+                </Link>
+                .
+              </p>
             </section>
           </div>
         </div>
-
-        <p className="stagger-item mt-7 text-center text-[0.92rem] leading-relaxed text-ink/68" style={{ "--stagger": 0.9 }}>
-          Se você precisa estruturar ou evoluir sistemas empresariais com responsabilidade técnica, integração confiável e arquitetura escalável, vamos conversar.
-        </p>
       </div>
     </section>
   );
