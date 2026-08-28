@@ -15,7 +15,7 @@ export const strings = {
   },
   footer: {
     role: { pt: "Guilherme Fugazza · Full-stack Product Engineer", en: "Guilherme Fugazza · Full-stack Product Engineer" },
-    place: { pt: "Santa Catarina, Brasil", en: "Santa Catarina, Brazil" }
+    place: { pt: "Camboriú, SC, Brasil", en: "Camboriú, SC, Brazil" }
   },
   common: {
     seeCase: { pt: "Ver o case", en: "View case" },
@@ -33,7 +33,7 @@ export const strings = {
     goTo: { pt: "Ir para", en: "Go to" }
   },
   home: {
-    eyebrow: { pt: "Full-stack Product Engineer · Santa Catarina, Brasil · Remoto", en: "Full-stack Product Engineer · Santa Catarina, Brazil · Remote" },
+    eyebrow: { pt: "Full-stack Product Engineer · Camboriú, SC · Remoto", en: "Full-stack Product Engineer · Camboriú, SC, Brazil · Remote" },
     lede: {
       pt: "Construo o produto inteiro: banco de dados, API, aplicação web e mobile, e o servidor onde tudo roda. Sistemas multi-tenant, operação offline-first e integrações financeiras, com segurança decidida antes do primeiro deploy.",
       en: "I build the whole product: database, API, web and mobile apps, and the server it all runs on. Multi-tenant systems, offline-first operation and financial integrations, with security decided before the first deploy."
@@ -134,7 +134,7 @@ export const strings = {
     ],
     facts: [
       { label: { pt: "Cargo", en: "Role" }, value: { pt: "Full-stack Product Engineer", en: "Full-stack Product Engineer" } },
-      { label: { pt: "Base", en: "Based in" }, value: { pt: "Santa Catarina, Brasil", en: "Santa Catarina, Brazil" } },
+      { label: { pt: "Base", en: "Based in" }, value: { pt: "Camboriú, SC, Brasil", en: "Camboriú, SC, Brazil" } },
       { label: { pt: "Modelo", en: "Work model" }, value: { pt: "Remoto · CLT ou PJ", en: "Remote · employee or contractor" } },
       { label: { pt: "Formação", en: "Education" }, value: { pt: "ADS em andamento (UNIVALI) · Técnico em Informática (IFC)", en: "B.Tech. in Systems Analysis, in progress (UNIVALI) · IT Technician (IFC)" } }
     ],
