@@ -46,8 +46,8 @@ export const strings = {
     },
     proof: [
       { value: "4", label: { pt: "sistemas construídos ponta a ponta", en: "systems built end to end" } },
-      { value: "1", label: { pt: "em produção com clientes reais", en: "in production with real clients" } },
-      { value: "2", label: { pt: "em testes com usuários reais", en: "in testing with real users" } }
+      { value: "2", label: { pt: "em testes com usuários reais", en: "in testing with real users" } },
+      { value: "3", label: { pt: "desenvolvedores liderados como tech lead", en: "developers led as tech lead" } }
     ],
     moreEyebrow: { pt: "Projetos", en: "Projects" },
     moreTitle: { pt: "Mais três sistemas, cada um com o problema que resolveu", en: "Three more systems, each with the problem it solved" },
@@ -83,13 +83,13 @@ export const strings = {
       en: "Four systems where I built the database, the API, the interface and the server. Each case starts from the problem behind the technical decision, not just the tech list."
     },
     countSystems: { pt: "Sistemas", en: "Systems" },
-    countLive: { pt: "Em produção", en: "In production" },
+    countLive: { pt: "No ar", en: "Live" },
     ndaNote: {
       pt: "Atuo também em sistemas de gestão sob contrato de confidencialidade, que por definição não aparecem aqui. Esse escopo está descrito na página",
       en: "I also work on management systems under NDA, which by definition are not shown here. That scope is described on the"
     },
     ndaLink: { pt: "Sobre", en: "About page" },
-    liveButton: { pt: "Ver em produção", en: "View live" }
+    liveButton: { pt: "Ver no ar", en: "View live" }
   },
   detail: {
     backCrumb: { pt: "← Projetos", en: "← Projects" },
@@ -147,23 +147,23 @@ export const strings = {
         role: { pt: "Fundador e engenheiro", en: "Founder and engineer" },
         org: "FTech Works",
         summary: {
-          pt: "Produtos próprios e projetos sob contrato. Quatro sistemas construídos ponta a ponta: um em produção com clientes, dois em fase de testes com usuários reais.",
-          en: "Own products and contract work. Four systems built end to end: one in production with clients, two in testing with real users."
+          pt: "Produtos próprios e projetos sob contrato. Quatro sistemas construídos ponta a ponta: dois em fase de testes com usuários reais e um publicado para validação.",
+          en: "Own products and contract work. Four systems built end to end: two in testing with real users and one published for validation."
         },
         points: [
           { pt: "Mensageria de Condomínios: gestão condominial multi-tenant com reconhecimento facial, on-premise no cliente, em homologação", en: "Condominium Mailroom: multi-tenant condo management with facial recognition, on-premise at the client, in acceptance testing" },
-          { pt: "VistaCloud: plataforma comercial multi-tenant, em produção com revendas", en: "VistaCloud: multi-tenant sales platform, in production with dealerships" },
+          { pt: "VistaCloud: plataforma comercial multi-tenant, publicada para validação com revendas", en: "VistaCloud: multi-tenant sales platform, published for validation with dealerships" },
           { pt: "EasyFinance: app financeiro em beta fechado, Stripe e certificate pinning", en: "EasyFinance: finance app in closed beta, Stripe and certificate pinning" },
           { pt: "Comandafy: PDV offline-first com emissão fiscal, em pré-lançamento", en: "Comandafy: offline-first POS with tax invoicing, in pre-launch" }
         ]
       },
       {
         period: { pt: "Atual", en: "Present" },
-        role: { pt: "Desenvolvedor de sistemas", en: "Systems developer" },
+        role: { pt: "Tech Lead", en: "Tech Lead" },
         org: { pt: "Empresa de administração condominial e aeronáutica", en: "Condominium and aviation management company" },
         summary: {
-          pt: "Sistemas de gestão empresarial sob contrato de confidencialidade: integrações financeiras, APIs multi-tenant, automações operacionais e sustentação em Linux.",
-          en: "Business management systems under NDA: financial integrations, multi-tenant APIs, operational automation and Linux operations."
+          pt: "Tech lead de uma equipe de três desenvolvedores. Sistemas de gestão sob confidencialidade: integrações financeiras, APIs multi-tenant e automações que economizam de 2 a 3 horas por dia das equipes de atendimento e financeiro.",
+          en: "Tech lead of a three-developer team. Business management systems under NDA: financial integrations, multi-tenant APIs and automations that save the support and finance teams 2 to 3 hours a day."
         },
         points: []
       }

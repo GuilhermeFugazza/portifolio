@@ -83,9 +83,9 @@ const en = {
   vistacloud: {
     shortDescription:
       "Multi-tenant platform connecting public storefront, lead capture and sales operations in one flow: the same backend serves vehicle, real-estate and food-service sites.",
-    status: "In production",
+    status: "Live",
     overview:
-      "Own product, sold to dealerships. One backend, one operations panel and several public storefronts across segments. The lead comes in through the site, is distributed automatically, and the team follows it to the sale in the same place.",
+      "Own product, built for dealerships and published for validation ahead of sales. One backend, one operations panel and several public storefronts across segments. The lead comes in through the site, is distributed automatically, and the team follows it to the sale in the same place.",
     problem:
       "A small dealership lives with a catalogue on a site that talks to nothing and leads landing loose on WhatsApp. Nobody knows which listing they came from, how long first contact took or who was handling the customer.",
     solution:
@@ -99,7 +99,7 @@ const en = {
       "Deployment on Coolify with PostgreSQL in the same compose and a reverse proxy to the API"
     ],
     statusDetail:
-      "In production at business.ftechworks.com.br, with real clients operating. About 52k lines across API, panel and storefronts.",
+      "Live at business.ftechworks.com.br, in validation with dealerships ahead of commercial launch. About 52k lines across API, panel and storefronts.",
     keyMessage: "One backend, many segments: the tenant defines the catalogue, not the code.",
     keyHighlights: [
       "A lead from the public form arrives already distributed by the tenant's active rule.",

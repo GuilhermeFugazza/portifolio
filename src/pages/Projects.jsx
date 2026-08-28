@@ -8,7 +8,7 @@ import { strings } from "../i18n/strings.js";
 export default function Projects() {
   const { t } = useLang();
   const projects = useProjects();
-  const live = projects.filter((p) => /produ/i.test(p.status)).length;
+  const live = projects.filter((p) => /produ|no ar|^live$/i.test(p.status)).length;
   const s = strings.projects;
 
   return (

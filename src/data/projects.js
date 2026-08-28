@@ -115,10 +115,10 @@ export const projects = [
     name: "VistaCloud",
     shortDescription:
       "Plataforma multi-tenant que liga vitrine pública, captação de lead e operação comercial num fluxo único: o mesmo backend serve sites de veículos, imóveis e food service.",
-    status: "Em produção",
+    status: "No ar",
     stack: ["NestJS", "PostgreSQL", "React", "Multi-tenant"],
     overview:
-      "Produto próprio, vendido para revendas. Um backend, um painel operacional e várias vitrines públicas de segmentos diferentes. O lead entra pelo site, é distribuído automaticamente e a operação acompanha até a venda no mesmo lugar.",
+      "Produto próprio, construído para revendas e publicado para validação antes da venda. Um backend, um painel operacional e várias vitrines públicas de segmentos diferentes. O lead entra pelo site, é distribuído automaticamente e a operação acompanha até a venda no mesmo lugar.",
     problem:
       "Revenda pequena vive com o catálogo num site que não conversa com nada e o lead chegando solto no WhatsApp. Ninguém sabe de qual anúncio veio, quanto tempo demorou o primeiro atendimento nem quem estava com o cliente.",
     solution:
@@ -143,7 +143,7 @@ export const projects = [
     ],
     desktopGalleryFolder: "VistaCloud",
     statusDetail:
-      "Em produção em business.ftechworks.com.br, com clientes reais operando. Cerca de 52 mil linhas entre API, painel e vitrines.",
+      "No ar em business.ftechworks.com.br, em validação com revendas antes da comercialização. Cerca de 52 mil linhas entre API, painel e vitrines.",
     keyMessage:
       "Um backend, vários segmentos: o tenant define o catálogo, não o código.",
     keyHighlights: [
@@ -162,7 +162,7 @@ export const projects = [
       "Dashboard de conversão e origem de lead, analytics do funil e gestão de equipe por empresa.",
     links: [
       {
-        label: "Ver em produção",
+        label: "Ver no ar",
         href: "https://business.ftechworks.com.br",
         kind: "live"
       }
