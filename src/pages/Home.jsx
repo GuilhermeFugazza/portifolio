@@ -10,7 +10,7 @@ import { strings } from "../i18n/strings.js";
 const FEATURED_SLUG = "vistacloud";
 const GRID_SLUGS = ["mensageria-condominios", "comandafy", "easyfinance"];
 
-function CaseCover({ project, pendingLabel }) {
+function CaseCover({ project }) {
   const cover = coverFor(project);
   const isMobile = Boolean(project.mobileGalleryFolder && !project.desktopGalleryFolder);
 
@@ -25,8 +25,11 @@ function CaseCover({ project, pendingLabel }) {
           decoding="async"
         />
       ) : (
+        // Sem captura ainda: a capa vira a marca do produto, não um aviso de
+        // "em breve" — aviso passa recado de site inacabado.
         <span className="project-cover-empty">
-          <span className="eyebrow eyebrow--quiet">{pendingLabel}</span>
+          <span className="project-cover-mark">{project.name}</span>
+          <span className="project-cover-mark-stack">{(project.stack || []).slice(0, 3).join(" · ")}</span>
         </span>
       )}
     </span>
@@ -40,7 +43,6 @@ export default function Home() {
   const featured = projects.find((p) => p.slug === FEATURED_SLUG);
   const grid = GRID_SLUGS.map((slug) => projects.find((p) => p.slug === slug)).filter(Boolean);
   const featuredLive = (featured?.links || []).find((l) => l.kind === "live");
-  const pendingLabel = t(strings.common.screensPending);
 
   return (
     <section className="w-full pb-6 md:pb-10">
@@ -82,7 +84,7 @@ export default function Home() {
             style={{ "--stagger": 0.8 }}
             aria-label={`${t(strings.common.openCase)} ${featured.name}`}
           >
-            <CaseCover project={featured} pendingLabel={pendingLabel} />
+            <CaseCover project={featured} />
             <span className="grid gap-3 p-5 md:p-6">
               <span className="flex flex-wrap items-center justify-between gap-2">
                 <span className={`status-pill ${statusModifier(featured.status)}`}>{featured.status}</span>
@@ -125,7 +127,7 @@ export default function Home() {
           {grid.map((project, index) => (
             <li key={project.slug} className="stagger-item" style={{ "--stagger": 1.2 + index * 0.1 }}>
               <Link to={`/projetos/${project.slug}`} className="surface surface--interactive flex h-full flex-col !p-0">
-                <CaseCover project={project} pendingLabel={pendingLabel} />
+                <CaseCover project={project} />
                 <span className="grid gap-2 p-4 md:p-5">
                   <span className="flex items-center justify-between gap-2">
                     <span className={`status-pill ${statusModifier(project.status)}`}>{project.status}</span>

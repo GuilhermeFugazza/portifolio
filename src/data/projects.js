@@ -111,6 +111,7 @@ export const projects = [
   },
   {
     slug: "vistacloud",
+    coverFile: "2-analytics",
     group: "produto",
     name: "VistaCloud",
     shortDescription:

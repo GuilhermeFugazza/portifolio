@@ -133,8 +133,8 @@
     --shiny-cta-bg: #0b1324;
     --shiny-cta-bg-subtle: #111c36;
     --shiny-cta-fg: #ffffff;
-    --shiny-cta-highlight: #6d5bff;
-    --shiny-cta-highlight-subtle: #9f94ff;
+    --shiny-cta-highlight: #2f7dff;
+    --shiny-cta-highlight-subtle: #7ab1ff;
     --animation: gradient-angle linear infinite;
     --duration: 3s;
     --shadow-size: 2px;
@@ -667,7 +667,7 @@
     font-weight: 700;
     text-transform: uppercase;
     letter-spacing: 0.16em;
-    color: rgba(255, 138, 31, 0.9);
+    color: rgba(127, 177, 255, 0.9);
   }
 
   .about-intro-title {
@@ -791,7 +791,7 @@
     font-weight: 700;
     text-transform: uppercase;
     letter-spacing: 0.15em;
-    color: rgba(255, 138, 31, 0.88);
+    color: rgba(127, 177, 255, 0.88);
   }
 
   .about-section-title {
@@ -1143,8 +1143,8 @@
     padding: clamp(1rem, 2.2vw, 1.55rem);
     background:
       radial-gradient(105% 95% at 8% 0%,
-        rgba(255, 138, 31, 0.18),
-        rgba(255, 138, 31, 0) 54%),
+        rgba(127, 177, 255, 0.18),
+        rgba(127, 177, 255, 0) 54%),
       radial-gradient(96% 95% at 96% 5%,
         rgba(121, 161, 255, 0.25),
         rgba(121, 161, 255, 0) 62%),
@@ -1183,7 +1183,7 @@
     font-weight: 700;
     text-transform: uppercase;
     letter-spacing: 0.16em;
-    color: rgba(255, 138, 31, 0.9);
+    color: rgba(127, 177, 255, 0.9);
   }
 
   .contact-hero-title {
@@ -1230,8 +1230,8 @@
     width: 0.4rem;
     height: 0.4rem;
     border-radius: 999px;
-    background: rgba(255, 138, 31, 0.9);
-    box-shadow: 0 0 0 4px rgba(255, 138, 31, 0.14);
+    background: rgba(127, 177, 255, 0.9);
+    box-shadow: 0 0 0 4px rgba(127, 177, 255, 0.14);
   }
 
   .contact-metrics-panel {
@@ -1248,7 +1248,7 @@
     font-weight: 700;
     text-transform: uppercase;
     letter-spacing: 0.15em;
-    color: rgba(255, 138, 31, 0.85);
+    color: rgba(127, 177, 255, 0.85);
   }
 
   .contact-metrics-grid {
@@ -2459,11 +2459,34 @@
   position: absolute;
   inset: 0;
   display: grid;
-  place-items: center;
-  background-image:
-    linear-gradient(rgba(139, 163, 214, 0.06) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(139, 163, 214, 0.06) 1px, transparent 1px);
-  background-size: 22px 22px;
+  place-content: center;
+  justify-items: center;
+  gap: 0.5rem;
+  background:
+    radial-gradient(90% 120% at 50% 108%, rgba(47, 125, 255, 0.24), transparent 62%),
+    linear-gradient(rgba(139, 163, 214, 0.05) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(139, 163, 214, 0.05) 1px, transparent 1px);
+  background-size: auto, 22px 22px, 22px 22px;
+}
+
+.project-cover-mark {
+  font-family: theme("fontFamily.display");
+  font-size: clamp(1.6rem, 3.2vw, 2.1rem);
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  line-height: 1;
+  background: linear-gradient(120deg, #f1f5fd 30%, #7fb1ff);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.project-cover-mark-stack {
+  font-size: 0.66rem;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--fg-4);
 }
 
 /* Mobile: o pill "Disponível" vira só o ponto verde, para caber na mesma

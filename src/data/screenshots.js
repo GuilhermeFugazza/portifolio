@@ -28,7 +28,11 @@ export const screenshotsByFolder = Object.entries(modules).reduce((acc, [path, s
 Object.keys(screenshotsByFolder).forEach((folder) => {
   screenshotsByFolder[folder] = screenshotsByFolder[folder]
     .sort((a, b) => collator.compare(fileNameFromPath(a.path), fileNameFromPath(b.path)))
-    .map((item, index) => ({ src: item.src, label: labelFromPath(item.path, index) }));
+    .map((item, index) => ({
+      src: item.src,
+      label: labelFromPath(item.path, index),
+      file: fileNameFromPath(item.path)
+    }));
 });
 
 const labelEn = {
@@ -53,4 +57,14 @@ export const galleryFor = (project, lang = "pt") => {
   return list.map((item) => ({ ...item, label: labelEn[item.label] || item.label }));
 };
 
-export const coverFor = (project) => galleryFor(project)[0]?.src ?? null;
+// A capa é a primeira captura, salvo quando o projeto aponta outra por
+// `coverFile` (prefixo do nome do arquivo): a primeira nem sempre é a que
+// melhor vende o sistema.
+export const coverFor = (project) => {
+  const list = galleryFor(project);
+  if (project.coverFile) {
+    const hit = list.find((item) => item.file?.startsWith(project.coverFile));
+    if (hit) return hit.src;
+  }
+  return list[0]?.src ?? null;
+};
