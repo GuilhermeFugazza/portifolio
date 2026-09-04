@@ -6,9 +6,9 @@ import { useLang } from "../i18n/LanguageContext.jsx";
 import { strings } from "../i18n/strings.js";
 
 // A home responde em 30 segundos: quem, o que faz, prova e para onde ir.
-// Trabalho real aparece acima da dobra, não só o nome.
-const FEATURED_SLUG = "vistacloud";
-const GRID_SLUGS = ["mensageria-condominios", "comandafy", "easyfinance"];
+// Herói só de tipografia: o trabalho aparece logo abaixo, numa grade calma,
+// sem um card disputando atenção com o nome.
+const GRID_SLUGS = ["vistacloud", "mensageria-condominios", "comandafy", "easyfinance"];
 
 function CaseCover({ project }) {
   const cover = coverFor(project);
@@ -26,7 +26,7 @@ function CaseCover({ project }) {
         />
       ) : (
         // Sem captura ainda: a capa vira a marca do produto, não um aviso de
-        // "em breve" — aviso passa recado de site inacabado.
+        // "em breve": aviso passa recado de site inacabado.
         <span className="project-cover-empty">
           <span className="project-cover-mark">{project.name}</span>
           <span className="project-cover-mark-stack">{(project.stack || []).slice(0, 3).join(" · ")}</span>
@@ -40,68 +40,42 @@ export default function Home() {
   const { t } = useLang();
   const projects = useProjects();
   const s = strings.home;
-  const featured = projects.find((p) => p.slug === FEATURED_SLUG);
   const grid = GRID_SLUGS.map((slug) => projects.find((p) => p.slug === slug)).filter(Boolean);
-  const featuredLive = (featured?.links || []).find((l) => l.kind === "live");
 
   return (
     <section className="w-full pb-6 md:pb-10">
-      <div className="grid gap-10 pt-24 md:min-h-[calc(100svh-5rem)] md:grid-cols-[minmax(0,1.05fr)_minmax(0,0.95fr)] md:items-center md:gap-12 md:pt-20">
-        <div className="grid gap-6">
-          <p className="stagger-item eyebrow" style={{ "--stagger": 0.4 }}>{t(s.eyebrow)}</p>
+      <div className="grid gap-6 pt-24 md:gap-7 md:pt-36">
+        <p className="stagger-item eyebrow" style={{ "--stagger": 0.4 }}>{t(s.eyebrow)}</p>
 
-          <h1
-            className="stagger-item font-display text-[2.7rem] font-semibold leading-[1.02] tracking-[-0.025em] txt-1 md:text-[4.2rem]"
-            style={{ "--stagger": 0.2 }}
-          >
-            Guilherme Fugazza
-          </h1>
+        <h1
+          className="stagger-item font-display font-semibold leading-[0.98] tracking-[-0.03em] txt-1 text-[clamp(2.9rem,9.5vw,6.4rem)]"
+          style={{ "--stagger": 0.2 }}
+        >
+          Guilherme Fugazza
+        </h1>
 
-          <p className="stagger-item lede !max-w-[36rem] md:text-[1.12rem]" style={{ "--stagger": 0.7 }}>
-            {t(s.lede)}
-          </p>
+        <p className="stagger-item lede !max-w-[42rem] md:text-[1.16rem]" style={{ "--stagger": 0.7 }}>
+          {t(s.lede)}
+        </p>
 
-          <div className="stagger-item flex flex-wrap items-center gap-3" style={{ "--stagger": 0.9 }}>
-            <Link to="/projetos" className="btn btn--solid">
-              {t(s.ctaProjects)}
-              <span aria-hidden="true">→</span>
-            </Link>
-            <Link to="/contato" className="btn btn--ghost">
-              {t(s.ctaContact)}
-            </Link>
-          </div>
-
-          <p className="stagger-item meta-text flex items-start gap-2" style={{ "--stagger": 1.05 }}>
-            <span className="mt-[0.45em] inline-block h-1.5 w-1.5 shrink-0 rounded-full bg-emerald-400" aria-hidden="true" />
-            {t(s.now)}
-          </p>
+        <div className="stagger-item flex flex-wrap items-center gap-3" style={{ "--stagger": 0.9 }}>
+          <Link to="/projetos" className="btn btn--solid">
+            {t(s.ctaProjects)}
+            <span aria-hidden="true">→</span>
+          </Link>
+          <Link to="/contato" className="btn btn--ghost">
+            {t(s.ctaContact)}
+          </Link>
         </div>
 
-        {featured && (
-          <Link
-            to={`/projetos/${featured.slug}`}
-            className="stagger-item surface surface--interactive group flex flex-col !p-0"
-            style={{ "--stagger": 0.8 }}
-            aria-label={`${t(strings.common.openCase)} ${featured.name}`}
-          >
-            <CaseCover project={featured} />
-            <span className="grid gap-3 p-5 md:p-6">
-              <span className="flex flex-wrap items-center justify-between gap-2">
-                <span className={`status-pill ${statusModifier(featured.status)}`}>{featured.status}</span>
-                {featuredLive && <span className="meta-text">{featuredLive.href.replace(/^https?:\/\//, "")}</span>}
-              </span>
-              <span className="grid gap-1.5">
-                <span className="font-display text-[1.35rem] font-semibold leading-tight txt-1">{featured.name}</span>
-                <span className="body-text">{featured.keyMessage}</span>
-              </span>
-              <span className="meta-text transition group-hover:txt-1">{t(strings.common.seeCase)} →</span>
-            </span>
-          </Link>
-        )}
+        <p className="stagger-item meta-text flex items-start gap-2" style={{ "--stagger": 1.05 }}>
+          <span className="mt-[0.45em] inline-block h-1.5 w-1.5 shrink-0 rounded-full bg-emerald-400" aria-hidden="true" />
+          {t(s.now)}
+        </p>
       </div>
 
       <dl
-        className="stagger-item mt-14 grid gap-4 border-y border-[var(--line)] py-6 sm:grid-cols-3 md:mt-16 md:gap-6"
+        className="stagger-item mt-12 grid gap-4 border-y border-[var(--line)] py-6 sm:grid-cols-3 md:mt-16 md:gap-6"
         style={{ "--stagger": 1.1 }}
       >
         {s.proof.map((item) => (
@@ -123,22 +97,33 @@ export default function Home() {
           </Link>
         </header>
 
-        <ol className="grid gap-4 md:grid-cols-3 md:gap-5">
-          {grid.map((project, index) => (
-            <li key={project.slug} className="stagger-item" style={{ "--stagger": 1.2 + index * 0.1 }}>
-              <Link to={`/projetos/${project.slug}`} className="surface surface--interactive flex h-full flex-col !p-0">
-                <CaseCover project={project} />
-                <span className="grid gap-2 p-4 md:p-5">
-                  <span className="flex items-center justify-between gap-2">
-                    <span className={`status-pill ${statusModifier(project.status)}`}>{project.status}</span>
-                    <span className="txt-4" aria-hidden="true">→</span>
+        <ol className="grid gap-4 md:grid-cols-2 md:gap-5">
+          {grid.map((project, index) => {
+            const live = (project.links || []).find((l) => l.kind === "live");
+            return (
+              <li key={project.slug} className="stagger-item" style={{ "--stagger": 1.2 + index * 0.1 }}>
+                <Link
+                  to={`/projetos/${project.slug}`}
+                  className="surface surface--interactive group flex h-full flex-col !p-0"
+                  aria-label={`${t(strings.common.openCase)} ${project.name}`}
+                >
+                  <CaseCover project={project} />
+                  <span className="grid gap-2 p-5 md:p-6">
+                    <span className="flex flex-wrap items-center justify-between gap-2">
+                      <span className={`status-pill ${statusModifier(project.status)}`}>{project.status}</span>
+                      {live ? (
+                        <span className="meta-text">{live.href.replace(/^https?:\/\//, "")}</span>
+                      ) : (
+                        <span className="txt-4" aria-hidden="true">→</span>
+                      )}
+                    </span>
+                    <span className="font-display text-[1.2rem] font-semibold leading-tight txt-1">{project.name}</span>
+                    <span className="meta-text">{project.keyMessage}</span>
                   </span>
-                  <span className="font-display text-[1.1rem] font-semibold txt-1">{project.name}</span>
-                  <span className="meta-text">{project.keyMessage}</span>
-                </span>
-              </Link>
-            </li>
-          ))}
+                </Link>
+              </li>
+            );
+          })}
         </ol>
       </section>
 

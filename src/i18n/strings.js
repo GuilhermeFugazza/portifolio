@@ -50,7 +50,7 @@ export const strings = {
       { value: "3", label: { pt: "desenvolvedores liderados como tech lead", en: "developers led as tech lead" } }
     ],
     moreEyebrow: { pt: "Projetos", en: "Projects" },
-    moreTitle: { pt: "Mais três sistemas, cada um com o problema que resolveu", en: "Three more systems, each with the problem it solved" },
+    moreTitle: { pt: "Quatro sistemas, cada um com o problema que resolveu", en: "Four systems, each with the problem it solved" },
     strengthsEyebrow: { pt: "Onde faço diferença", en: "Where I make a difference" },
     strengthsTitle: { pt: "Três decisões que se repetem nos meus sistemas", en: "Three decisions that repeat across my systems" },
     strengths: [
