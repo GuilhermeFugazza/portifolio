@@ -1,0 +1,11 @@
+/* Gerado a partir da prévia aprovada (previas/2026-11-09-dois-produtos/v2). Escopo: .p-pf. */
+/* Títulos do case na fonte nova */
+.p-pf .world h1 { font-weight: 600; letter-spacing: -0.035em; font-variation-settings: "opsz" 96; }
+.p-pf .chapter h2, .p-pf .screens h2 { font-weight: 600; letter-spacing: -0.022em; font-variation-settings: "opsz" 96; }
+.p-pf .problem { font-family: var(--sans); font-weight: 400; font-variation-settings: normal; }
+.p-pf .decision h3 { font-weight: 600; letter-spacing: -0.015em; font-variation-settings: normal; }
+.p-pf .differently { font-weight: 500; letter-spacing: -0.015em; font-variation-settings: normal; }
+.p-pf .next span { font-weight: 600; letter-spacing: -0.022em; }
+.p-pf .dentro { padding: clamp(48px, 7vw, 96px) 0 0; }
+.p-pf .inside__text h2 { margin: 0; font: 600 clamp(1.6rem, 1.2rem + 1.2vw, 2.2rem)/1.1 var(--display); letter-spacing: -0.02em; }
+.p-pf .decision { scroll-margin-top: 96px; }

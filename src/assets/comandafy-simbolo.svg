@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="Comandafy">
+  <!--
+    O "C" de Comandafy que também é a borda de uma xícara vista de cima, com o
+    grão lima ocupando a abertura. Aberto de propósito: comanda em aberto é
+    o estado central do sistema. Sem letra no símbolo: a 16px do favicon
+    tipografia vira sujeira, e o anel continua legível.
+  -->
+  <rect width="64" height="64" rx="15" fill="#2B2640" />
+  <path
+    d="M45.5 21.4A16.5 16.5 0 1 0 45.5 42.6"
+    fill="none"
+    stroke="#FFFFFF"
+    stroke-width="7"
+    stroke-linecap="round"
+  />
+  <circle cx="47.7" cy="32" r="4.3" fill="#E4FF5B" />
+</svg>

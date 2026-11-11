@@ -1,0 +1,9 @@
+# Endereços do site antigo (agosto de 2026) levam ao lugar equivalente do site novo.
+/sobre                          /#sobre                 301
+/contato                        /#contato               301
+/stack-experiencia              /#sobre                 301
+/projetos                       /#produtos              301
+/projetos/easyfinance           /projetos/poupfy        301
+/projetos/vistacloud            /#produtos              301
+/projetos/mensageria-condominios /#mensageria           301
+/en/                            /en                     301

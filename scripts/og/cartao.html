@@ -1,0 +1,51 @@
+<!doctype html>
+<html><head><meta charset="utf-8">
+<style>
+@font-face { font-family: "Bricolage Grotesque"; font-weight: 500 600; src: url("../../public/fonts/bricolage-grotesque-latin.woff2") format("woff2"); }
+@font-face { font-family: "Inter Tight"; font-weight: 400 600; src: url("../../public/fonts/inter-tight-latin.woff2") format("woff2"); }
+* { box-sizing: border-box; }
+html, body { margin: 0; }
+body { width: 1200px; height: 630px; overflow: hidden; background: #0E0C15; color: #F4F2FB; font: 400 26px/1.4 "Inter Tight", sans-serif; position: relative; }
+.luz { position: absolute; inset: 0; background:
+  radial-gradient(900px 520px at 6% -10%, rgba(37,30,232,.22), transparent 70%),
+  radial-gradient(circle 760px at 78% 170%, transparent 80%, rgba(37,30,232,.9) 86%, #CCAFFF 89%, rgba(37,30,232,.6) 91.5%, transparent 96%);
+  filter: blur(2px); }
+.fio { position: absolute; inset: 0; background: radial-gradient(circle 760px at 78% 170%, transparent 88.6%, rgba(255,255,255,.8) 89%, transparent 89.6%); }
+main { position: absolute; left: 80px; top: 72px; right: 80px; }
+.selo { display: inline-flex; align-items: center; gap: 12px; font-size: 22px; color: #B4AFC6; }
+.selo i { width: 12px; height: 12px; border-radius: 50%; background: #3DDC84; box-shadow: 0 0 0 5px rgba(61,220,132,.18); }
+h1 { margin: 26px 0 0; font: 600 104px/0.98 "Bricolage Grotesque", sans-serif; letter-spacing: -0.035em; font-variation-settings: "opsz" 96; }
+.papel { margin: 22px 0 0; font: 500 34px/1.25 "Bricolage Grotesque", sans-serif; letter-spacing: -0.01em; max-width: 40ch; }
+.frase { margin: 14px 0 0; color: #B4AFC6; max-width: 34ch; }
+ul { list-style: none; margin: 0; padding: 0; position: absolute; left: 80px; bottom: 64px; display: flex; gap: 16px; }
+li { display: flex; align-items: center; gap: 14px; padding: 14px 22px 14px 14px; border-radius: 999px; background: rgba(22,19,31,.85); box-shadow: inset 0 0 0 1.5px #2A2638; font-size: 22px; }
+li b { font-weight: 600; color: #F4F2FB; }
+li span { color: #B4AFC6; }
+.ic { width: 40px; height: 40px; border-radius: 11px; display: grid; place-items: center; }
+.pf { background: #251EE8; }
+.cf { background: #2B2640; }
+.pf img { width: 20px; height: 20px; }
+.cf img { width: 40px; height: 40px; border-radius: 11px; }
+</style></head>
+<body>
+<div class="luz"></div><div class="fio"></div>
+<main>
+  <p class="selo" data-k="selo"><i></i><span></span></p>
+  <h1>Guilherme Fugazza</h1>
+  <p class="papel" data-k="papel"></p>
+  <p class="frase" data-k="frase"></p>
+</main>
+<ul>
+  <li><span class="ic pf"><img src="../../src/assets/poupfy-simbolo-branco.svg" alt=""></span><b>Poupfy</b><span data-k="pf"></span></li>
+  <li><span class="ic cf"><img src="../../src/assets/comandafy-simbolo.svg" alt=""></span><b>Comandafy</b><span data-k="cf"></span></li>
+</ul>
+<script>
+const T = {
+  pt: { selo: "Aberto a vaga remota, CLT ou PJ", papel: "Full-stack Product Engineer e tech lead", frase: "Faço o produto inteiro, do banco de dados ao app na loja.", pf: "na App Store", cf: "em 3 cafeterias" },
+  en: { selo: "Open to remote roles, full-time or contract", papel: "Full-stack Product Engineer and tech lead", frase: "I build the whole product, from the database to the app in the store.", pf: "on the App Store", cf: "in 3 cafés" },
+};
+const t = T[new URLSearchParams(location.search).get("lang") || "pt"];
+document.querySelector('[data-k="selo"] span').textContent = t.selo;
+for (const el of document.querySelectorAll('[data-k]:not([data-k="selo"])')) el.textContent = t[el.dataset.k];
+</script>
+</body></html>

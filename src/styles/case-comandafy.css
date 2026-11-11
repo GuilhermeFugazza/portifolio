@@ -1,0 +1,58 @@
+/* Gerado a partir da prévia aprovada (previas/2026-11-09-dois-produtos/v2). Escopo: .p-cf. */
+/* Títulos do case na fonte nova */
+.p-cf .world h1 { font-weight: 600; letter-spacing: -0.035em; font-variation-settings: "opsz" 96; }
+.p-cf .chapter h2, .p-cf .screens h2 { font-weight: 600; letter-spacing: -0.022em; font-variation-settings: "opsz" 96; }
+.p-cf .problem { font-family: var(--sans); font-weight: 400; font-variation-settings: normal; }
+.p-cf .decision h3 { font-weight: 600; letter-spacing: -0.015em; font-variation-settings: normal; }
+.p-cf .differently { font-weight: 500; letter-spacing: -0.015em; font-variation-settings: normal; }
+.p-cf .next span { font-weight: 600; letter-spacing: -0.022em; }
+.p-cf .dentro { padding: clamp(48px, 7vw, 96px) 0 0; }
+.p-cf .inside__text h2 { margin: 0; font: 600 clamp(1.6rem, 1.2rem + 1.2vw, 2.2rem)/1.1 var(--display); letter-spacing: -0.02em; }
+.p-cf .decision { scroll-margin-top: 96px; }
+/* Mundo do Comandafy: claro, tinta e grão lima */
+.p-cf .world.world--cf { background: #F2F2F5; color: #2B2640; }
+.p-cf .world--cf::before { background: radial-gradient(36% 52% at 90% 6%, rgba(228,255,91,.62), transparent 70%), radial-gradient(60% 50% at 30% 112%, rgba(43,38,64,.10), transparent 70%); filter: none; }
+.p-cf .world--cf::after { inset: auto; width: 980px; height: 980px; right: -360px; top: -470px; border-radius: 50%; border: 86px solid rgba(43,38,64,.05); background: none; }
+.p-cf .world--cf .crumb, .p-cf .world--cf .world__line { color: #5B5670; }
+.p-cf .world--cf .crumb a { text-decoration-color: rgba(43,38,64,.3); }
+.p-cf .world--cf .mark, .p-cf .results li::before { background: #E4FF5B; box-shadow: 0 0 0 2px #2B2640; }
+.p-cf .world--cf .btn--solid { background: #2B2640; color: #fff; }
+.p-cf .world--cf .btn--solid:hover { background: #1C1830; }
+.p-cf .world--cf .btn--line { box-shadow: inset 0 0 0 1px rgba(43,38,64,.35); color: #2B2640; }
+.p-cf .world--cf .btn--line:hover { box-shadow: inset 0 0 0 1px #2B2640; }
+.p-cf .site-header .brand, .p-cf .site-header .lang a, .p-cf .site-header .lang span, .p-cf .site-header .cv-sm { color: #2B2640; }
+.p-cf .site-header .cv-sm { box-shadow: inset 0 0 0 1px rgba(43,38,64,.35); }
+.p-cf .world--cf h1 { font-size: clamp(2.8rem, 1.4rem + 4vw, 5.2rem); line-height: 1; }
+.p-cf .cf-brand { display: inline-flex; align-items: center; gap: 14px; }
+.p-cf .cf-brand img { width: .82em; height: auto; border-radius: .2em; }
+.p-cf .world--cf .world__stage { min-height: 620px; }
+.p-cf .browser { border-radius: 14px; overflow: hidden; background: #fff; box-shadow: 0 0 0 1px rgba(43,38,64,.10), 0 40px 70px -30px rgba(43,38,64,.45), 0 12px 24px -16px rgba(43,38,64,.3); }
+.p-cf .browser__bar { height: 34px; display: flex; align-items: center; gap: 7px; padding: 0 14px; background: #E9E9EE; border-bottom: 1px solid #DDDCE3; }
+.p-cf .browser__bar i { width: 10px; height: 10px; border-radius: 50%; background: #CFCDD6; }
+.p-cf .browser__bar span { margin-left: 10px; font-size: 12px; color: #6E6A80; white-space: nowrap; }
+.p-cf .browser img { width: 100%; height: auto; }
+.p-cf .world--cf .world__stage .browser { position: absolute; left: 2%; top: 32px; width: 150%; }
+.p-cf .phone--light { background: linear-gradient(150deg, #D9D8DF 0%, #A9A7B3 30%, #C9C7D1 70%, #8F8D99 100%); }
+.p-cf .phone--light img { background: #fff; }
+.p-cf .phone--bare::after { display: none; }
+.p-cf .world--cf .world__stage .phone { position: absolute; left: -2%; bottom: -6%; --w: 230px; }
+.p-cf .screens.screens--cf { background: #F2F2F5; color: #2B2640; }
+.p-cf .screens--cf::before { background: radial-gradient(40% 60% at 85% 0%, rgba(228,255,91,.5), transparent 70%), radial-gradient(60% 60% at 10% 110%, rgba(43,38,64,.10), transparent 70%); }
+.p-cf .screens--cf .sub { color: #5B5670; }
+.p-cf .gallery--cf { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 48px 40px; }
+.p-cf .gallery--cf li { justify-items: stretch; }
+.p-cf .gallery--cf li.only-phone { justify-items: center; }
+.p-cf .gallery--cf p { color: #5B5670; text-align: left; max-width: none; }
+.p-cf .gallery--cf li.only-phone p { text-align: center; }
+.p-cf .gallery--cf b { color: #2B2640; }
+.p-cf .gallery--cf .phone { max-width: 230px; }
+.p-cf .tech tbody th { color: #E4FF5B; }
+@media (max-width: 860px) {
+  .p-cf .world--cf .world__stage { min-height: 420px; }
+  .p-cf .world--cf .world__stage .browser { width: 190%; left: 18%; top: 10px; }
+  .p-cf .world--cf .world__stage .phone { --w: 170px; left: 0; bottom: -10%; }
+  .p-cf .gallery--cf { grid-template-columns: 1fr; }
+}
+
+/* No mundo claro, o dock translúcido perdia contraste (3,9:1). Fundo quase opaco: texto a 4,5:1 ou mais. */
+.p-cf .dock { background: rgba(22, 19, 31, .94); }

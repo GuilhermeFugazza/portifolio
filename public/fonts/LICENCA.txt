@@ -1,0 +1,3 @@
+As fontes Bricolage Grotesque, Inter Tight e JetBrains Mono são distribuídas sob a SIL Open Font License 1.1.
+https://openfontlicense.org
+Arquivos: subconjunto latino baixado do Google Fonts em 11/11/2026.
