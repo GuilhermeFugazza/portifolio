@@ -51,7 +51,7 @@ export default {
       disponivel: "Aberto a vaga remota, CLT ou PJ",
       papel: (
         <>
-          Full-stack Product Engineer e tech lead, com <Experiencia /> de experiência.
+          Full-stack Product Engineer com <Experiencia /> de experiência, liderando uma equipe pequena.
         </>
       ),
       frase: "Faço o produto inteiro, do banco de dados ao app na loja, e cuido dele depois que entra no ar.",
@@ -140,7 +140,7 @@ export default {
       bio: (
         <>
           Sou desenvolvedor full-stack há <Experiencia />, em Balneário Camboriú, SC. Desde março de 2024 trabalho numa empresa de
-          administração condominial e aeronáutica, onde sou tech lead desde 2025. Em paralelo, construí do zero e mantenho dois produtos
+          administração condominial e aeronáutica, onde lidero a equipe de desenvolvimento desde 2025. Em paralelo, construí do zero e mantenho dois produtos
           em uso: o Poupfy e o Comandafy.
         </>
       ),
@@ -174,10 +174,12 @@ export default {
           {
             agora: true,
             quando: "2025 a hoje",
-            cargo: "Tech Lead",
+            cargo: "Desenvolvedor Full-stack Pleno",
             onde: "Empresa de administração condominial e aeronáutica",
             pontos: [
-              "Desde 2025, coordeno os outros 2 desenvolvedores da equipe: arquitetura, revisão de código e distribuição do trabalho.",
+              "Lidero a equipe de 3 desenvolvedores, contando comigo: arquitetura, padrões de código e de Git, revisão de código e distribuição do trabalho.",
+              "Planejo as entregas com a diretoria e com as áreas que usam os sistemas, e oriento o desenvolvedor júnior.",
+              "Logs organizados, trilha de auditoria e healthchecks em todos os sistemas; sou o primeiro a responder quando algo falha.",
               "Automações em n8n e Python que poupam de 2 a 3 horas por dia.",
               "Apps em React Native e Expo para iOS e Android, APIs em Node.js e Python e painéis em React.",
               "Integrações com Superlógica, Sicoob, Sicredi e Zendesk; deploy em Ubuntu Server, Proxmox e Cloudflare.",
@@ -196,7 +198,7 @@ export default {
         titulo: "Ficha rápida",
         itens: [
           ["Experiência", <Experiencia key="e" />, "desde março de 2024"],
-          ["Cargo", "Full-stack Product Engineer e tech lead"],
+          ["Cargo", "Full-stack Product Engineer", "liderando uma equipe de 3"],
           ["Disponível", "Aberto a vaga, CLT ou PJ", null, true],
           ["Trabalho", "Remoto, no Brasil ou no exterior"],
           ["Local", "Balneário Camboriú, SC, Brasil"],
@@ -227,7 +229,7 @@ export default {
           ["Linguagens", [["javascript", "JavaScript"], ["python", "Python"], ["codigo", "SQL"], ["swift", "Swift"]]],
           ["Mobile", [["expo", "Expo"], ["pacote", "EAS Build"], ["apple", "Widgets do iPhone"]]],
           ["Web", [["vite", "Vite"], ["tailwindcss", "Tailwind CSS"], ["pwa", "PWA"]]],
-          ["API", [["nestjs", "NestJS"], ["express", "Express"], ["socketdotio", "WebSocket"], ["modelcontextprotocol", "MCP"]]],
+          ["API", [["nestjs", "NestJS"], ["express", "Express"], ["socketdotio", "WebSocket"], ["zod", "Zod"], ["swagger", "OpenAPI"], ["fila", "Filas (BullMQ)"], ["modelcontextprotocol", "MCP"]]],
           ["Dados", [["prisma", "Prisma"], ["redis", "Redis"], ["mysql", "MySQL"], ["banco", "Row-Level Security"]]],
           [
             "Infra",
@@ -240,6 +242,10 @@ export default {
               ["cloudflare", "Cloudflare"],
               ["githubactions", "GitHub Actions"],
             ],
+          ],
+          [
+            "Qualidade e operação",
+            [["jest", "Jest"], ["vitest", "Vitest"], ["codigo", "Supertest"], ["sentry", "Sentry"], ["lista", "Logs e auditoria"], ["pulso", "Healthchecks"]],
           ],
           ["Pagamentos", [["stripe", "Stripe"], ["pix", "Pix"], ["apple", "Compra pela Apple"]]],
           ["Segurança", [["jsonwebtokens", "JWT com renovação"], ["cadeado", "argon2"], ["cadeado", "AES-256-GCM"], ["escudo", "LGPD"]]],
@@ -257,7 +263,7 @@ export default {
             "Quanto tempo de experiência você tem?",
             <>
               Sou desenvolvedor há <Experiencia />, desde março de 2024, numa empresa de administração condominial e aeronáutica, onde
-              sou tech lead desde 2025. Somos 3 desenvolvedores na equipe, e eu coordeno os outros 2.
+              lidero a equipe de desenvolvimento desde 2025. Somos 3 desenvolvedores, e eu coordeno os outros 2.
             </>,
             "Em paralelo, construí do zero e mantenho o Poupfy, na App Store, e o Comandafy, em 3 cafeterias.",
           ],
@@ -268,7 +274,7 @@ export default {
           ],
           [
             "Você trabalha sozinho ou em equipe?",
-            "Os dois. No trabalho atual, cuido de arquitetura, revisão de código e distribuição das tarefas, e coordeno os outros 2 desenvolvedores da equipe. Nos meus produtos, faço tudo, do banco de dados ao contato com o cliente.",
+            "Os dois. No trabalho atual, lidero a equipe de 3 desenvolvedores: defino arquitetura e padrões, reviso o código, planejo as entregas com a diretoria e oriento o desenvolvedor júnior. Nos meus produtos, faço tudo, do banco de dados ao contato com o cliente.",
           ],
           [
             "Qual é a sua stack principal?",

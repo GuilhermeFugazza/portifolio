@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { experiencia, hora, mesAtual, MES_DO_BUILD } from "../lib/tempo.js";
 import { useLang } from "./Lang.jsx";
 
-// "2 anos e 8 meses": sai no HTML com o mês do build e se atualiza no navegador.
+// "3 anos" (e, depois de março de 2027, "3 anos e 1 mês"): sai no HTML com o mês do build e se atualiza no navegador.
 export function Experiencia() {
   const lang = useLang();
   const [mes, setMes] = useState(MES_DO_BUILD);

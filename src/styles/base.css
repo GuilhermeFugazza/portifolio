@@ -28,7 +28,9 @@
 
 /* Fontes de reserva com a largura calibrada (size-adjust medido contra Arial): enquanto a fonte
    do site carrega, o texto ocupa o mesmo espaço e a página não pula quando ela chega. */
-@font-face { font-family: "Bricolage Fallback"; src: local("Arial"), local("ArialMT"), local("Helvetica"); font-weight: 400 500; size-adjust: 94.3%; }
+@font-face { font-family: "Bricolage Fallback"; src: local("Arial"), local("ArialMT"), local("Helvetica"); font-weight: 400; size-adjust: 94.3%; }
+/* O peso 500 da Bricolage é 11% mais largo que o Arial normal (medido em 18/11/2026 na linha do herói). */
+@font-face { font-family: "Bricolage Fallback"; src: local("Arial"), local("ArialMT"), local("Helvetica"); font-weight: 500; size-adjust: 105%; }
 @font-face { font-family: "Bricolage Fallback"; src: local("Arial Bold"), local("Arial-BoldMT"), local("Helvetica Bold"); font-weight: 600 700; size-adjust: 89.7%; }
 @font-face { font-family: "Inter Tight Fallback"; src: local("Arial"), local("ArialMT"), local("Helvetica"); font-weight: 400 500; size-adjust: 95.5%; }
 @font-face { font-family: "Inter Tight Fallback"; src: local("Arial Bold"), local("Arial-BoldMT"), local("Helvetica Bold"); font-weight: 600 700; size-adjust: 93.4%; }

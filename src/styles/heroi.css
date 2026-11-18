@@ -8,8 +8,9 @@
 }
 .p-home .hx-text .avail-line { display: flex; align-items: center; gap: 10px; margin: 0 0 22px; font-size: 15px; font-weight: 500; }
 .p-home .hx-text h1 { margin: 0; font: 600 clamp(2.8rem, 1.5rem + 3.8vw, 5.2rem)/1 var(--display); letter-spacing: -0.03em; font-variation-settings: "opsz" 96; }
-.p-home .hx-role { margin: 20px 0 0; font: 500 clamp(1.1rem, 1rem + .45vw, 1.35rem)/1.4 var(--display); letter-spacing: -0.01em; color: var(--text); max-width: 32ch; }
-.p-home .hx-lede { margin: 10px 0 0; color: var(--text-2); font-size: 17px; line-height: 1.6; max-width: 40ch; }
+/* Largura em em, não em ch: o ch muda com a fonte de reserva e a linha quebrava diferente na troca (CLS). */
+.p-home .hx-role { margin: 20px 0 0; font: 500 clamp(1.1rem, 1rem + .45vw, 1.35rem)/1.4 var(--display); letter-spacing: -0.01em; color: var(--text); max-width: 20.8em; }
+.p-home .hx-lede { margin: 10px 0 0; color: var(--text-2); font-size: 17px; line-height: 1.6; max-width: 23.1em; }
 .p-home .hx-text .actions { margin-top: 30px; }
 .p-home .hx-ico { width: 40px; height: 40px; border-radius: 11px; display: grid; place-items: center; flex: none; }
 .p-home .hx-ico svg { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-width: 1.7; stroke-linecap: round; stroke-linejoin: round; }

@@ -41,8 +41,8 @@ li span { color: #B4AFC6; }
 </ul>
 <script>
 const T = {
-  pt: { selo: "Aberto a vaga remota, CLT ou PJ", papel: "Full-stack Product Engineer e tech lead", frase: "Faço o produto inteiro, do banco de dados ao app na loja.", pf: "na App Store", cf: "em 3 cafeterias" },
-  en: { selo: "Open to remote roles, full-time or contract", papel: "Full-stack Product Engineer and tech lead", frase: "I build the whole product, from the database to the app in the store.", pf: "on the App Store", cf: "in 3 cafés" },
+  pt: { selo: "Aberto a vaga remota, CLT ou PJ", papel: "Full-stack Product Engineer", frase: "Faço o produto inteiro, do banco de dados ao app na loja.", pf: "na App Store", cf: "em 3 cafeterias" },
+  en: { selo: "Open to remote roles, full-time or contract", papel: "Full-stack Product Engineer", frase: "I build the whole product, from the database to the app in the store.", pf: "on the App Store", cf: "in 3 cafés" },
 };
 const t = T[new URLSearchParams(location.search).get("lang") || "pt"];
 document.querySelector('[data-k="selo"] span').textContent = t.selo;

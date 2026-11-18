@@ -51,7 +51,7 @@ export default {
       disponivel: "Open to remote roles, full-time or contract",
       papel: (
         <>
-          Full-stack Product Engineer and tech lead, with <Experiencia /> of experience.
+          Full-stack Product Engineer with <Experiencia /> of experience, leading a small team.
         </>
       ),
       frase: "I build the whole product, from the database to the app in the store, and I keep it running after launch.",
@@ -140,7 +140,7 @@ export default {
       bio: (
         <>
           I've been a full-stack developer for <Experiencia />, based in Balneário Camboriú, Brazil. Since March 2024 I've worked at a
-          property and aviation management company, where I've been tech lead since 2025. On the side, I built from scratch and still run
+          property and aviation management company, where I've led the development team since 2025. On the side, I built from scratch and still run
           two products in use: Poupfy and Comandafy.
         </>
       ),
@@ -174,10 +174,12 @@ export default {
           {
             agora: true,
             quando: "2025 to present",
-            cargo: "Tech Lead",
+            cargo: "Mid-level Full-stack Developer",
             onde: "Property and aviation management company",
             pontos: [
-              "Since 2025, I coordinate the other 2 developers on the team: architecture, code review, and work planning.",
+              "I lead a team of 3 developers, myself included: architecture, coding and Git standards, code review, and work planning.",
+              "I plan deliveries with company leadership and the teams that use our systems, and mentor our junior developer.",
+              "Organized logs, audit trails, and health checks in every system; I'm the first to respond when something breaks.",
               "n8n and Python automations that save 2 to 3 hours a day.",
               "React Native and Expo apps for iOS and Android, Node.js and Python APIs, and React dashboards.",
               "Integrations with Superlógica, Sicoob, Sicredi, and Zendesk; deployment on Ubuntu Server, Proxmox, and Cloudflare.",
@@ -196,7 +198,7 @@ export default {
         titulo: "At a glance",
         itens: [
           ["Experience", <Experiencia key="e" />, "since March 2024"],
-          ["Role", "Full-stack Product Engineer and tech lead"],
+          ["Role", "Full-stack Product Engineer", "leading a team of 3"],
           ["Availability", "Open to roles, full-time or contract", null, true],
           ["Work", "Remote, in Brazil or abroad"],
           ["Location", "Balneário Camboriú, SC, Brazil"],
@@ -227,7 +229,7 @@ export default {
           ["Languages", [["javascript", "JavaScript"], ["python", "Python"], ["codigo", "SQL"], ["swift", "Swift"]]],
           ["Mobile", [["expo", "Expo"], ["pacote", "EAS Build"], ["apple", "iPhone widgets"]]],
           ["Web", [["vite", "Vite"], ["tailwindcss", "Tailwind CSS"], ["pwa", "PWA"]]],
-          ["API", [["nestjs", "NestJS"], ["express", "Express"], ["socketdotio", "WebSocket"], ["modelcontextprotocol", "MCP"]]],
+          ["API", [["nestjs", "NestJS"], ["express", "Express"], ["socketdotio", "WebSocket"], ["zod", "Zod"], ["swagger", "OpenAPI"], ["fila", "Queues (BullMQ)"], ["modelcontextprotocol", "MCP"]]],
           ["Data", [["prisma", "Prisma"], ["redis", "Redis"], ["mysql", "MySQL"], ["banco", "Row-Level Security"]]],
           [
             "Infrastructure",
@@ -240,6 +242,10 @@ export default {
               ["cloudflare", "Cloudflare"],
               ["githubactions", "GitHub Actions"],
             ],
+          ],
+          [
+            "Quality and operations",
+            [["jest", "Jest"], ["vitest", "Vitest"], ["codigo", "Supertest"], ["sentry", "Sentry"], ["lista", "Logs and audit trails"], ["pulso", "Health checks"]],
           ],
           ["Payments", [["stripe", "Stripe"], ["pix", "Pix"], ["apple", "Apple in-app purchase"]]],
           ["Security", [["jsonwebtokens", "JWT with refresh tokens"], ["cadeado", "argon2"], ["cadeado", "AES-256-GCM"], ["escudo", "LGPD"]]],
@@ -256,8 +262,8 @@ export default {
           [
             "How much experience do you have?",
             <>
-              I've been a developer for <Experiencia />, since March 2024, at a property and aviation management company, where I've been
-              tech lead since 2025. We are 3 developers, and I coordinate the other 2.
+              I've been a developer for <Experiencia />, since March 2024, at a property and aviation management company, where I've led
+              the development team since 2025. We are 3 developers, and I coordinate the other 2.
             </>,
             "On the side, I built from scratch and run Poupfy, on the App Store, and Comandafy, in 3 cafés.",
           ],
@@ -268,7 +274,7 @@ export default {
           ],
           [
             "Do you work alone or on a team?",
-            "Both. At my current job, I own architecture, code review, and task planning, and I coordinate the other 2 developers on the team. On my own products, I do everything, from the database to talking with customers.",
+            "Both. At my current job, I lead a team of 3 developers: I set the architecture and standards, review code, plan deliveries with company leadership, and mentor our junior developer. On my own products, I do everything, from the database to talking with customers.",
           ],
           [
             "What's your main stack?",

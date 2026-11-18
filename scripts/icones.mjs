@@ -10,6 +10,9 @@ const TRACOS = {
   cadeado: '<rect x="5" y="11" width="14" height="9" rx="2"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/>',
   escudo: '<path d="M12 3l7 3v5c0 4.5-3 8.2-7 10-4-1.8-7-5.5-7-10V6l7-3z"/>',
   tomada: '<path d="M9 3v5M15 3v5"/><path d="M6 8h12v3a6 6 0 0 1-12 0V8z"/><path d="M12 17v4"/>',
+  fila: '<path d="M4 7h11M4 12h11M4 17h11"/><path d="M18 9l3 3-3 3"/>',
+  lista: '<path d="M9 6h11M9 12h11M9 18h11"/><path d="M4.5 6h.01M4.5 12h.01M4.5 18h.01"/>',
+  pulso: '<path d="M3 12h4l2.5-6 5 12 2.5-6h4"/>',
 };
 
 const simbolos = [];

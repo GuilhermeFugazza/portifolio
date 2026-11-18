@@ -1,5 +1,8 @@
 // Tempo de experiência contado a partir de março de 2024, no fuso de Balneário Camboriú.
+// Regra do Guilherme (18/11/2026): até completar 3 anos (março de 2027), mostra "3 anos";
+// depois, conta mês a mês ("3 anos e 1 mês").
 export const INICIO = "2024-03";
+const MINIMO_EM_MESES = 36;
 
 function mesAtual(agora = new Date()) {
   const partes = new Intl.DateTimeFormat("en-CA", {
@@ -17,7 +20,7 @@ export const MES_DO_BUILD = typeof __MES_DO_BUILD__ === "string" ? __MES_DO_BUIL
 export function experiencia(lang, mes = mesAtual()) {
   const [a0, m0] = INICIO.split("-").map(Number);
   const [a1, m1] = mes.split("-").map(Number);
-  const total = Math.max(0, (a1 - a0) * 12 + (m1 - m0));
+  const total = Math.max(MINIMO_EM_MESES, (a1 - a0) * 12 + (m1 - m0));
   const anos = Math.floor(total / 12);
   const meses = total % 12;
   const pt = lang === "pt";
