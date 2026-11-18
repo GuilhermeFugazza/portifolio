@@ -236,6 +236,7 @@ export default {
             [
               ["coolify", "Coolify"],
               ["ubuntu", "Ubuntu Server"],
+              ["nuvem", "AWS (EC2)"],
               ["proxmox", "Proxmox"],
               ["caddy", "Caddy"],
               ["nginx", "Nginx"],

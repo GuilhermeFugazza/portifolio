@@ -13,6 +13,7 @@ const TRACOS = {
   fila: '<path d="M4 7h11M4 12h11M4 17h11"/><path d="M18 9l3 3-3 3"/>',
   lista: '<path d="M9 6h11M9 12h11M9 18h11"/><path d="M4.5 6h.01M4.5 12h.01M4.5 18h.01"/>',
   pulso: '<path d="M3 12h4l2.5-6 5 12 2.5-6h4"/>',
+  nuvem: '<path d="M7 18h10a4 4 0 0 0 .6-7.95A6 6 0 0 0 6.2 9.1 4.5 4.5 0 0 0 7 18z"/>',
 };
 
 const simbolos = [];
